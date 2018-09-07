@@ -16,7 +16,8 @@ class Dispatcher(View):
             site = get_current_site(request)
             member = Member.objects.get(site=site)
         except:
-            pass
+            site=''
+            member=''
         return {'member':member, 'site':site}
     def post(self, request, *args, **kwargs):
         pass
