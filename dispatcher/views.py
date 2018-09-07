@@ -22,8 +22,8 @@ class Dispatcher(View):
 
 class Index(Dispatcher):
     def get(self, request, *args, **kwargs):
-        if get_current_site(request).domain == 'sidomo.com':
-            return render(request, "zeon_backend/templates/index-3.html")
+        #if get_current_site(request).domain == 'sidomo.com':
+        #   return render(request, "zeon_backend/templates/index-3.html")
         data = super(Index, self).get(request, args, kwargs)
         configs, is_created = UserConfigs.objects.get_or_create(member = data['member'])
         if is_created:
