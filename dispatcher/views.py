@@ -12,8 +12,11 @@ from membership.models import Member
 class Dispatcher(View):
     component = {}
     def get(self, request, *args, **kwargs):
-        site = get_current_site(request)
-        member = Member.objects.get(site=site)
+        try:
+            site = get_current_site(request)
+            member = Member.objects.get(site=site)
+        except:
+            pass
         return {'member':member, 'site':site}
     def post(self, request, *args, **kwargs):
         pass
