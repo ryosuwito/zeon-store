@@ -50,6 +50,8 @@ class Blog(Dispatcher):
         data = super(Blog, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
+        if site.domain == 'sidomo.com':
+            return render(request, "zeon_backend/templates/blog_index.html")
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
@@ -107,8 +109,6 @@ class Page(Dispatcher):
                 return render(request, "zeon_backend/templates/services.html")
             elif kwargs['page_slug'] == 'pricing':
                 return render(request, "zeon_backend/templates/pricing-tables.html")
-            elif kwargs['page_slug'] == 'blog':
-                return render(request, "zeon_backend/templates/blog_index.html")
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
