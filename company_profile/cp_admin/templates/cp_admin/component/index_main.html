@@ -1,0 +1,158 @@
+<div class="row">
+    <!-- column -->
+    <div class="col-sm-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center m-b-20">
+                    <div>
+                        <h1 class="font-bold m-b-0">Application Overview</h1>
+                        <span>Rangkuman singkat {{ site.domain }}</span>
+                    </div>
+                    <div class="ml-auto">
+                        <img src="{{ configs.brand_assets.get_brand_logo_url}}" width="60px" height="auto">
+                    </div>
+                </div>
+                <hr>
+                <h3>Package : </h3>
+                <p>
+                    {% for package in member.package_group.all %}
+                    <i class="fa fa-check text-success"></i> {{package.name}}<br>
+                    {% endfor %}
+                    <a href="#" class="btn btn-xs btn-info">UPGRADE <span class="fa fa-arrow-up"></span></a>
+                </p>
+            </div>
+            <div class="row" style="margin: 0">
+                <div class="col-xs-8 col-sm-8" style="padding: 0">
+                    <div class="card bg-info" style="margin: 0">
+                        <div class="card-body">
+                            <div class="d-block">
+                                <div>
+                                    <h4 class="card-title text-white">Page Views</h4>
+                                </div>
+                                <div class="row" style="margin: 0">
+                                    <div class="col-xs-6 col-sm-6" style="padding: 0">
+                                        <p class="text-white m-b-0">Today<br> <b style="font-size: 32pt">6548</b></p>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6" style="padding: 0">
+                                        <p class="text-white m-b-0">
+                                        This Month<br> <b style="font-size: 32pt">6548</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-4" style="padding: 0">
+                    <div class="card bg-success" style="margin: 0">
+                        <div class="card-body">
+                            <div class="d-block">
+                                <div>
+                                    <h4 class="card-title text-white">Comments</h4>
+                                </div>
+                                <div class="row" style="margin: 0">
+                                    <div class="col-xs-12 col-sm-12" style="padding: 0">
+                                        <p class="text-white m-b-0">Lifetime : <br> <b style="font-size: 32pt">6548</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-sm-12 col-lg-6">
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-8 col-sm-9" style="text-align: left; padding: 0">
+                                <h3>Articles </h3>
+                                <p>Total Article: {{ site.article_site.all | length}}</p>
+                            </div>
+                            <div class="col-xs-4 col-sm-3" style="text-align: right; padding: 0">
+                                <span onclick="getNext('/cms/article/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
+                                <span onclick="getNext('/cms/article/add/')" style="margin: 5px 0" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> CREATE NEW</span>
+                            </div>
+                            <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
+                                <hr>
+                                {% for article in site.article_site.all %}
+                                <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ article.title | title | truncatechars:60 }}</p>
+                                <a href='javascript:void(0)' onclick="getNext('{{ article.get_edit_url }}')"class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
+                                <a href='javascript:void(0)' onclick="getNext('{{ article.get_delete_url }}')" class="btn btn-link btn-sm text-danger"><span class="fa fa-trash"></span></a>
+                                <br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- column -->
+            <!-- column -->
+            <div class="col-xs-12 col-sm-6">
+                <div class="card order-widget">
+                    <div class="card-body">
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
+                                <h3>Pages </h3>
+                                <p>Total Pages: {{ site.site_page.all | length}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
+                                <span onclick="getNext('/cms/article/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
+                                <span onclick="getNext('/cms/article/add/')" style="margin: 5px 0" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> CREATE NEW</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="padding: 0">
+                                <p>
+                                    {% for page in site.site_page.all  %}
+                                    <a href="{{ page.get_article_url }}">
+                                        <i class="mdi mdi-file text-success"></i> {{page.title | truncatechars:30}}
+                                    </a>
+                                    <a href="#" class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
+                                    <br>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="card order-widget">
+                    <div class="card-body">
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
+                                <h3>Categories </h3>
+                                <p>Total Categories: {{ site.category_site.all | length}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
+                                <span onclick="getNext('/cms/article/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
+                                <span onclick="getNext('/cms/article/add/')" style="margin: 5px 0" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> CREATE NEW</span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="padding: 0">
+                                <hr>
+                                <p>
+                                    {% for category in site.category_site.all %}
+                                    <a href="/{{ category.slug }}">
+                                        <i class="mdi mdi-file text-success"></i> {{category.title | truncatechars:30 | title }}
+                                    </a>
+                                    <a href="#" class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
+                                    <br>
+                                    {% endfor %}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

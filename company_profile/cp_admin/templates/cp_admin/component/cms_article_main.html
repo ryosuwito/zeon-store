@@ -1,0 +1,85 @@
+{% load humanize %}
+<div class="row">
+    <!-- column -->
+    <div class="col-sm-12 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-10 col-sm-10" style="text-align: left">
+                        <h3>Articles </h3>
+                        <p>Total Article: {{ site.article_site.all | length}}</p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2" style="text-align: right; display: flex; flex-direction: column; justify-content: flex-end">
+                        <p onclick="getNext('/cms/article/add/')" class="btn btn-primary btn-md"><span class="fa fa-plus"></span> CREATE NEW</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-2 col-sm-1" style="text-align: center">
+                        <h6>Published</h6>
+                    </div>
+                    <div class="col-xs-2 col-sm-1" style="text-align: center">
+                        <h6>Featured</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4" style="text-align: left">
+                        <h6>Title</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-1" style="text-align: left">
+                        <h6>Tags</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-1" style="text-align: left">
+                        <h6>Category</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-2" style="text-align: left">
+                        <h6>Created Date</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-2" style="text-align: left">
+                    </div>
+                </div>
+                <hr>
+                {% for article in site.article_site.all %}
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-2 col-sm-1" style="text-align: center">
+                        {% if  article.is_published %}
+                        <span class="text-success fa fa-check"></span>
+                        {% else %}
+                        <span class="text-danger fa fa-times"></span>
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2 col-sm-1" style="text-align: center">
+                        {% if  article.is_featured %}
+                        <span class="text-success fa fa-check"></span>
+                        {% else %}
+                        <span class="text-danger fa fa-times"></span>
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
+                        <p onclick="window.open('{{ article.get_article_url }}', '_blank')" class="btn btn-link text-info">{{ article.title | title }}</p>
+                    </div>
+                    <div class="col-xs-4 col-sm-1" style="text-align: left; word-wrap: break-word">
+                        {% for tag in article.tags.all %}
+                            <span style="display: inline-block; margin: 2px 0"  class="label label-primary">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="col-xs-4 col-sm-1" style="text-align: left; word-wrap: break-word">
+                        {% for category in article.category.all %}
+                            <span style="display: inline-block; margin: 2px 0"  class="label label-info">{{ category }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="col-xs-4 col-sm-2" style="text-align: left">
+                        <p>{{ article.created_date | naturalday }}</p>
+                    </div>
+                    <div class="col-xs-4 col-sm-2" style="display: flex; justify-content: center">
+                        <p onclick="getNext('{{ article.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
+                        <p onclick="getNext('{{ article.get_delete_url }}')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
+                    </div>
+                </div>
+                {% if not forloop.last %}
+                   <hr>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+</div>

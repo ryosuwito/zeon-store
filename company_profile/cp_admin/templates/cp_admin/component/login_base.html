@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon.png">
+    <title>Xtreme admin Template - The Ultimate Multipurpose admin template</title>
+    <!-- chartist CSS -->
+    <link href="/static/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="/static/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--c3 CSS -->
+    <link href="/static/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/dist/css/style.min.css" rel="stylesheet">
+    <style>
+        @-webkit-keyframes rotating /* Safari and Chrome */ {
+            from {
+            -webkit-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            }
+            to {
+            -webkit-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+            }
+            }
+        @keyframes rotating {
+            from {
+            -ms-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            }
+            to {
+            -ms-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+            }
+        }
+        .rotating {
+            -webkit-animation: rotating 3s linear infinite;
+            -moz-animation: rotating 3s linear infinite;
+            -ms-animation: rotating 3s linear infinite;
+            -o-animation: rotating 3s linear infinite;
+            animation: rotating 3s linear infinite;
+        }
+        .hidden{
+            display: none;
+        }
+        .show{
+            display: block; 
+            display: flex; 
+            justify-content: center; 
+        }
+        .danger{
+            color: #ff5555
+        }
+        .success{
+            color: #137413
+        }
+        input{
+            padding: 13px 6px;
+            margin: 6px 0;
+            width: 100%
+        }
+    </style>
+</head>
+
+<body style="background: #07355a">
+    {% block header %}
+    {% endblock header %}
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+    {% block main_wrapper %}
+    {% endblock main_wrapper %}
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- customizer Panel -->
+    <!-- ============================================================== -->
+    <script src="/static/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/static/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/static/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        function getNext(url, token){
+            $.get(url,
+            {
+                method:'get_component',
+            },
+                //or your custom data either as object {foo: "bar", ...} or foo=bar&...
+                function (data, status){    
+                    var stateObj = { obj: url };
+                    history.pushState(stateObj, url, url);
+                    if(status=='success'){    
+                        $('#main-wrapper').html(data['main']);
+                        $('#local_script').html(data['local_script']);
+                    }
+                },
+            ).fail(function(xhr) {
+                alert(xhr.status);
+                if(xhr.status == 403){
+                    window.open(url+"?code=403", "_self");
+                }else if(xhr.status == 404){
+                    window.open(url+"?code=404", "_self");
+                }else if(xhr.status == 500){
+                    window.open(url+"?code=500", "_self");
+                }
+            });
+        }
+    </script>
+    <div id='local_script'>
+        {% block local_script %}{% endblock local_script %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon.png">
+    <title>Xtreme admin Template - The Ultimate Multipurpose admin template</title>
+    <!-- chartist CSS -->
+    <link href="/static/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="/static/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--c3 CSS -->
+    <link href="/static/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/dist/css/style.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <link href="/static/taggit_selectize/css/selectize.django.css" type="text/css" media="all" rel="stylesheet">
+    <script type="text/javascript" src="/static/taggit_selectize/js/selectize.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <style>
+        .django-ckeditor-widget{
+            width: 100% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader" style="background: #092133">
+
+        <div style="widows: 100%; display: flex; justify-content: center;">
+            <img src="/static/images/zeon-gear-white.svg" width="140px" height="auto"/>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" style="background: #07131d !important">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="{% url 'cms:index' %}">
+                        <!-- Logo icon -->
+                        <b class="logo-icon">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="/static/images/zeon-gear-white.svg" width="40px" height="auto"/>
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span class="logo-text">
+                             <h5 style="color:#fff">ZEON CMS</h5>
+                        </span>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" style="background: #e2e2e2; box-shadow: 0px 1px 5px #aaa">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        <!-- ============================================================== -->
+                        <!-- mega menu -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown mega-dropdown"><a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-none d-md-block">Information <i class="fa fa-angle-down"></i></span>
+                             <span class="d-block d-md-none"><i class="mdi mdi-dialpad font-24"></i></span>
+                            </a>
+                            <div class="dropdown-menu animated bounceInDown">
+                                <div class="mega-dropdown-menu row">
+                                    <div class="col-lg-3 col-xlg-2 m-b-30">
+                                        <h4 class="m-b-20">ZEON Promo</h4>
+                                        <!-- CAROUSEL -->
+                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <div class="container p-0"> <img class="d-block img-fluid" src="/static/assets/images/sale1.jpeg" alt="First slide"></div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="container p-0"><img class="d-block img-fluid" src="/static/assets/images/sale2.jpeg" alt="Second slide"></div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <div class="container p-0"><img class="d-block img-fluid" src="/static/assets/images/sale3.jpeg" alt="Third slide"></div>
+                                                </div>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+                                        </div>
+                                        <!-- End CAROUSEL -->
+                                    </div>
+                                    <div class="col-lg-3 m-b-30">
+                                        <h4 class="m-b-20">ZEON Notifications</h4>
+                                        <!-- Accordian -->
+                                        <div id="accordion">
+                                            <div class="card m-b-5">
+                                                <div class="card-header" id="headingOne">
+                                                    <h5 class="mb-0">
+                                                <button class="btn btn-link text-danger" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                  Top Up Needed
+                                                </button>
+                                              </h5>
+                                                </div>
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anda perlu menambah deposit untuk memperpanjang masa berlaku website {{ site.domain }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card m-b-5">
+                                                <div class="card-header" id="headingTwo">
+                                                    <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                  Pemberitahuan 2
+                                                </button>
+                                              </h5>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card m-b-5">
+                                                <div class="card-header" id="headingThree">
+                                                    <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                    Pemberitahuan 3
+                                                </button>
+                                              </h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3  m-b-30">
+                                        <h4 class="m-b-20">Contact Our Support</h4>
+                                        <!-- Contact -->
+                                        <form>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Enter email"> </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-info">Submit</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-lg-3 col-xlg-4 m-b-30">
+                                        <h4 class="m-b-20">Documentation</h4>
+                                        <!-- List style -->
+                                        <ul class="list-style-none">
+                                            <li><a href="javascript:void(0)"><i class="fa fa-book text-info"></i> Tutorial Edit Identitas Website</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-book text-info"></i> Tutorial Edit Halaman Home</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-book text-info"></i> Tutorial Menambah Halaman</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-book text-info"></i> Tutorial Menambah Artikel</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-book text-info"></i> Tutorial Menambah Kategori</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End mega menu -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- create new -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
+                             <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Page</a>
+                                <a href='javascript:void(0)' onclick="getNext('/cms/article/add/')"; class="dropdown-item">Article</a>
+                                <a class="dropdown-item" href="#">Category</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">Search <i class="ti-search"></i></a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- Notifications -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated flipInY">
+                                <span class="with-arrow"><span class="bg-primary"></span></span>
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="drop-title bg-primary text-white">
+                                            <h4 class="m-b-0 m-t-5">4 New</h4>
+                                            <span class="font-light">Notifications</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message-center notifications">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Launch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center m-b-5" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Comment -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox  animated flipInY" aria-labelledby="2">
+                                <span class="with-arrow"><span class="bg-danger"></span></span>
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="drop-title text-white bg-danger">
+                                            <h4 class="m-b-0 m-t-5">5 New</h4>
+                                            <span class="font-light">Messages</span>
+                                        </div>
+                                    </li>#07131d !important
+                                    <li>
+                                        <div class="message-center message-body">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="{{ configs.brand_assets.get_brand_logo_url  }}" alt="user" class="rounded-circle"> <span class="profile-status online pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/static/assets/images/users/2.jpg" alt="user" class="rounded-circle"> <span class="profile-status busy pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/static/assets/images/users/3.jpg" alt="user" class="rounded-circle"> <span class="profile-status away pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img"> <img src="/static/assets/images/users/4.jpg" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center link" href="javascript:void(0);"> <b>See all e-Mails</b> <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ configs.brand_assets.get_brand_logo_url  }}" alt="user" class="rounded-circle" width="31"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <span class="with-arrow" ><span style="background: #58646b" ></span></span>
+                                <div class="d-flex no-block align-items-center p-15 text-white m-b-10" style="background: #58646b">
+                                    <div style="background: #fff; padding:8px; overflow: hidden; width: 60px; height: 60px; border-radius: 30px"><img src="{{ configs.brand_assets.get_brand_logo_url  }}" width="100%"></div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0">{{ member.user.username }}</h4>
+                                        <p class=" m-b-0">{{ member.user.email  }}</p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar" style="background: #092133 !important">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav" style="background: #092133 !important">
+                    <ul id="sidebarnav" style="background: #092133 !important">
+                        <!-- User Profile-->
+                        <li>
+                            <!-- User Profile-->
+                            <div class="user-profile d-flex no-block dropdown m-t-20">
+                                <div class="user-content hide-menu m-l-10" style="width: 100%;">
+                                    <a href="javascript:void(0)" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-block create-btn text-white no-block d-flex align-items-center">
+                                        <i class="fa fa-plus-square"></i>
+                                        <span class="hide-menu m-l-5">Create New</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
+                                        <a class="dropdown-item" href='javascript:void(0)' onclick="getNext('/cms/article/add/')"; class="dropdown-item"><i class="fa fa-newspaper m-r-5 m-l-5"></i> Article</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-clone m-r-5 m-l-5"></i> Page</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-object-ungroup m-r-5 m-l-5"></i> Category</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Template</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Identity</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Brand Assets</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End User Profile-->
+                        </li>
+                        <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal Info</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-user-circle"></i><span class="hide-menu">Profile </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Edit Profile </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Membership </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Upgrade Membership </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">My App</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="mdi mdi-file"></i><span class="hide-menu">Pages </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-plus-square"></i><span class="hide-menu"></i><span class="hide-menu"> Add New Page </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-newspaper"></i><span class="hide-menu">Articles </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href='javascript:void(0)' onclick="getNext('/cms/article/')" class="sidebar-link"><i class="fa fa-newspaper"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href='javascript:void(0)' onclick="getNext('/cms/article/add/')" class="sidebar-link"><i class="fa fa-plus-square"></i><span class="hide-menu"></i><span class="hide-menu"> Add New Article </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-object-ungroup"></i><span class="hide-menu">Categories </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="fa fa-object-ungroup"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-plus-square"></i><span class="hide-menu"></i><span class="hide-menu"> Add New Category </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">App Config</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-file-image"></i><span class="hide-menu">Template </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Edit Template </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Edit Color Scheme </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-cube"></i><span class="hide-menu">Brand Assets </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Edit Assets </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="mdi mdi-account-box"></i><span class="hide-menu">Brand Identity </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Edit Identity </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-globe"></i><span class="hide-menu">Site Domain </span></a>
+                            <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="layout-inner-fixed-right-sidebar.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"></i><span class="hide-menu"> Overview </span></a></li>
+                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Edit Assets </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Extra</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/static/docs/documentation.html" aria-expanded="false"><i class="mdi mdi-content-paste"></i><span class="hide-menu">Documentation</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="authentication-login1.html" aria-expanded="false"><i class="mdi mdi-directions"></i><span class="hide-menu">Log Out</span></a></li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-5 align-self-center">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Article</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-7 align-self-center">
+                        <div class="d-flex no-block justify-content-end align-items-center">
+                            <div class=""><small>Lifetime Pageviews</small>
+                                <h4 class="text-info m-b-0 font-medium">580,256</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid"  id="main_container">
+                {% block main_wrapper %}
+                {% endblock main_wrapper %}
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                    Copyright &copy; ZEON WebBuilder
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js"></script>
+    <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/static/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/static/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <script src="/static/dist/js/app.min.js"></script>
+    <script src="/static/dist/js/app.init.light-sidebar.js"></script>
+    <script src="/static/dist/js/app-style-switcher.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/static/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/static/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="/static/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/static/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/static/dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <script src="/static/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="/static/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="/static/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="/static/assets/extra-libs/c3/c3.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            setStateToHistory();
+        });
+        function setStateToHistory(){
+            var main = $('#main_container').html().toString();
+            var local_script = $('#local_script').html().toString();
+            history.replaceState({'main':main, 'local_script':local_script}, window.location.pathname, window.location.pathname);
+        }
+        function getNext(url){
+            var prevUrl = window.location.pathname
+            $.get(url,
+            {
+                method:'get_component',
+            },
+                //or your custom data either as object {foo: "bar", ...} or foo=bar&...
+                function (data, status){
+                    if(status=='success'){
+                        history.pushState({},url,url);
+                        $('#main_container').html(data['main']);
+                        $('#local_script').html(data['local_script']);
+                        localScript();
+                        setStateToHistory();
+                    }
+                },
+            ).fail(function(xhr) {
+                alert(xhr.status);
+                if(xhr.status == 403){
+                    window.open(url+"?code=403", "_self");
+                }else if(xhr.status == 404){
+                    window.open(url+"?code=404", "_self");
+                }else if(xhr.status == 500){
+                    window.open(url+"?code=500", "_self");
+                }
+            });
+        }
+        window.addEventListener('popstate', function(event) {
+            if (event.state) {
+                var main = ( event.state.main );
+                var local_script = ( event.state.local_script );
+                $('#main_container').html(event.state.main);
+                $('#local_script').html(event.state.local_script);
+                $('#id_content #cke_id_content').remove();
+                var elements = document.getElementsByClassName("selectize-control");
+                var idx = 0;
+                for(idx; idx < elements.length; idx ++){
+                    if(idx>0) elements[idx].parentNode.removeChild(elements[idx]);
+                };
+                localScript();
+                setStateToHistory();
+            }
+        }, false);
+    </script>
+    <div id='local_script'>
+        {% block local_script %}{% endblock local_script %}
+    </div>
+</body>
+
+</html>
