@@ -22,7 +22,7 @@ class Dispatcher(View):
 
 class Index(Dispatcher):
     def get(self, request, *args, **kwargs):
-        if get_current_site(request) == 'sidomo.com':
+        if get_current_site(request).domain == 'sidomo.com':
             return HttpResponse('OK')
         data = super(Index, self).get(request, args, kwargs)
         configs, is_created = UserConfigs.objects.get_or_create(member = data['member'])
