@@ -27,6 +27,8 @@ class Index(Dispatcher):
         if is_created:
             super(Index, self).set_default_configs(configs)
         site = data['site']
+        if site == 'sidomo.com':
+            return HttpResponse('OK')
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
