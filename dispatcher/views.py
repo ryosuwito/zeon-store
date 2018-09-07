@@ -98,15 +98,14 @@ class Page(Dispatcher):
         data = super(Page, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
-        if site == 'sidomo.com':
-            return HttpResponse(kwargs['page_slug'])
+        if site.domain == 'sidomo.com':
             if kwargs['page_slug'] == 'contact':
                 return render(request, "zeon_backend/templates/contact.html")
-            if kwargs['page_slug'] == 'about':
+            elif kwargs['page_slug'] == 'about':
                 return render(request, "zeon_backend/templates/about.html")
-            if kwargs['page_slug'] == 'services':
+            elif kwargs['page_slug'] == 'services':
                 return render(request, "zeon_backend/templates/services.html")
-            if kwargs['page_slug'] == 'pricing':
+            elif kwargs['page_slug'] == 'pricing':
                 return render(request, "zeon_backend/templates/pricing-tables.html")
         assets = configs.brand_assets
         scheme = configs.color_scheme
