@@ -22,13 +22,13 @@ class Dispatcher(View):
 
 class Index(Dispatcher):
     def get(self, request, *args, **kwargs):
+        if site == 'sidomo.com':
+            return HttpResponse('OK')
         data = super(Index, self).get(request, args, kwargs)
         configs, is_created = UserConfigs.objects.get_or_create(member = data['member'])
         if is_created:
             super(Index, self).set_default_configs(configs)
         site = data['site']
-        if site == 'sidomo.com':
-            return HttpResponse('OK')
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
