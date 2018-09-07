@@ -99,6 +99,7 @@ class Page(Dispatcher):
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
         if site == 'sidomo.com':
+            return HttpResponse(kwargs['page_slug'])
             if kwargs['page_slug'] == 'contact':
                 return render(request, "zeon_backend/templates/contact.html")
             if kwargs['page_slug'] == 'about':
