@@ -22,8 +22,8 @@ class Dispatcher(View):
 
 class Index(Dispatcher):
     def get(self, request, *args, **kwargs):
-        #if get_current_site(request).domain == 'sidomo.com':
-        #   return render(request, "zeon_backend/templates/index-3.html")
+        if get_current_site(request).domain == 'sidomo.com':
+           return render(request, "zeon_backend/templates/index-3.html")
         data = super(Index, self).get(request, args, kwargs)
         configs, is_created = UserConfigs.objects.get_or_create(member = data['member'])
         if is_created:
@@ -98,6 +98,15 @@ class Page(Dispatcher):
         data = super(Page, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
+        if site == 'sidomo.com':
+            if kwargs['page_slug'] == 'contact':
+                return render(request, "zeon_backend/templates/contact.html")
+            if kwargs['page_slug'] == 'about':
+                return render(request, "zeon_backend/templates/about.html")
+            if kwargs['page_slug'] == 'services':
+                return render(request, "zeon_backend/templates/services.html")
+            if kwargs['page_slug'] == 'pricing':
+                return render(request, "zeon_backend/templates/pricing-tables.html")
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
