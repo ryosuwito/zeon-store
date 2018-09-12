@@ -54,12 +54,9 @@ class Login(Dispatcher):
             if user is not None : 
                 if user.user_member.site == data['site']:
                     login(request, user)
-                    time.sleep(5)
                     return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
                 else:
-                    time.sleep(5)
                     return  HttpResponse(status=403)
-            time.sleep(5)
             return HttpResponse(status=404)
 
 class Index(LoginRequiredMixin, Dispatcher):

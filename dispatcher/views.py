@@ -6,6 +6,7 @@ from django.views import View
 from company_profile.cp_pages.models import PageModel
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import Category as CategoryModel
+from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_user_configs.models import UserConfigs
 from membership.models import Member
 
@@ -47,18 +48,22 @@ class Index(Dispatcher):
 
 class Blog(Dispatcher):
     def get(self, request, *args, **kwargs):
+        article = ArticleModel.objects.all()
         data = super(Blog, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
         if site.domain == 'sidomo.com':
-            return render(request, "zeon_backend/templates/blog_index.html")
+            template = "zeon_backend/templates/blog_index.html"
+        else:
+            self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
+            self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
+            template = "company_profile/%s/blog-index.html"%(configs.templates.dir_name)
+
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
-        self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
-        self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
-        template = "company_profile/%s/blog-index.html"%(configs.templates.dir_name)
         return render(request, template, {
+            'article': article,
             'component': self.component,
             'configs':configs,
             'site':site,
@@ -74,11 +79,22 @@ class Article(Dispatcher):
         data = super(Article, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
-        try:
-            category = CategoryModel.objects.get(site=site, slug=kwargs['kategori'])
-            article = ArticleModel.objects.filter(site=site, slug=kwargs['slug'], category=category)
-        except:
-            return HttpResponse("Not Found")
+        if kwargs['kategori'] != 'preview':
+            try:
+                category = CategoryModel.objects.get(site=site, slug=kwargs['kategori'])
+                article = ArticleModel.objects.get(site=site, slug=kwargs['slug'])
+            except:
+                return HttpResponse("Not Found")
+        else:
+            category = 'preview'
+            try:
+                article = TempArticleModel.objects.get(site=site, slug=kwargs['slug'])
+            except:
+                return HttpResponse("Not Found")
+
+        if site.domain == 'sidomo.com':
+            template = "zeon_backend/templates/blog-post.html"
+            return render(request, template, {'article': article})
 
         assets = configs.brand_assets
         scheme = configs.color_scheme
@@ -109,6 +125,8 @@ class Page(Dispatcher):
                 return render(request, "zeon_backend/templates/services.html")
             elif kwargs['page_slug'] == 'pricing':
                 return render(request, "zeon_backend/templates/pricing-tables.html")
+            else:
+                return render(request, "zeon_backend/templates/index-3.html")
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity

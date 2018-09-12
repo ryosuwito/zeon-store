@@ -1,13 +1,31 @@
 <div class="row">
     <div class="col-sm-12">
-        <div class="row">
-            <!-- column -->
-            <div class="col-xs-12 col-sm-9">
-                <div class="card">
-                    <div class="card-body">
-                        <h1>Add New Article</h1>
-                        <hr>
-                        <form id='addArticleForm' method="POST">
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                    <p>{{ field.label }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-sm-12">
+        <form id='editArticleForm' method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
+            <div class="row">
+                <!-- column -->
+                <div class="col-xs-12 col-sm-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Add New Article</h1>
+                            <hr>
                             {% csrf_token %}
                             <h4>{{ form.title.label }}</h4>
                             {{ form.title }}
@@ -15,35 +33,40 @@
                             <br>
                             <h4>{{ form.content.label }}</h4>
                             {{ form.content }}
-                        </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-xs col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6>{{ form.tags.label }}</h6>
+                            {{ form.tags }}
+                            <h6>{{ form.category.label }}</h6>
+                            {{ form.category }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h6>{{ form.published_date }}  {{ form.published_date.label }}</h6>
+                            <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
+                            <h6>{{ form.is_featured }}  {{ form.is_featured.label }}</h6>
+                            <hr>
+                            <h6>{{ form.featured_image.label }}</h6>
+                            {% if featured_image %}
+                            <img src="{{ featured_image }}" width="100%; height:auto">
+                            <hr>
+                            {% endif %}
+                            {{ form.featured_image }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="display: flex; justify-content: center">
+                            <p class="btn btn-info" style="margin: auto" onclick="previewNewArticle()">PREVIEW</p>
+                            <button class="btn btn-primary" form="editArticleForm" style="margin: auto" type="submit">SUBMIT</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="hidden-xs col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h6>{{ form.tags.label }}</h6>
-                        {{ form.tags }}
-                        <h6>{{ form.category.label }}</h6>
-                        {{ form.category }}
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h6>{{ form.published_date }}  {{ form.published_date.label }}</h6>
-                        <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
-                        <h6>{{ form.is_featured }}  {{ form.is_featured.label }}</h6>
-                        <h6>{{ form.featured_image.label }}</h6>
-                        {{ form.featured_image }}
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body" style="display: flex; justify-content: center">
-                        <p class="btn btn-info" style="margin: auto" onclick="">PREVIEW</p>
-                        <p class="btn btn-primary" style="margin: auto" onclick="">SUBMIT</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

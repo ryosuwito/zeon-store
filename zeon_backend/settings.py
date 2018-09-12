@@ -26,7 +26,6 @@ SECRET_KEY = 'dli3^=1mdk6vj-d+k*e8=49o^g35gqhc7_3)l4m^++wa^h)b8j'
 DEBUG = True
 
 ALLOWED_HOSTS = ['zeon.co.id',
-		'178.128.124.24',
                 '.co.id',
                 '.com',
                 '.biz',
@@ -232,4 +231,5 @@ TAGGIT_SELECTIZE = {
     'DRAG_DROP': False,
     'DELIMITER': ','
 }
-SITE_ID = 1
+
+SITE_ID = 2

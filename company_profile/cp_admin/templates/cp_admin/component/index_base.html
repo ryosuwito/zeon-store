@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon.png">
-    <title>Xtreme admin Template - The Ultimate Multipurpose admin template</title>
+    <title>{{ site }}</title>
     <!-- chartist CSS -->
     <link href="/static/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="/static/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
@@ -91,6 +91,7 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-left mr-auto">
                         <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        {% if site.domain != "sidomo.com" %}
                         <!-- ============================================================== -->
                         <!-- mega menu -->
                         <!-- ============================================================== -->
@@ -199,6 +200,7 @@
                         <!-- ============================================================== -->
                         <!-- End mega menu -->
                         <!-- ============================================================== -->
+                        {% endif %}
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
@@ -226,6 +228,7 @@
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-right">
+                        {% if site.domain != "sidomo.com" %}
                         <!-- ============================================================== -->
                         <!-- Notifications -->
                         <!-- ============================================================== -->
@@ -335,6 +338,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
+                        {% endif %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ configs.brand_assets.get_brand_logo_url  }}" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -387,17 +391,21 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
                                         <a class="dropdown-item" href='javascript:void(0)' onclick="getNext('/cms/article/add/')"; class="dropdown-item"><i class="fa fa-newspaper m-r-5 m-l-5"></i> Article</a>
+
+                                        {% if site.domain != "sidomo.com" %}
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-clone m-r-5 m-l-5"></i> Page</a>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-object-ungroup m-r-5 m-l-5"></i> Category</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Template</a>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Identity</a>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Brand Assets</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                             <!-- End User Profile-->
                         </li>
+                        {% if site.domain != "sidomo.com" %}
                         <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal Info</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                             <i class="fa fa-user-circle"></i><span class="hide-menu">Profile </span></a>
@@ -413,7 +421,10 @@
                                 <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-edit"></i><span class="hide-menu"></i><span class="hide-menu"> Upgrade Membership </span></a></li>
                             </ul>
                         </li>
+                        {% endif %}
                         <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">My App</span></li>
+
+                        {% if site.domain != "sidomo.com" %}
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                             <i class="mdi mdi-file"></i><span class="hide-menu">Pages </span></a>
                             <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
@@ -421,6 +432,7 @@
                                 <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-plus-square"></i><span class="hide-menu"></i><span class="hide-menu"> Add New Page </span></a></li>
                             </ul>
                         </li>
+                        {% endif %}
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                             <i class="fa fa-newspaper"></i><span class="hide-menu">Articles </span></a>
                             <ul style="background: #114065" aria-expanded="false" class="collapse  first-level">
@@ -435,6 +447,7 @@
                                 <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="fa fa-plus-square"></i><span class="hide-menu"></i><span class="hide-menu"> Add New Category </span></a></li>
                             </ul>
                         </li>
+                        {% if site.domain != "sidomo.com" %}
                         <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">App Config</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                             <i class="fa fa-file-image"></i><span class="hide-menu">Template </span></a>
@@ -468,6 +481,8 @@
                         <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Extra</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/static/docs/documentation.html" aria-expanded="false"><i class="mdi mdi-content-paste"></i><span class="hide-menu">Documentation</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="authentication-login1.html" aria-expanded="false"><i class="mdi mdi-directions"></i><span class="hide-menu">Log Out</span></a></li>
+
+                        {% endif %}
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -592,6 +607,7 @@
                     }
                 },
             ).fail(function(xhr) {
+                /*
                 alert(xhr.status);
                 if(xhr.status == 403){
                     window.open(url+"?code=403", "_self");
@@ -599,7 +615,7 @@
                     window.open(url+"?code=404", "_self");
                 }else if(xhr.status == 500){
                     window.open(url+"?code=500", "_self");
-                }
+                }*/
             });
         }
         window.addEventListener('popstate', function(event) {
