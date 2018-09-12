@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'company_profile.cp_articles',
     'company_profile.cp_pages',
     'company_profile.cp_user_configs',
+    'company_profile.cp_comment',
     'company_profile.api',
     'ckeditor',
     'ckeditor_uploader',
