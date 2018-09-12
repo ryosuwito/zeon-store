@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Findeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/static/css/zeon-backend-style.css">
+<link rel="stylesheet" href="/static/css/colors/main.css" id="colors">
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+
+
+<!-- Header Container
+================================================== -->
+<header id="header-container">
+
+	<!-- Topbar -->
+	<div id="top-bar">
+		<div class="container">
+
+			<!-- Left Side Content -->
+			<div class="left-side">
+
+				<!-- Top bar -->
+				<ul class="top-bar-menu">
+					<li><i class="fa fa-phone"></i> (123) 123-456 </li>
+				</ul>
+
+			</div>
+			<!-- Left Side Content / End -->
+
+
+			<!-- Left Side Content -->
+			<div class="right-side">
+
+				<!-- Social Icons -->
+				<ul class="social-icons">
+					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+					<li><a class="pinterest" href="#"><i class="icon-pinterest"></i></a></li>
+				</ul>
+
+			</div>
+			<!-- Left Side Content / End -->
+
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<!-- Topbar / End -->
+
+
+	<!-- Header -->
+	<div id="header">
+		<div class="container">
+			
+			<!-- Left Side Content -->
+			<div class="left-side">
+				
+				<!-- Logo -->
+				<div id="logo" style="min-width:170px">
+					<a href="/"><img src="/images/logo3.png" style="width: 110px;"></a>
+				</div>
+
+				<!-- Mobile Navigation -->
+				<div class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+
+				<!-- Main Navigation -->
+				<nav id="navigation" class="style-1">
+					<ul id="responsive">
+
+						<li><a href="/">Home</a>
+						</li>
+
+						<li><a href="/about">About</a>
+						</li>
+
+						<li><a href="#">Services</a>
+							<ul>
+								<li><a href="/services">Website</a>
+								</li>
+								<li><a href="/services">Android</a>
+								</li>
+								<li><a href="/services">Ios</a>
+								</li>
+							</ul>
+						</li>
+
+						<li><a href="/pricing">Pricing</a>
+						</li>
+						<li><a class="current" href="/blog">Blog</a>
+						</li>
+						<li><a href="/contact">Contact</a>
+						</li>
+
+					</ul>
+				</nav>
+				<div class="clearfix"></div>
+				<!-- Main Navigation / End -->
+				
+			</div>
+			<!-- Left Side Content / End -->
+
+			<!-- Right Side Content / End -->
+			<div class="right-side">
+				<!-- Header Widget -->
+				<div class="header-widget">
+					<a href="/login-register" class="sign-in"><i class="fa fa-user"></i> Log In</a>
+					<a href="/submit-property" class="button border-green">Register</a>
+				</div>
+				<!-- Header Widget / End -->
+			</div>
+			<!-- Right Side Content / End -->
+
+		</div>
+	</div>
+	<!-- Header / End -->
+
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+    
+                    <h2>News</h2>
+                    <span>Dapatkan informasi terbaru!</span>
+    
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li>Blog</li>
+                        </ul>
+                    </nav>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Content
+================================================== -->
+<div class="container padding-top-10 margin-bottom-40">
+	<div class="row sticky-wrapper">
+
+		<div class="col-md-8">
+			<!-- Listings -->
+			<div class="listings-container list-layout">
+
+				{% for a in article %}
+				<!-- Listing Item -->
+				<div class="listing-item">
+
+					<a href="{{ a.get_article_url }}" class="listing-img-container">
+
+						{% if a.is_featured %}
+						<div class="listing-badges">
+							<span class="featured">Featured</span>
+						</div>
+						{% endif %}
+						<div>
+							<div><img src="{{ a.get_image_url }}" alt="{{ a.slug }}"></div>
+						</div>
+					</a>
+					<div class="listing-content" style="padding:0 15px">
+
+						<div class="listing-title" style="padding:0">
+							<h4><a href="{{ a.get_article_url }}">{{ a.title | truncatechars:75  | title }}</a></h4>
+							{% comment %}
+							<p style="margin:0">
+								<i class="fa fa-user"></i> David Strozier
+								<i class="fa fa-comment" style="margin-left:3px"></i> 21.1k
+								<i class="fa fa-calendar-o" style="margin-left:3px"></i> 1 day ago</span>
+							</p>
+							{% endcomment %}
+							<p>
+								{{ a.lead_in | truncatechars:95 }}
+							</p>
+							<a href="{{ a.get_article_url }}">
+								<span class="button border border-green" style="padding:2px 40px; width: auto">
+								Details</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+				{% endfor %}
+
+			</div>
+			<!-- Listings Container / End -->
+
+			
+			<!-- Pagination -->
+			<div class="pagination-container margin-top-20">
+				<nav class="pagination">
+					<ul>
+						<li><a href="#" class="current-page">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li class="blank">...</li>
+						<li><a href="#">22</a></li>
+					</ul>
+				</nav>
+
+				<nav class="pagination-next-prev">
+					<ul>
+						<li><a href="#" class="prev">Previous</a></li>
+						<li><a href="#" class="next">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+			<!-- Pagination / End -->
+
+		</div>
+
+
+		<!-- Sidebar
+	================================================== -->
+
+	<!-- Widgets -->
+	<div class="col-md-4">
+            <div class="sidebar right">
+    
+                <!-- Widget -->
+                <div class="widget">
+                    <h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>
+                    <div class="search-blog-input">
+                        <div class="input"><input class="search-field" type="text" placeholder="Type and hit enter" value=""/></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Widget / End -->
+    
+    
+                <!-- Widget -->
+                <div class="widget">
+                    <h3>Got any questions?</h3>
+                    <div class="info-box margin-bottom-10">
+                        <p>If you are having any questions, please feel free to ask.</p>
+                        <a href="contact" class="button fullwidth margin-top-20"><i class="fa fa-envelope-o"></i> Drop Us a Line</a>
+                    </div>
+                </div>
+                <!-- Widget / End -->
+    
+    
+				{% comment %}
+                <!-- Widget -->
+                <div class="widget">
+    
+                    <h3>Popular Posts</h3>
+                    <ul class="widget-tabs">
+    
+                        <!-- Post #1 -->
+                        <li>
+                            <div class="widget-content">
+                                    <div class="widget-thumb">
+                                    <a href="blog-full-width-single-post"><img src="/images/blog-widget-03.jpg" alt=""></a>
+                                </div>
+    
+                                <div class="widget-text">
+                                    <h5><a href="blog-full-width-single-post">What to Do a Year Before Buying Apartment </a></h5>
+                                    <span>October 26, 2016</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+    
+                        <!-- Post #2 -->
+                        <li>
+                            <div class="widget-content">
+                                <div class="widget-thumb">
+                                    <a href="blog-full-width-single-post"><img src="/images/blog-widget-02.jpg" alt=""></a>
+                                </div>
+    
+                                <div class="widget-text">
+                                    <h5><a href="blog-full-width-single-post">Bedroom Colors You'll Never Regret</a></h5>
+                                    <span>November 9, 2016</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+    
+                        <!-- Post #3 -->
+                        <li>
+                            <div class="widget-content">
+                                <div class="widget-thumb">
+                                    <a href="blog-full-width-single-post"><img src="/images/blog-widget-01.jpg" alt=""></a>
+                                </div>
+    
+                                <div class="widget-text">
+                                    <h5><a href="blog-full-width-single-post">8 Tips to Help You Finding New Home</a></h5>
+                                    <span>November 12, 2016</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+    
+                    </ul>
+    
+                </div>
+                <!-- Widget / End-->
+				{% endcomment %}
+    
+                <!-- Widget -->
+                <div class="widget">
+                    <h3 class="margin-top-0 margin-bottom-25">Social</h3>
+                    <ul class="social-icons rounded">
+                        <li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
+                    </ul>
+    
+                </div>
+                <!-- Widget / End-->
+    
+                <div class="clearfix"></div>
+                <div class="margin-bottom-40"></div>
+            </div>
+        </div>
+        </div>
+        <!-- Sidebar / End -->
+	</div>
+</div>
+
+
+
+<div class="padding-top-40 padding-bottom-40" style="width: 100%; background:#18ab07bf">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 margin-bottom-20">
+			<h1 style="font-weight:100; font-size:34pt">Berlangganan Melalui  
+			<span class="white" style="font-weight:900">
+					Email	
+			</span></h1>
+			</div>
+			<div class="col-xs-12 margin-bottom-15" style="border-top:1px solid #555"></div>
+			<div class="col-xs-12 col-md-6 margin-bottom-10">
+				<p style="color:#333; font-size:13pt">
+						Dapatkan informasi terbaru serta harga promo menarik dengan subscribe dan berlangganan melalui email
+				</p>
+			</div>
+			<div class="col-xs-12 col-md-6 margin-bottom-40" style="display: flex; justify-content:center">
+				<input type="email" style="border:1px solid #fff;min-height:51px;margin:auto; width: 75%; border-top-left-radius: 5px; border-bottom-left-radius: 5px" placeholder="Masukkan alamat email Anda">
+				<button class="button" type="submit" style="border:1px solid #fff;border-top-right-radius: 5px; border-bottom-right-radius: 5px;min-height:51px;width: 25%; margin:auto">Kirim</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Footer
+================================================== -->
+<div id="footer">
+	<!-- Main -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3  col-sm-12">
+				<h4>Contact Us</h4>
+				<div class="text-widget">
+					<span>
+						– Jl. Laksda Adi Sucipto Gang.22, Pandanwangi (Graha Cipta Residence, Blok B5), Blimbing, Pandanwangi, Blimbing, Malang, Jawa Timur 65126
+					</span> <br>
+					<span>
+						– Jl. Sentot Prawirodirjo Sentul Kota Blitar, Jawa TImur
+					</span> <br>
+					Phone: <span>+62 821-66-900-900 </span><br>
+					E-Mail:<span> <a href="#">contact@sidomo.com</a> </span><br>
+
+					<div class="row" style="margin: 0">
+						<ul class="social-icons margin-top-20">
+							<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+							<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+							<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+							<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-md-1  col-sm-12"></div>
+			<div class="col-md-4 col-sm-12">
+					<h4>Helpful Links</h4>
+					<ul class="footer-links">
+						<li><a href="#">Log In / Register</a></li>
+						<li><a href="#">Company Profile</a></li>
+						<li><a href="#">My Account</a></li>
+						<li><a href="#">Web Builder</a></li>
+						<li><a href="#">Android Builder</a></li>
+					</ul>
+	
+					<ul class="footer-links">
+						<li><a href="#">IOS Builder</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Term of service</a></li>
+						<li><a href="#">Kritik dan Saran</a></li>
+						<li><a href="#">Laporkan Penyalahgunaan</a></li>
+					</ul>
+					<div class="clearfix"></div>
+			</div>
+
+			<div class="col-md-4 col-sm-12 ">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="#">Web Support</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">News</a></li>
+					<li><a href="#">Program Afiliasi</a></li>
+					<li><a href="#">Pricing</a></li>
+					<li><a href="#">Stockist & Cabang</a></li>
+				</ul>
+
+				<ul class="footer-links">
+					<li><a href="#">Review Pelanggan</a></li>
+					<li><a href="#">Gallery Events</a></li>
+					<li><a href="#">Karir</a></li>
+					<li><a href="#">Developer Club</a></li>
+					<li><a href="#">Metode Pembayaran</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>		
+
+		</div>
+		
+		<!-- Copyright -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyrights">© 2016 Findeo. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- Footer / End -->
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="/static/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/static/scripts/chosen.min.js"></script>
+<script type="text/javascript" src="/static/scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="/static/scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/static/scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="/static/scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="/static/scripts/slick.min.js"></script>
+<script type="text/javascript" src="/static/scripts/masonry.min.js"></script>
+<script type="text/javascript" src="/static/scripts/mmenu.min.js"></script>
+<script type="text/javascript" src="/static/scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="/static/scripts/custom.js"></script>
+
+
+</div>
+<!-- Wrapper / End -->
+
+
+</body>
+</html>
