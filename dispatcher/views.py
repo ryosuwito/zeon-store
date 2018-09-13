@@ -12,7 +12,7 @@ from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_user_configs.models import UserConfigs
 
 from company_profile.cp_comment.forms import AddVisitorForm, AddCommentForm, AddReplyForm
-from company_profile.cp_comment.models import Visitor, Comment, Reply
+from company_profile.cp_comment.models import VisitorModel, CommentModel, ReplyModel
 from membership.models import Member
 
 class Dispatcher(View):
@@ -202,10 +202,10 @@ class Comment(Dispatcher):
         comment_form = AddCommentForm(request.POST)
         if visitor_form.is_valid() and comment_form.is_valid():
             visitor_form_data = visitor_form.cleaned_data
-            visitor = Visitor.objects.create(email=visitor_form_data['email'],
+            visitor = VisitorModel.objects.create(email=visitor_form_data['email'],
                     name=visitor_form_data['name'])
             comment_form_data = comment_form.cleaned_data
-            comment = Comment.objects.create(visitor=visitor,
+            comment = CommentModel.objects.create(visitor=visitor,
                     content=comment_form_data['content'],
                     article=article)
 
