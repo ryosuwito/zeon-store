@@ -179,8 +179,8 @@ class Comment(Dispatcher):
         }
         
     def format_replies(self, comment):
-        if comment.reply.all():
-            return [self.format_reply(reply) for reply in  comment.reply.all()]
+        if comment.comment_reply.all():
+            return [self.format_reply(reply) for reply in  comment.comment_reply.all()]
         else:
             return ''
     
