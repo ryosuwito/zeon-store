@@ -145,3 +145,21 @@ class Page(Dispatcher):
         })
     def post(self, request, *args, **kwargs):
         pass
+
+
+class Comment(Dispatcher):
+    def get(self, request, *args, **kwargs):
+        data = super(Comment, self).get(request, args, kwargs)
+        configs = UserConfigs.objects.get(member = data['member'])
+        site = data['site']
+        try:
+            method = kwargs['method']
+        except:
+            method = ''
+        
+        if method == 'add':
+            return HttpResponse('Wrong Method', status=403)
+
+        slug = kwargs['article_slug']
+        
+            
