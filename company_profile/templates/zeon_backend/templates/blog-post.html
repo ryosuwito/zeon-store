@@ -303,69 +303,29 @@
 
 			<!-- Reviews -->
 			<section class="comments">
-				{% for comment in comments %}
-				<p>{{ comment.created_date }}</p>
-				<p>{{ comment.visitor }}</p>
-				<p>{{ comment.content }}</p>
-				{% endfor %}
 			<h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(5)</span></h4>
 
 				<ul>
-					<li>
-						<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-						<div class="comment-content"><div class="arrow-comment"></div>
-							<div class="comment-by">Kathy Brown<span class="date">12th, June 2015</span>
+					{% for comment in comments %}
+					<li><div class="comment-content"><div class="arrow-comment"></div>
+							<div class="comment-by">{{ comment.visitor | title}}<span class="date">{{ comment.created_date }}</span>
 								<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
 							</div>
-							<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
+							<p>{{ comment.content }}</p>
 						</div>
-
 						<ul>
-							<li>
-								<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-								<div class="comment-content"><div class="arrow-comment"></div>
-									<div class="comment-by">Tom Smith<span class="date">12th, June 2015</span>
+							{% for reply in comment.reply %}
+							<li><div class="comment-content"><div class="arrow-comment"></div>
+									<div class="comment-by">{{ reply.visitor }}<span class="date">{{ reply.created_date }}</span>
 										<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
 									</div>
-									<p>Rrhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque.</p>
+									<p>{{ reply.content }}</p>
 								</div>
 							</li>
-							<li>
-								<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-								<div class="comment-content"><div class="arrow-comment"></div>
-									<div class="comment-by">Kathy Brown<span class="date">12th, June 2015</span>
-										<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-									</div>
-									<p>Nam posuere tristique sem, eu ultricies tortor.</p>
-								</div>
-
-								<ul>
-									<li>
-										<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-										<div class="comment-content"><div class="arrow-comment"></div>
-											<div class="comment-by">John Doe<span class="date">12th, June 2015</span>
-												<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-											</div>
-											<p>Great template!</p>
-										</div>
-									</li>
-								</ul>
-
-							</li>
+							{% endfor %}
 						</ul>
-
 					</li>
-
-					<li>
-						<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-						<div class="comment-content"><div class="arrow-comment"></div>
-							<div class="comment-by">John Doe<span class="date">15th, May 2015</span>
-								<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-							</div>
-							<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-						</div>
-
-					</li>
+					{% endfor %}
 				 </ul>
 
 			</section>
