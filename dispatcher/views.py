@@ -166,9 +166,11 @@ class Comment(Dispatcher):
             return HttpResponse('Article Not Found', status=404)
 
         if article.article_comment.all():
-            comments_dict = [comment for comment in article.article_comment.all()]
-            return HttpResponse([self.format_comment(comment) for comment in comments_dict])
+            return HttpResponse(self.get_comment_and_reply(article))
         return HttpResponse('Not Found' , status=404)
+
+    def get_comment_and_reply(article):
+        return [self.format_comment(comment) for comment in article.article_comment.all()]
 
     def format_comment(self, comment):
         return {
