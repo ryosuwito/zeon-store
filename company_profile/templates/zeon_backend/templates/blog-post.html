@@ -308,6 +308,7 @@
 				<ul>
 					{% for comment in comments %}
 					<li><div class="comment-content"><div class="arrow-comment"></div>
+							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>	
 							<div class="comment-by">{{ comment.visitor | title}}<span class="date">{{ comment.created_date }}</span>
 								<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
 							</div>
@@ -315,6 +316,7 @@
 						</div>
 						<ul>
 							{% for reply in comment.reply %}
+							<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>								
 							<li><div class="comment-content"><div class="arrow-comment"></div>
 									<div class="comment-by">{{ reply.visitor }}<span class="date">{{ reply.created_date }}</span>
 										<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
