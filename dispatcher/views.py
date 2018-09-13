@@ -1,8 +1,9 @@
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.forms.models import model_to_dict
+from django.urls import reverse
 
 from company_profile.cp_pages.models import PageModel
 from company_profile.cp_articles.models import Article as ArticleModel
@@ -11,7 +12,7 @@ from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_user_configs.models import UserConfigs
 
 from company_profile.cp_comment.forms import AddVisitorForm, AddCommentForm, AddReplyForm
-
+from company_profile.cp_comment.models import Visitor, Comment, Reply
 from membership.models import Member
 
 class Dispatcher(View):
@@ -189,22 +190,26 @@ class Comment(Dispatcher):
         site = data['site']
         try:
             method = kwargs['method']
+            article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
         except:
             method = ''
+            article = ''
         
-        if method != 'add':
+        if method != 'add' or not article:
             return HttpResponse('Wrong Method', status=403)
 
         visitor_form = AddVisitorForm(request.POST)
-        if visitor_form.is_valid():
+        comment_form = AddCommentForm(request.POST)
+        if visitor_form.is_valid() and comment_form.is_valid():
             visitor_form_data = visitor_form.cleaned_data
-            return HttpResponse(visitor_form_data['email'])
+            visitor = Visitor(email=visitor_form_data['email'],
+                    name=visitor_form_data['name'])
+            comment_form_data = comment_form.changed_data
+            comment = Comment(visitor=visitor,
+                    content=comment_form_data['content'],
+                    article=article)
 
-        article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
-
-        if article.article_comment.all():
-            return JsonResponse(self.get_comment_and_reply(article), safe=False)
-        return HttpResponse('Not Found' , status=404)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
 
     def get_comment_and_reply(self, article):
