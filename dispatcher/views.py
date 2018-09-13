@@ -172,7 +172,7 @@ class Comment(Dispatcher):
 
     def format_comment(self, comment):
         return {
-            'created_date' : comment.created_date,
+            'created_date' : comment.created_date.strftime("%d/%m/%y"),
             'visitor': comment.visitor.name, 
             'content': comment.content,
             'reply' : self.format_replies(comment),
@@ -186,7 +186,7 @@ class Comment(Dispatcher):
     
     def format_reply(self, reply):
         return {
-            'created_date' : reply.created_date,
+            'created_date' : reply.created_date.strftime("%d/%m/%y"),
             'visitor': reply.visitor.name, 
             'content': reply.content,
         }
