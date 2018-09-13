@@ -176,11 +176,14 @@ class Comment(Dispatcher):
             'created_date' : comment.created_date,
             'visitor': comment.visitor.name, 
             'content': comment.content,
-            'reply' : format_replies(comment) if comment.reply.all()
+            'reply' : format_replies(comment),
         }
         
     def format_replies(comment):
-        return [format_reply(reply) for reply in  comment.reply.all()]
+        if comment.reply.all():
+            return [format_reply(reply) for reply in  comment.reply.all()]
+        else:
+            return ''
     
     def format_reply(reply):
         return {
