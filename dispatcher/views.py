@@ -9,6 +9,9 @@ from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import Category as CategoryModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_user_configs.models import UserConfigs
+
+from company_profile.cp_comment.forms import AddVisitorForm, AddCommentForm, AddReplyForm
+
 from membership.models import Member
 
 class Dispatcher(View):
@@ -95,9 +98,17 @@ class Article(Dispatcher):
 
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
+            visitor_form = AddVisitorForm()
+            comment_form = AddCommentForm()
+            reply_form = AddReplyForm()
             comment = Comment()
             comment_and_reply = comment.get_comment_and_reply(article)
-            return render(request, template, {'article': article, 'comments':comment_and_reply})
+            return render(request, template, 
+                {'article': article, 
+                'comments':comment_and_reply,
+                'visitor_form': visitor_form,
+                'comment_form': comment_form,
+                'reply_form': reply_form})
 
         assets = configs.brand_assets
         scheme = configs.color_scheme
