@@ -12,7 +12,9 @@ from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_user_configs.models import UserConfigs
 
 from company_profile.cp_comment.forms import AddVisitorForm, AddCommentForm, AddReplyForm
-from company_profile.cp_comment.models import VisitorModel, CommentModel, ReplyModel
+from company_profile.cp_comment.models import Visitor as VisitorModel
+from company_profile.cp_comment.models import Comment as CommentModel
+from company_profile.cp_comment.models import Reply as ReplyModel
 from membership.models import Member
 
 class Dispatcher(View):
