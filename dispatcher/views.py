@@ -181,6 +181,33 @@ class Comment(Dispatcher):
         if article.article_comment.all():
             return JsonResponse(self.get_comment_and_reply(article), safe=False)
         return HttpResponse('Not Found' , status=404)
+    
+    
+    def post(self, request, *args, **kwargs):
+        data = super(Comment, self).get(request, args, kwargs)
+        configs = UserConfigs.objects.get(member = data['member'])
+        site = data['site']
+        try:
+            method = kwargs['method']
+        except:
+            method = ''
+        
+        if method != 'add':
+            return HttpResponse('Wrong Method', status=403)try:
+
+        visitor_form = AddVisitorForm(request.POST)
+        if visitor_form.is_valid():
+            visitor_form_data = visitor_form.cleaned_data
+            return HttpResponse(visitor_form_data['email'])
+
+        article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
+        except:
+            return HttpResponse('Article Not Found', status=404)
+
+        if article.article_comment.all():
+            return JsonResponse(self.get_comment_and_reply(article), safe=False)
+        return HttpResponse('Not Found' , status=404)
+    
 
     def get_comment_and_reply(self, article):
         return [self.format_comment(comment) for comment in article.article_comment.all()]

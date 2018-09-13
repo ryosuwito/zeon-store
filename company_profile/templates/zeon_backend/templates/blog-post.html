@@ -331,6 +331,7 @@
 
 			<!-- Add Comment Form -->
 			<form id="add-comment" class="add-comment" method="POST" action="/comment/{{ article.slug }}/add/">
+				{% csrf_token %}
 				<fieldset>
 
 					<div>
