@@ -160,7 +160,7 @@ class Comment(Dispatcher):
         
         if method == 'add':
             return HttpResponse('Wrong Method', status=403)
-
+        return HttpResponse(kwargs['article_slug'])
         try:
             article = Article.objects.get(slug=kwargs['article_slug'])
         except:
