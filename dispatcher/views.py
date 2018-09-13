@@ -1,5 +1,5 @@
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.forms.models import model_to_dict
@@ -166,7 +166,7 @@ class Comment(Dispatcher):
             return HttpResponse('Article Not Found', status=404)
 
         if article.article_comment.all():
-            return HttpResponse(self.get_comment_and_reply(article))
+            return JsonResponse(self.get_comment_and_reply(article), safe=False)
         return HttpResponse('Not Found' , status=404)
 
     def get_comment_and_reply(self, article):
