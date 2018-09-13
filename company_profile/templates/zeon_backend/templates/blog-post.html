@@ -303,7 +303,8 @@
 
 			<!-- Reviews -->
 			<section class="comments">
-			<h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(5)</span></h4>
+			<h4 class="headline margin-bottom-35">Komentar 
+				<span class="comments-amount">({{ article.article_comment.all.count }})</span></h4>
 
 				<ul>
 					{% for comment in comments %}
