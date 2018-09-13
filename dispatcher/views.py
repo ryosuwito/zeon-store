@@ -167,24 +167,24 @@ class Comment(Dispatcher):
 
         if article.article_comment.all():
             comments_dict = [comment for comment in article.article_comment.all()]
-            return HttpResponse([ format_comment(comment) for comment in comments_dict])
+            return HttpResponse([self.format_comment(comment) for comment in comments_dict])
         return HttpResponse('Not Found' , status=404)
 
-    def format_comment(comment):
+    def format_comment(self, comment):
         return {
             'created_date' : comment.created_date,
             'visitor': comment.visitor.name, 
             'content': comment.content,
-            'reply' : format_replies(comment),
+            'reply' : self.format_replies(comment),
         }
         
-    def format_replies(comment):
+    def format_replies(self, comment):
         if comment.reply.all():
-            return [format_reply(reply) for reply in  comment.reply.all()]
+            return [self.format_reply(reply) for reply in  comment.reply.all()]
         else:
             return ''
     
-    def format_reply(reply):
+    def format_reply(self, reply):
         return {
             'created_date' : reply.created_date,
             'visitor': reply.visitor.name, 
