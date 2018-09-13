@@ -193,7 +193,7 @@ class Comment(Dispatcher):
             method = ''
         
         if method != 'add':
-            return HttpResponse('Wrong Method', status=403)try
+            return HttpResponse('Wrong Method', status=403)
 
         visitor_form = AddVisitorForm(request.POST)
         if visitor_form.is_valid():
