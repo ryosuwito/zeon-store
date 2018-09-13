@@ -201,8 +201,6 @@ class Comment(Dispatcher):
             return HttpResponse(visitor_form_data['email'])
 
         article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
-        except:
-            return HttpResponse('Article Not Found', status=404)
 
         if article.article_comment.all():
             return JsonResponse(self.get_comment_and_reply(article), safe=False)
