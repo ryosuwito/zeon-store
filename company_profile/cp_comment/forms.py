@@ -6,17 +6,18 @@ class AddVisitorForm(forms.ModelForm):
         model = Visitor
         fields = ('name','email',)
 
-class AddCommentForm(forms.ModelForm):
+class AddCommentForm(forms.Form):
+    content = forms.TextField(max_length=650, required=True)
     def __init__(self, *args, **kwargs):
         self.fields['content'].widget = forms.Textarea() 
         self.fields['content'].widget.attrs['rows'] = '3'
         self.fields['content'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['content'].widget.attrs['placeholder'] = 'Komentar Anda'
-    class Meta:
-        model = Comment
-        fields = ('content',)
 
-class AddReplyForm(AddCommentForm):
-    class Meta(AddCommentForm.Meta):
-        model = Reply
-        fields = ('content',)
+class AddReplyForm(forms.Form):
+    content = forms.TextField(max_length=650, required=True)
+    def __init__(self, *args, **kwargs):
+        self.fields['content'].widget = forms.Textarea() 
+        self.fields['content'].widget.attrs['rows'] = '3'
+        self.fields['content'].widget.attrs['style'] = 'width:100%; padding:10px'
+        self.fields['content'].widget.attrs['placeholder'] = 'Komentar Anda'
