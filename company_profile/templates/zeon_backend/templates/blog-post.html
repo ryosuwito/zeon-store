@@ -341,7 +341,7 @@
 			<div class="margin-top-15"></div>
 
 			<!-- Add Comment Form -->
-			<form id="add-comment" class="add-comment">
+			<form id="add-comment" class="add-comment" method="POST" action="/comment/{{ article.slug }}/{{ add }}/">
 				<fieldset>
 
 					<div>
@@ -361,7 +361,7 @@
 
 				</fieldset>
 
-				<a href="#" class="button">Add Comment</a>
+				<button class="button" type="submit">Add Comment</button>
 				<div class="clearfix"></div>
 				<div class="margin-bottom-20"></div>
 
