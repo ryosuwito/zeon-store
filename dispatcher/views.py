@@ -2,6 +2,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import View
+from django.forms.models import model_to_dict
 
 from company_profile.cp_pages.models import PageModel
 from company_profile.cp_articles.models import Article as ArticleModel
@@ -160,6 +161,30 @@ class Comment(Dispatcher):
         if method == 'add':
             return HttpResponse('Wrong Method', status=403)
 
-        slug = kwargs['article_slug']
+        try:
+            article = Article.objects.get(slug=kwargs['article_slug'])
+        except:
+            return HttpResponse('Article Not Found', status=404)
+
+        if article.article_comment.all():
+            comments_dict = [comment for comment in article.article_comment.all()]
+            return HttpResponse([ format_comment(comment) for comment in comments_dict])
+        return HttpResponse('Not Found' , status=404)
+
+    def format_comment(comment):
+        return {
+            'created_date' : comment.created_date,
+            'visitor': comment.visitor.name, 
+            'content': comment.content,
+            'reply' : format_replies(comment) if comment.reply.all()
+        }
         
-            
+    def format_replies(comment):
+        return [format_reply(reply) for reply in  comment.reply.all()]
+    
+    def format_reply(reply):
+        return {
+            'created_date' : reply.created_date,
+            'visitor': reply.visitor.name, 
+            'content': reply.content,
+        }
