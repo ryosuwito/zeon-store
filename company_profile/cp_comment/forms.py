@@ -4,6 +4,7 @@ from .models import Comment, Reply, Visitor
 class AddVisitorForm(forms.ModelForm):
     class Meta:
         model = Visitor
+        fields = ('name','email')
 
 class AddCommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -18,3 +19,4 @@ class AddCommentForm(forms.ModelForm):
 class AddReplyForm(AddCommentForm):
     class Meta(AddCommentForm.Meta):
         model = Reply
+        fields = ('content')
