@@ -202,10 +202,10 @@ class Comment(Dispatcher):
         comment_form = AddCommentForm(request.POST)
         if visitor_form.is_valid() and comment_form.is_valid():
             visitor_form_data = visitor_form.cleaned_data
-            visitor = Visitor(email=visitor_form_data['email'],
+            visitor = Visitor.objects.create(email=visitor_form_data['email'],
                     name=visitor_form_data['name'])
             comment_form_data = comment_form.cleaned_data
-            comment = Comment(visitor=visitor,
+            comment = Comment.objects.create(visitor=visitor,
                     content=comment_form_data['content'],
                     article=article)
 
