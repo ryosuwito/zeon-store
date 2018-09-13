@@ -204,7 +204,7 @@ class Comment(Dispatcher):
             visitor_form_data = visitor_form.cleaned_data
             visitor = Visitor(email=visitor_form_data['email'],
                     name=visitor_form_data['name'])
-            comment_form_data = comment_form.changed_data
+            comment_form_data = comment_form.cleaned_data
             comment = Comment(visitor=visitor,
                     content=comment_form_data['content'],
                     article=article)
