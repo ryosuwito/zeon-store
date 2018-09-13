@@ -303,6 +303,9 @@
 
 			<!-- Reviews -->
 			<section class="comments">
+				{% for comment in comment_and_reply %}
+				<p>{{ comment }}</p>
+				{% endfor %}
 			<h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(5)</span></h4>
 
 				<ul>
