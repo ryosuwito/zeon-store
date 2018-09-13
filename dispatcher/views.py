@@ -96,7 +96,7 @@ class Article(Dispatcher):
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
             comment = Comment()
-            return HttpResponse(list(comment.get_comment_and_reply(article)))
+            comment_and_reply = comment.get_comment_and_reply(article)[0]
             return render(request, template, {'article': article, 'comments':comment_and_reply})
 
         assets = configs.brand_assets
