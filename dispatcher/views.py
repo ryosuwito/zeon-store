@@ -99,13 +99,14 @@ class Article(Dispatcher):
             except:
                 return HttpResponse("Not Found")
 
+        visitor_form = AddVisitorForm()
+        comment_form = AddCommentForm()
+        reply_form = AddReplyForm()
+        comment = Comment()
+        comment_and_reply = comment.get_comment_and_reply(article)
+
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
-            visitor_form = AddVisitorForm()
-            comment_form = AddCommentForm()
-            reply_form = AddReplyForm()
-            comment = Comment()
-            comment_and_reply = comment.get_comment_and_reply(article)
             return render(request, template, 
                 {'article': article, 
                 'comments':comment_and_reply,
@@ -120,7 +121,10 @@ class Article(Dispatcher):
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
         return render(request, template, {
-            'article': article,
+            'article': article, 
+            'comments':comment_and_reply,
+            'visitor_form': visitor_form,
+            'comment_form': comment_form,
             'component': self.component,
             'configs':configs,
             'site':site,
