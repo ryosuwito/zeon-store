@@ -104,4 +104,5 @@ venv.bak/
 .mypy_cache/
 
 company_profile/templates/
+company_profile/static/
 *.pyc

@@ -120,6 +120,7 @@ class Article(Dispatcher):
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
         return render(request, template, {
+            'article': article,
             'component': self.component,
             'configs':configs,
             'site':site,
