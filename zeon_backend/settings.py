@@ -243,5 +243,3 @@ TAGGIT_SELECTIZE = {
     'DRAG_DROP': False,
     'DELIMITER': ','
 }
-
-SITE_ID = 1
