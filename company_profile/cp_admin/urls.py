@@ -9,6 +9,7 @@ urlpatterns = [
     path('article/', CmsArticle.as_view(), name='article_all'),
     path('category/<str:action>/<int:pk>/', CmsCategory.as_view(), name='category_edit_delete'),
     path('category/<str:action>/', CmsCategory.as_view(), name='category_add'),
+    path('category/', CmsCategory.as_view(), name='category_all'),
     path('page/<str:action>/<int:pk>/', CmsPage.as_view(), name='page_edit_delete'),
     path('page/<str:action>/', CmsPage.as_view(), name='page_add'),
     path('page/', CmsPage.as_view(), name='page_all'),
