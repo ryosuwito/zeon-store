@@ -29,10 +29,6 @@
                             {{ form.title }}
                             <br>
                             <br>
-                            <h4>{{ form.lead_in.label }}</h4>
-                            {{ form.lead_in }}
-                            <br>
-                            <br>
                             <h4>{{ form.content.label }}</h4>
                             {{ form.content }}
                         </div>
@@ -41,19 +37,14 @@
                 <div class="hidden-xs col-sm-3">
                     <div class="card">
                         <div class="card-body">
-                            <h6>{{ form.tags.label }}</h6>
-                            {{ form.tags }}
-                            <h6>{{ form.category.label }}</h6>
-                            {{ form.category }}
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>{{ form.published_date }}  {{ form.published_date.label }}</h6>
+                            <h6>{{ form.created_date }}  {{ form.created_date.label }}</h6>
                             <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
-                            <h6>{{ form.is_featured }}  {{ form.is_featured.label }}</h6>
-                            <h6>{{ form.featured_image.label }}</h6>
-                            {{ form.featured_image }}
+                            <h6>{{ form.banner_image_1.label }}</h6>
+                            {{ form.banner_image_1 }}
+                            <h6>{{ form.banner_image_2.label }}</h6>
+                            {{ form.banner_image_2 }}
+                            <h6>{{ form.banner_image_3.label }}</h6>
+                            {{ form.banner_image_3 }}
                         </div>
                     </div>
                     <div class="card">
