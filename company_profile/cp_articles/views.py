@@ -5,7 +5,7 @@ from django.middleware.csrf import get_token
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.template.loader import render_to_string
-from .forms import ArticleAddForm, ArticlePreviewForm
+from .forms import ArticleAddForm, ArticlePreviewForm, CategoryAddForm
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_articles.models import Category
