@@ -27,6 +27,12 @@ class Category(models.Model):
         self.slug = slug
         super(Category, self).save(*args, **kwargs)
 
+    def get_edit_url(self):
+        return "%s" % (reverse('cms:category_edit_delete', kwargs={'action':'edit', 'pk':self.pk}))
+
+    def get_delete_url(self):
+        return "%s" % (reverse('cms:category_edit_delete', kwargs={'action':'delete', 'pk':self.pk}))
+    
     class Meta:
         verbose_name_plural = "Categories"
 

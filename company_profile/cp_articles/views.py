@@ -161,6 +161,23 @@ class CPArticle(LoginRequiredMixin, Dispatcher):
             self.component['main'] = self.delete_main
             self.component['local_script'] = self.delete_local_script
         
+class CPCategory(CPArticle):
+    login_url = '/cms/login/'
+    template = "cp_admin/index.html"
+    component = {}
+    component['base'] = 'cp_admin/component/index_base.html'
+    component['header'] =  'cp_admin/component/index_header.html'
+    index_main = 'cp_admin/component/cms_category_main.html'
+    index_local_script = 'cp_admin/component/cms_category_local_script.html'
+    add_main = 'cp_admin/component/cms_category_add_main.html'
+    add_local_script = 'cp_admin/component/cms_category_add_local_script.html'
+    edit_main = 'cp_admin/component/cms_category_edit_main.html'
+    edit_local_script = 'cp_admin/component/cms_category_edit_local_script.html'
+    index_url = '/cms/category/'
+    form = CategoryAddForm()
 
-
+    def get(self, request, *args, **kwargs):
+        action = kwargs['action']
+        pk = kwargs['pk']
+        return super(CPCategory, self).get(request, args, action=action, pk=pk)
 

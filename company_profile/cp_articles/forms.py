@@ -1,9 +1,16 @@
 from django import forms
 from taggit import forms as taggit_form
-from .models import Article, TempArticle
+from .models import Article, TempArticle, Category
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
+class CategoryAddForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CategoryAddForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = Category
+        fields = ('title')
+        
 class ArticleAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleAddForm, self).__init__(*args, **kwargs)

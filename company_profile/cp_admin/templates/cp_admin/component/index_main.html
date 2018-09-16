@@ -125,8 +125,8 @@
                                 <p>Total Categories: {{ site.category_site.all | length}}</p>
                             </div>
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
-                                <span onclick="getNext('/cms/article/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
-                                <span onclick="getNext('/cms/article/add/')" style="margin: 5px 0" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> CREATE NEW</span>
+                                <span onclick="getNext('/cms/category/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
+                                <span onclick="getNext('/cms/category/add/')" style="margin: 5px 0" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> CREATE NEW</span>
                             </div>
                         </div>
                         <div class="row" style="margin: 0">
@@ -134,10 +134,9 @@
                                 <hr>
                                 <p>
                                     {% for category in site.category_site.all %}
-                                    <a href="/{{ category.slug }}">
-                                        <i class="mdi mdi-file text-success"></i> {{category.title | truncatechars:30 | title }}
-                                    </a>
-                                    <a href="#" class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
+                                    <p onclick="window.open('/{{ category.slug }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{category.title | truncatechars:30 | title }}</p>
+                                    <a href='javascript:void(0)' onclick="getNext('{{ category.get_edit_url }}')"class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
+                                    <a href='javascript:void(0)' onclick="getNext('{{ category.get_delete_url }}')" class="btn btn-link btn-sm text-danger"><span class="fa fa-trash"></span></a>
                                     <br>
                                     {% endfor %}
                                 </p>

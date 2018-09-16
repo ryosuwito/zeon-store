@@ -10,7 +10,7 @@ from .forms import CmsLoginForm
 
 import time
 from company_profile.cp_user_configs.models import UserConfigs
-from company_profile.cp_articles.views import CPArticle
+from company_profile.cp_articles.views import CPArticle, CPCategory
 from company_profile.cp_pages.views import CPPage
 
 class Logout(Dispatcher):
@@ -128,5 +128,19 @@ class CmsPage(CPPage):
             pk = 'none'
 
         return super(CmsPage, self).get(request, args, action=action, pk=pk)
+
+class CmsCategory(CPCategory):
+    def get(self, request, *args, **kwargs):
+        try:
+            action = kwargs['action']
+        except:
+            action = 'show_all'
+        
+        try:
+            pk = kwargs['pk']
+        except:
+            pk = 'none'
+
+        return super(CmsCategory, self).get(request, args, action=action, pk=pk)
 
 
