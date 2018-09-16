@@ -41,4 +41,13 @@ class PageModel(models.Model):
 
     def get_page_url(self):
         return "%s/" % (self.slug)
+
+    def get_edit_url(self):
+        return "%s" % (reverse('cms:page_edit_delete', kwargs={'action':'edit', 'pk':self.pk}))
+
+    def get_delete_url(self):
+        return "%s" % (reverse('cms:page_edit_delete', kwargs={'action':'delete', 'pk':self.pk}))
+    
+    def get_class_name(self):
+        return self.class_name
         
