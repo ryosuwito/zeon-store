@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                                 <hr>
-                                {% for article in site.site_page.all %}
+                                {% for page in site.site_page.all %}
                                 <p onclick="window.open('{{ page.get_page_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ page.title | title | truncatechars:60 }}</p>
                                 <a href='javascript:void(0)' onclick="getNext('{{ page.get_edit_url }}')"class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
                                 <a href='javascript:void(0)' onclick="getNext('{{ page.get_delete_url }}')" class="btn btn-link btn-sm text-danger"><span class="fa fa-trash"></span></a>
