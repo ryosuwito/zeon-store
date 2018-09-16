@@ -11,4 +11,4 @@ class PageAddForm(forms.ModelForm):
          self.fields['content'].widget = CKEditorUploadingWidget()
     class Meta:
         model = PageModel
-        fields = ('title','content')
+        fields = ('title','content','is_published','banner_image_1','banner_image_2','banner_image_3')
