@@ -9,8 +9,8 @@ class CategoryAddForm(forms.ModelForm):
         super(CategoryAddForm, self).__init__(*args, **kwargs)
     class Meta:
         model = Category
-        fields = ('title')
-        
+        fields = ('title',)
+
 class ArticleAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleAddForm, self).__init__(*args, **kwargs)
