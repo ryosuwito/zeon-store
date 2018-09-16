@@ -58,7 +58,13 @@
             processData: false
         });
     }
-    
-    ($('#id_is_published').bootstrapToggle())();
-    ($('#id_is_featured').bootstrapToggle())();
+    try {
+        ($('#id_is_published').bootstrapToggle())();
+        ($('#id_is_featured').bootstrapToggle())();
+        throw "Exception"; // generates an exception
+    }
+    catch (e) {
+    // statements to handle any exceptions
+    logMyErrors(e); // pass exception object to error handler
+    }
 </script>
