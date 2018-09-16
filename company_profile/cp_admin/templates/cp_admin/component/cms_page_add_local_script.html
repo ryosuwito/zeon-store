@@ -1,7 +1,6 @@
 <script>
     function localScript(){
         $('#id_is_published').bootstrapToggle();
-        $('#id_is_featured').bootstrapToggle();
         var textareas = Array.prototype.slice.call(document.querySelectorAll('textarea[data-type=ckeditortype]'));
         for (var i=0; i<textareas.length; ++i) {
             var t = textareas[i];
@@ -46,7 +45,7 @@
         CKEDITOR.instances['id_content'].updateElement();
         var formData = new FormData($('#addArticleForm')[0]);
         $.ajax({
-            url: '/cms/article/preview/',
+            url: '/cms/page/preview/',
             type: 'POST',
             data: formData,
             async: false,
