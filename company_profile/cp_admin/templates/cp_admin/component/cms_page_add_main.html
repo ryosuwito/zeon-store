@@ -1,3 +1,14 @@
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/')">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/page/')">Page</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
 <div class="row">
     <div class="col-sm-12">
     {% if form.errors %}
