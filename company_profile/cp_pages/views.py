@@ -21,8 +21,6 @@ class CPPage(CPArticle):
     add_local_script = 'cp_admin/component/cms_page_add_local_script.html'
     edit_main = 'cp_admin/component/cms_page_edit_main.html'
     edit_local_script = 'cp_admin/component/cms_page_edit_local_script.html'
-    delete_main = 'cp_admin/component/cms_page_delete_main.html'
-    delete_local_script = 'cp_admin/component/cms_page_delete_local_script.html'
     index_url = '/cms/page/'
     form = PageAddForm()
 

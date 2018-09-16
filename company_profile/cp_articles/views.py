@@ -26,8 +26,6 @@ class CPArticle(LoginRequiredMixin, Dispatcher):
     add_local_script = 'cp_admin/component/cms_article_add_local_script.html'
     edit_main = 'cp_admin/component/cms_article_edit_main.html'
     edit_local_script = 'cp_admin/component/cms_article_edit_local_script.html'
-    delete_main = 'cp_admin/component/cms_article_delete_main.html'
-    delete_local_script = 'cp_admin/component/cms_article_delete_local_script.html'
     index_url = '/cms/article/'
     form = ArticleAddForm()
     def post(self, request, *args, **kwargs):
@@ -98,7 +96,10 @@ class CPArticle(LoginRequiredMixin, Dispatcher):
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
             else :
-                article = ArticleModel.objects.get(pk=kwargs['pk'])
+                try:
+                    article = ArticleModel.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
         method = request.GET.get('method', '')
         data = super(CPArticle, self).get(request, args, kwargs)
         token = get_token(request)
