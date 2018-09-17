@@ -12,6 +12,7 @@ import time
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.views import CPArticle, CPCategory
 from company_profile.cp_pages.views import CPPage
+from company_profile.cp_user_configs.views import CPAsset
 
 class Logout(Dispatcher):
     def get(self, request, *args, **kwargs):
@@ -144,3 +145,16 @@ class CmsCategory(CPCategory):
         return super(CmsCategory, self).get(request, args, action=action, pk=pk)
 
 
+class CmsAsset(CPAsset):
+    def get(self, request, *args, **kwargs):
+        try:
+            action = kwargs['action']
+        except:
+            action = 'show_all'
+        
+        try:
+            pk = kwargs['pk']
+        except:
+            pk = 'none'
+
+        return super(CmsAsset, self).get(request, args, action=action, pk=pk)

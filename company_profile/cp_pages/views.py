@@ -15,12 +15,12 @@ class CPPage(CPArticle):
     component = {}
     component['base'] = 'cp_admin/component/index_base.html'
     component['header'] =  'cp_admin/component/index_header.html'
-    index_main = 'cp_admin/component/cms_page_main.html'
-    index_local_script = 'cp_admin/component/cms_page_local_script.html'
-    add_main = 'cp_admin/component/cms_page_add_main.html'
-    add_local_script = 'cp_admin/component/cms_page_add_local_script.html'
-    edit_main = 'cp_admin/component/cms_page_edit_main.html'
-    edit_local_script = 'cp_admin/component/cms_page_edit_local_script.html'
+    index_main = 'cp_pages/component/cms_page_main.html'
+    index_local_script = 'cp_pages/component/cms_page_local_script.html'
+    add_main = 'cp_pages/component/cms_page_add_main.html'
+    add_local_script = 'cp_pages/component/cms_page_add_local_script.html'
+    edit_main = 'cp_pages/component/cms_page_edit_main.html'
+    edit_local_script = 'cp_pages/component/cms_page_edit_local_script.html'
     index_url = '/cms/page/'
     form = PageAddForm()
 
