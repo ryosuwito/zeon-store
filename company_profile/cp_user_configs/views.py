@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from company_profile.views import CPArticle
+from company_profile.cp_articles.views import CPArticle
 from .form import AssetEditForm
         
 class CPAsset(CPArticle):
