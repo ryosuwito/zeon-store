@@ -20,7 +20,6 @@ urlpatterns = [
     path('template/<str:action>/<int:pk>/', CmsTemplate.as_view(), name='template_edit'),
     path('template/', CmsTemplate.as_view(), name='template_all'),
     path('color/<str:action>/<int:pk>/', CmsColor.as_view(), name='color_edit'),
-    path('color/', CmsColor.as_view(), name='color_all'),
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     path('', Index.as_view(), name='index'),
