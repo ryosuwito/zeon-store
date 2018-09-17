@@ -159,7 +159,7 @@ class CmsAsset(CPAsset):
 
         return super(CmsAsset, self).get(request, args, action=action, pk=pk)
 
-class ComponentRenderer():
+class ComponentRenderer(object):
     def get_component(self, request, token, data, configs, site, member, form, featured_image):
         main = render_to_string(self.component['main'], 
                                     {'form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,

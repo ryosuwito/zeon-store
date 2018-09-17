@@ -15,7 +15,7 @@ from company_profile.cp_admin.views import ComponentRenderer
 import time
 from urllib.parse import urlparse
 
-class CPArticle(LoginRequiredMixin, Dispatcher, ComponentRenderer):
+class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
     component = {}
