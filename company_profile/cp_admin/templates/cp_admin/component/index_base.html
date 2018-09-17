@@ -390,11 +390,11 @@
                                         <span class="hide-menu m-l-5">Create New</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
-                                        <a class="dropdown-item" href='javascript:void(0)' onclick="getNext('/cms/article/add/')"; class="dropdown-item"><i class="fa fa-newspaper m-r-5 m-l-5"></i> Article</a>
+                                        <a class="dropdown-item" href='javascript:void(0)' onclick="getNext('/cms/article/add/')" class="dropdown-item"><i class="fa fa-newspaper m-r-5 m-l-5"></i> Article</a>
 
                                         {% if site.domain != "sidomo.com" %}
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-clone m-r-5 m-l-5"></i> Page</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-object-ungroup m-r-5 m-l-5"></i> Category</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/page/add/')"><i class="fa fa-clone m-r-5 m-l-5"></i> Page</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/category/add/')"><i class="fa fa-object-ungroup m-r-5 m-l-5"></i> Category</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Template</a>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Identity</a>
