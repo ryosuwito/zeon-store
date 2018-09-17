@@ -158,28 +158,4 @@ class CmsAsset(CPAsset):
             pk = 'none'
 
         return super(CmsAsset, self).get(request, args, action=action, pk=pk)
-
-class ComponentRenderer(Dispatcher):
-    def get_component(self, request, token, data, configs, site, member, form, featured_image):
-        main = render_to_string(self.component['main'], 
-                                    {'form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
-                                    'featured_image' : featured_image})
-        local_script = render_to_string(self.component['local_script'], 
-                                    {'token': token, 'member': member,'data': data, 'site': site, 'configs': configs})
-        return JsonResponse({'main': main,
-                        'local_script': local_script}, status=200)
-
-    def set_component(self, kwargs):
-        if kwargs['action'] == 'show_all':
-            self.component['main'] = self.index_main
-            self.component['local_script'] = self.index_local_script
-        elif kwargs['action'] == 'add':
-            self.component['main'] = self.add_main
-            self.component['local_script'] = self.add_local_script
-        elif kwargs['action'] == 'edit':
-            self.component['main'] = self.edit_main
-            self.component['local_script'] = self.edit_local_script
-        elif kwargs['action'] == 'delete':
-            self.component['main'] = self.delete_main
-            self.component['local_script'] = self.delete_local_script
-        
+ 

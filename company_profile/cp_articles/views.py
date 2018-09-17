@@ -10,7 +10,7 @@ from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_articles.models import Category
 from company_profile.cp_user_configs.models import UserConfigs
-from company_profile.cp_admin.views import ComponentRenderer
+from dispatcher.views import ComponentRenderer
 
 import time
 from urllib.parse import urlparse
