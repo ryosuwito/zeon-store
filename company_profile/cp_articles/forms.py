@@ -7,6 +7,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 class CategoryAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CategoryAddForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs['style'] = 'width:100%; padding:10px'
     class Meta:
         model = Category
         fields = ('title',)
