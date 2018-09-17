@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.forms.models import model_to_dict
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 from company_profile.cp_pages.models import PageModel
 from company_profile.cp_articles.models import Article as ArticleModel
