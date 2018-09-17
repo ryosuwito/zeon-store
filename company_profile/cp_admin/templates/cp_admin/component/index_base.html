@@ -210,9 +210,9 @@
                              <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Page</a>
-                                <a href='javascript:void(0)' onclick="getNext('/cms/article/add/')"; class="dropdown-item">Article</a>
-                                <a class="dropdown-item" href="#">Category</a>
+                                <a href='javascript:void(0)' onclick="getNext('/cms/page/add/')" class="dropdown-item">Page</a>
+                                <a href='javascript:void(0)' onclick="getNext('/cms/article/add/')" class="dropdown-item">Article</a>
+                                <a href='javascript:void(0)' onclick="getNext('/cms/category/add/')" class="dropdown-item">Category</a>
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -356,7 +356,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/logout/')"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
                             </div>
