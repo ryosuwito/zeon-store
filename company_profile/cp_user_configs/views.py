@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from company_profile.cp_articles.views import CPArticle
-from .form import AssetEditForm
+from .forms import AssetEditForm
         
 class CPAsset(CPArticle):
     login_url = '/cms/login/'
