@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from company_profile.cp_articles.views import CPArticle
-from .forms import AssetEditForm, TemplateEditForm
+from .forms import AssetEditForm, TemplateEditForm, ColorEditForm
         
 class CPAsset(CPArticle):
     login_url = '/cms/login/'
@@ -67,7 +67,7 @@ class CPColor(CPArticle):
     edit_main = 'cp_user_configs/component/color/edit_main.html'
     edit_local_script = 'cp_user_configs/component/color/edit_local_script.html'
     index_url = '/cms/asset/'
-    form = TemplateEditForm()
+    form = ColorEditForm()
 
     def get(self, request, *args, **kwargs):
         action = kwargs['action']
