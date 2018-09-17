@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from dispatcher.views import Dispatcher
+from cp_admin.views import ComponentRenderer
 from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,12 +10,12 @@ from .forms import ArticleAddForm, ArticlePreviewForm, CategoryAddForm
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_articles.models import Category
+from company_profile.cp_user_configs.models import UserConfigs
 
 import time
 from urllib.parse import urlparse
-from company_profile.cp_user_configs.models import UserConfigs
 
-class CPArticle(LoginRequiredMixin, Dispatcher):
+class CPArticle(LoginRequiredMixin, Dispatcher, ComponentRenderer):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
     component = {}
@@ -137,29 +138,7 @@ class CPArticle(LoginRequiredMixin, Dispatcher):
                 'featured_image' : featured_image,
             }
         )
-
-    def get_component(self, request, token, data, configs, site, member, form, featured_image):
-        main = render_to_string(self.component['main'], 
-                                    {'form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
-                                    'featured_image' : featured_image})
-        local_script = render_to_string(self.component['local_script'], 
-                                    {'token': token, 'member': member,'data': data, 'site': site, 'configs': configs})
-        return JsonResponse({'main': main,
-                        'local_script': local_script}, status=200)
-
-    def set_component(self, kwargs):
-        if kwargs['action'] == 'show_all':
-            self.component['main'] = self.index_main
-            self.component['local_script'] = self.index_local_script
-        elif kwargs['action'] == 'add':
-            self.component['main'] = self.add_main
-            self.component['local_script'] = self.add_local_script
-        elif kwargs['action'] == 'edit':
-            self.component['main'] = self.edit_main
-            self.component['local_script'] = self.edit_local_script
-        elif kwargs['action'] == 'delete':
-            self.component['main'] = self.delete_main
-            self.component['local_script'] = self.delete_local_script
+   
         
 class CPCategory(CPArticle):
     login_url = '/cms/login/'
