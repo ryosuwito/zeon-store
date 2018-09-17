@@ -23,4 +23,4 @@ class TemplateEditForm(forms.ModelForm):
 class ColorEditForm(forms.ModelForm):
     class Meta:
         model = ColorScheme
-        fields = ('name','primary_color', 'dark_colot', 'accent_color',)
+        fields = ('name','primary_color', 'dark_color', 'accent_color',)
