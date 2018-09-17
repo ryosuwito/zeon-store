@@ -8,10 +8,10 @@ class CPAsset(CPArticle):
     component = {}
     component['base'] = 'cp_admin/component/index_base.html'
     component['header'] =  'cp_admin/component/index_header.html'
-    index_main = 'cp_user_configs/component/asset/cms_asset_main.html'
-    index_local_script = 'cp_user_configs/component/asset/cms_asset_local_script.html'
-    edit_main = 'cp_user_configs/component/asset/cms_asset_edit_main.html'
-    edit_local_script = 'cp_user_configs/component/asset/cms_asset_edit_local_script.html'
+    index_main = 'cp_user_configs/component/asset/main.html'
+    index_local_script = 'cp_user_configs/component/asset/local_script.html'
+    edit_main = 'cp_user_configs/component/asset/edit_main.html'
+    edit_local_script = 'cp_user_configs/component/asset/edit_local_script.html'
     index_url = '/cms/asset/'
     form = AssetEditForm()
 
@@ -19,3 +19,21 @@ class CPAsset(CPArticle):
         action = kwargs['action']
         pk = kwargs['pk']
         return super(CPAsset, self).get(request, args, action=action, pk=pk)
+
+class CPIdentity(CPArticle):
+    login_url = '/cms/login/'
+    template = "cp_admin/index.html"
+    component = {}
+    component['base'] = 'cp_admin/component/index_base.html'
+    component['header'] =  'cp_admin/component/index_header.html'
+    index_main = 'cp_user_configs/component/identity/main.html'
+    index_local_script = 'cp_user_configs/component/identity/local_script.html'
+    edit_main = 'cp_user_configs/component/identity/edit_main.html'
+    edit_local_script = 'cp_user_configs/component/identity/edit_local_script.html'
+    index_url = '/cms/asset/'
+    form = AssetEditForm()
+
+    def get(self, request, *args, **kwargs):
+        action = kwargs['action']
+        pk = kwargs['pk']
+        return super(CPIdentity, self).get(request, args, action=action, pk=pk)
