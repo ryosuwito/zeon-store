@@ -8,10 +8,10 @@ class CPAsset(CPArticle):
     component = {}
     component['base'] = 'cp_admin/component/index_base.html'
     component['header'] =  'cp_admin/component/index_header.html'
-    index_main = 'cp_admin/component/cms_asset_main.html'
-    index_local_script = 'cp_admin/component/cms_asset_local_script.html'
-    edit_main = 'cp_admin/component/cms_asset_edit_main.html'
-    edit_local_script = 'cp_admin/component/cms_asset_edit_local_script.html'
+    index_main = 'cp_user_configs/component/cms_asset_main.html'
+    index_local_script = 'cp_user_configs/component/cms_asset_local_script.html'
+    edit_main = 'cp_user_configs/component/cms_asset_edit_main.html'
+    edit_local_script = 'cp_user_configs/component/cms_asset_edit_local_script.html'
     index_url = '/cms/asset/'
     form = AssetEditForm()
 
