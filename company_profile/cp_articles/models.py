@@ -58,6 +58,7 @@ class Article(models.Model):
     is_published = models.BooleanField(default=True, db_index=True)
     is_featured = models.BooleanField(default=False, db_index=True)
     featured_image = models.ImageField(upload_to = 'cp/user_uploads/featured_images/', null=True, blank=True)
+    page_view = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title.title()

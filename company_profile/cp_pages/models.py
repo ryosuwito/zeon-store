@@ -22,6 +22,7 @@ class PageModel(models.Model):
     banner_image_1 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     banner_image_2 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     banner_image_3 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
+    page_view = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title.title()
