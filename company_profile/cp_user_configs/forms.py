@@ -1,4 +1,6 @@
 from django import forms
+from company_profile.cp_configs.models import BrandAsset
 
 class AssetEditForm(forms.ModelForm):
-    pass
+    class Meta:
+        model = BrandAsset
