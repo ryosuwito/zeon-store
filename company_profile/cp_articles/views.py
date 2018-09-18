@@ -176,6 +176,10 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         form = self.form
         featured_image = ''
         if  kwargs['action'] == 'edit':
+            try:
+                category = Category.objects.get(pk=kwargs['pk'])
+            except:
+                return HttpResponseRedirect(self.index_url)
             form = CategoryAddForm(instance=category)
 
         elif  kwargs['action'] == 'delete':
