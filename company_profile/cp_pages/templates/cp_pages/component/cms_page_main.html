@@ -48,9 +48,12 @@
                         </div>
                         <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
 
-                            <p onclick="window.open('{{ page.get_page_url }}', '_blank')" style="cursor:pointer" class="text-info">
+                            <p onclick="window.open('{{ page.get_page_url }}', '_blank')" style="cursor:pointer" 
                                 {% if page.get_class_name == 'TempPage' %}
-                                <span class="disabled">Temporer - </span>
+                                class="disabled">
+                                <span>Temporer - </span>
+                                {% else %}
+                                class="text-info">
                                 {% endif %}
                                 {{ page.title | title }}</p>
                         </div>
