@@ -257,7 +257,7 @@ class ComponentRenderer:
         local_script = render_to_string(self.component['local_script'], 
                                     {'token': token, 'member': member,'data': data, 'site': site, 'configs': configs})
         return JsonResponse({'main': main,
-                        'local_script': local_script}, status=200, **kwargs)
+                        'local_script': local_script}, status=200)
 
     def set_component(self, kwargs):
         if kwargs['action'] == 'show_all':
