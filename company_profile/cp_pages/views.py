@@ -48,28 +48,28 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             page = self.form.save(commit=False)
             page.site = site
             page.save()
-            referer = request.META['HTTP_REFERER']
-            if '/cms/page/edit' in referer:
-                parse_object = urlparse(referer)
-                url_splitted = parse_object.path.split("/")
-                try:
-                    old_page = PageModel.objects.get(pk = url_splitted[-2])
-                except:
-                    old_page = ''
-
-                if old_page and not page.banner_image_1:
-                    page.banner_image_1 = old_page.banner_image_1
-                if old_page and not page.banner_image_2:
-                    page.banner_image_2 = old_page.banner_image_2
-                if old_page and not page.banner_image_3:
-                    page.banner_image_3 = old_page.banner_image_3
-                    
-                page.save()
+            
 
             if kwargs['action'] == 'preview':
-                page.class_name='TempPage'
-                page.save()
-                return JsonResponse({'url': page.get_page_url()+'?method=preview'}, status=200)
+                referer = request.META['HTTP_REFERER']
+                if '/cms/page/edit' in referer:
+                    parse_object = urlparse(referer)
+                    url_splitted = parse_object.path.split("/")
+                    try:
+                        old_page = PageModel.objects.get(pk = url_splitted[-2])
+                    except:
+                        old_page = ''
+
+                    if old_page and not page.banner_image_1:
+                        page.banner_image_1 = old_page.banner_image_1
+                    if old_page and not page.banner_image_2:
+                        page.banner_image_2 = old_page.banner_image_2
+                    if old_page and not page.banner_image_3:
+                        page.banner_image_3 = old_page.banner_image_3
+                        
+                    page.class_name='TempPage'
+                    page.save()
+                    return JsonResponse({'url': page.get_page_url()+'?method=preview'}, status=200)
 
             return HttpResponseRedirect(reverse('cms:page_all'))
 
