@@ -1,16 +1,15 @@
 from django.shortcuts import render
-from dispatcher.views import Dispatcher
-from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-from django.template.loader import render_to_string
 from .forms import ArticleAddForm, ArticlePreviewForm, CategoryAddForm
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
 from company_profile.cp_articles.models import Category
 from company_profile.cp_user_configs.models import UserConfigs
 from dispatcher.views import ComponentRenderer
+from dispatcher.views import Dispatcher
 
 import time
 from urllib.parse import urlparse

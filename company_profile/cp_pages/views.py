@@ -10,6 +10,7 @@ from .models import PageModel
 import time
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.views import CPArticle
+from dispatcher.views import ComponentRenderer
 from dispatcher.views import Dispatcher
 
 class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
