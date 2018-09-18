@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 from .forms import ArticleAddForm, ArticlePreviewForm, CategoryAddForm
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
@@ -114,7 +113,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             form = ArticleAddForm(instance=article)
         elif  kwargs['action'] == 'delete':
             article.delete()
-            return HttpResponseRedirect(reverse('cms:article_all'))
+            return HttpResponseRedirect(self.index_url)
 
         if kwargs['action'] == 'show_all' or \
             kwargs['action'] == 'add' or \
@@ -164,7 +163,7 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.form = CategoryAddForm(request.POST, request.FILES, instance=category)
             if self.form.is_valid():
                 category = self.form.save()
-                return HttpResponseRedirect(reverse(self.index_url))
+                return HttpResponseRedirect(self.index_url)
         else:
             self.form = CategoryAddForm(request.POST, request.FILES)
 

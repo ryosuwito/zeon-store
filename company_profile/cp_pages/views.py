@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
-from django.urls import reverse
 from django.template.loader import render_to_string
 from .forms import PageAddForm, PagePreviewForm
 from .models import PageModel, TempPageModel
@@ -37,7 +36,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             page = PageModel.objects.get(pk=kwargs['pk'])
             self.form = PageAddForm(request.POST, request.FILES, instance=page)
             if self.form.is_valid():
-                return HttpResponseRedirect(reverse('cms:page_all'))
+                return HttpResponseRedirect(self.index_url)
         elif  kwargs['action'] == 'preview':
             self.form = PagePreviewForm(request.POST, request.FILES)
         else:
@@ -71,7 +70,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                     page.save()
                     return JsonResponse({'url': page.get_page_url()+'?method=preview'}, status=200)
 
-            return HttpResponseRedirect(reverse('cms:page_all'))
+            return HttpResponseRedirect(self.index_url)
 
         token = get_token(request)
         configs = UserConfigs.objects.get(member = member)
@@ -114,7 +113,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         elif  kwargs['action'] == 'delete':
             page.delete()
-            return HttpResponseRedirect(reverse('cms:page_all'))
+            return HttpResponseRedirect(self.index_url)
 
         if kwargs['action'] == 'show_all' or \
             kwargs['action'] == 'add' or \
