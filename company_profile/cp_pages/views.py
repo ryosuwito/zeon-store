@@ -4,12 +4,13 @@ from django.middleware.csrf import get_token
 from django.urls import reverse
 from django.template.loader import render_to_string
 from .forms import PageAddForm
+from .models import PageModel
 
 import time
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.views import CPArticle
 
-class CPPage(CPArticle):
+class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
     component = {}
@@ -25,6 +26,46 @@ class CPPage(CPArticle):
     form = PageAddForm()
 
     def get(self, request, *args, **kwargs):
-        action = kwargs['action']
-        pk = kwargs['pk']
-        return super(CPPage, self).get(request, args, action=action, pk=pk)
+        if  kwargs['action'] == 'delete' or kwargs['action'] == 'edit':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                try:
+                    page = PageModel.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
+        method = request.GET.get('method', '')
+        data = super(CPPage, self).get(request, args, kwargs)
+        token = get_token(request)
+        member = data['member']
+        configs = UserConfigs.objects.get(member = member)
+        site = data['site']
+        form = self.form
+        if  kwargs['action'] == 'edit':
+            form = PageAddForm(instance=page)
+        elif  kwargs['action'] == 'delete':
+            page.delete()
+            return HttpResponseRedirect(reverse('cms:page_all'))
+
+        if kwargs['action'] == 'show_all' or \
+            kwargs['action'] == 'add' or \
+            kwargs['action'] == 'edit' or \
+            kwargs['action'] == 'delete' :
+            self.set_component(kwargs)
+        else :
+            return HttpResponseRedirect(self.index_url)
+
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
+                                     
+        return render(request, self.template, {
+                'form': form,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component,
+                'page' : page,
+            }
+        )
