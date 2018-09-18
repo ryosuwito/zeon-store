@@ -42,7 +42,7 @@ class PageModel(models.Model):
         return ("/media/%s"%self.banner_image_3)
 
     def get_page_url(self):
-        return "%s/" % (self.slug)
+        return "/%s/" % (self.slug)
 
     def get_edit_url(self):
         return "%s" % (reverse('cms:page_edit_delete', kwargs={'action':'edit', 'pk':self.pk}))
