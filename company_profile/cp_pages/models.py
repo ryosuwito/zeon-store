@@ -8,6 +8,7 @@ from membership.models import Member
 
 import datetime
 import random
+import string
 
 class PageModel(models.Model):
     class_name = models.CharField(max_length=200, blank=True)
