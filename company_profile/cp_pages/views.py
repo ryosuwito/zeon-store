@@ -127,6 +127,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                                      
         return render(request, self.template, {
                 'form': form,
+                'featured_image': featured_image,
                 'member': member,
                 'data': data,
                 'configs': configs,
