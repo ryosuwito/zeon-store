@@ -59,6 +59,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             return HttpResponseRedirect(self.index_url)
 
         if method == 'get_component':
+            featured_image = ""
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
                                      
         return render(request, self.template, {
