@@ -9,6 +9,7 @@ from membership.models import Member
 import datetime
 
 class PageModel(models.Model):
+    class_name = models.CharField(max_length=200, blank=True)
     title = models.CharField(max_length=200)
     content = RichTextField(null=True, blank=True)
     slug = models.SlugField(unique=True, db_index=True, blank=True, null=True)

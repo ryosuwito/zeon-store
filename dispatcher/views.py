@@ -6,7 +6,7 @@ from django.forms.models import model_to_dict
 from django.urls import reverse
 from django.template.loader import render_to_string
 
-from company_profile.cp_pages.models import PageModel
+from company_profile.cp_pages.models import PageModel, TempPageModel
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import Category as CategoryModel
 from company_profile.cp_articles.models import TempArticle as TempArticleModel
@@ -155,7 +155,11 @@ class Page(Dispatcher):
         identity = configs.brand_identity
         self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
-        page = PageModel.objects.get(slug=kwargs['page_slug'])
+        if request.GET.get('method', '') == 'preview':
+            page = TempPageModel.objects.get(slug=kwargs['page_slug'])
+        else:
+            page = PageModel.objects.get(slug=kwargs['page_slug'])
+            
         template = "company_profile/%s/page.html"%(configs.templates.dir_name)
         return render(request, template, {
             'component': self.component,

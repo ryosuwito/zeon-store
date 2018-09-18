@@ -65,11 +65,11 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                     page.banner_image_3 = old_page.banner_image_3
                     
                 page.save()
-                
+
             if kwargs['action'] == 'preview':
                 page.class_name='TempPage'
                 page.save()
-                return JsonResponse({'url': page.get_article_url()}, status=200)
+                return JsonResponse({'url': page.get_page_url()+'?method=preview'}, status=200)
 
             return HttpResponseRedirect(reverse('cms:page_all'))
 
