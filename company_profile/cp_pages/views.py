@@ -4,8 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonRespons
 from django.middleware.csrf import get_token
 from django.urls import reverse
 from django.template.loader import render_to_string
-from .forms import PageAddForm, TempPageModel
-from .models import PageModel
+from .forms import PageAddForm, PagePreviewForm
+from .models import PageModel, TempPageModel
 
 import time
 from company_profile.cp_user_configs.models import UserConfigs
@@ -48,24 +48,24 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             page = self.form.save(commit=False)
             page.site = site
             page.save()
-            else:
-                referer = request.META['HTTP_REFERER']
-                if '/cms/page/edit' in referer:
-                    parse_object = urlparse(referer)
-                    url_splitted = parse_object.path.split("/")
-                    try:
-                        old_page = PageModel.objects.get(pk = url_splitted[-2])
-                    except:
-                        old_page = ''
+            referer = request.META['HTTP_REFERER']
+            if '/cms/page/edit' in referer:
+                parse_object = urlparse(referer)
+                url_splitted = parse_object.path.split("/")
+                try:
+                    old_page = PageModel.objects.get(pk = url_splitted[-2])
+                except:
+                    old_page = ''
 
-                    if old_page and not page.banner_image_1:
-                        page.banner_image_1 = old_page.banner_image_1
-                    if old_page and not page.banner_image_2:
-                        page.banner_image_2 = old_page.banner_image_2
-                    if old_page and not page.banner_image_3:
-                        page.banner_image_3 = old_page.banner_image_3
-                        
-                    page.save()
+                if old_page and not page.banner_image_1:
+                    page.banner_image_1 = old_page.banner_image_1
+                if old_page and not page.banner_image_2:
+                    page.banner_image_2 = old_page.banner_image_2
+                if old_page and not page.banner_image_3:
+                    page.banner_image_3 = old_page.banner_image_3
+                    
+                page.save()
+                
             if kwargs['action'] == 'preview':
                 page.class_name='TempPage'
                 page.save()
