@@ -159,7 +159,7 @@ class Page(Dispatcher):
             page = TempPageModel.objects.get(slug=kwargs['page_slug'])
         else:
             page = PageModel.objects.get(slug=kwargs['page_slug'])
-            
+
         template = "company_profile/%s/page.html"%(configs.templates.dir_name)
         return render(request, template, {
             'component': self.component,
@@ -250,14 +250,14 @@ class Comment(Dispatcher):
 
 
 class ComponentRenderer:
-    def get_component(self, request, token, data, configs, site, member, form, featured_image):
+    def get_component(self, request, token, data, configs, site, member, form, featured_image, **kwargs):
         main = render_to_string(self.component['main'], 
-                                    {'form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
+                                    {'kwargs':kwargs, form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
                                     'featured_image' : featured_image})
         local_script = render_to_string(self.component['local_script'], 
                                     {'token': token, 'member': member,'data': data, 'site': site, 'configs': configs})
         return JsonResponse({'main': main,
-                        'local_script': local_script}, status=200)
+                        'local_script': local_script}, status=200, **kwargs)
 
     def set_component(self, kwargs):
         if kwargs['action'] == 'show_all':
