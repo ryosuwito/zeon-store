@@ -7,6 +7,7 @@ from ckeditor.fields import RichTextField
 from membership.models import Member
 
 import datetime
+import random
 
 class PageModel(models.Model):
     class_name = models.CharField(max_length=200, blank=True)
