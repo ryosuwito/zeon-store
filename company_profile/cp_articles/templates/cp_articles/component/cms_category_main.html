@@ -32,19 +32,17 @@
                 </div>
                 <hr>
                 {% for category in site.site_page.all %}
-                    {% if category.category.all %}
-                        <div class="row" style="margin: 0">
-                            <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
-                                <p onclick="window.open('/{{ category.slug }}', '_blank')" style="cursor:pointer" class="text-info">{{ category.title | title }}</p>
-                            </div>
-                            <div class="col-xs-4 col-sm-2" style="display: flex; justify-content: center">
-                                <p onclick="getNext('{{ category.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
-                                <p onclick="window.open('{{ category.get_delete_url }}', '_parent')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
-                            </div>
+                    <div class="row" style="margin: 0">
+                        <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
+                            <p onclick="window.open('/{{ category.slug }}', '_blank')" style="cursor:pointer" class="text-info">{{ category.title | title }}</p>
                         </div>
-                        {% if not forloop.last %}
-                        <hr>
-                        {% endif %}
+                        <div class="col-xs-4 col-sm-2" style="display: flex; justify-content: center">
+                            <p onclick="getNext('{{ category.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
+                            <p onclick="window.open('{{ category.get_delete_url }}', '_parent')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
+                        </div>
+                    </div>
+                    {% if not forloop.last %}
+                    <hr>
                     {% endif %}
                 {% endfor %}
             </div>

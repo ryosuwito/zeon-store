@@ -139,7 +139,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         )
    
         
-class CPCategory(CPArticle):
+class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
     component = {}
@@ -155,7 +155,59 @@ class CPCategory(CPArticle):
     form = CategoryAddForm()
 
     def get(self, request, *args, **kwargs):
-        action = kwargs['action']
-        pk = kwargs['pk']
-        return super(CPCategory, self).get(request, args, action=action, pk=pk)
+        category = ""
+        if  kwargs['action'] == 'delete':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                try:
+                    category = Category.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
+        if category.title == 'post':
+            return HttpResponseRedirect(self.index_url)
 
+        method = request.GET.get('method', '')
+        data = super(CPCategory, self).get(request, args, kwargs)
+        token = get_token(request)
+        member = data['member']
+        configs = UserConfigs.objects.get(member = member)
+        site = data['site']
+        form = self.form
+        featured_image = ''
+        if  kwargs['action'] == 'edit':
+            form = CategoryAddForm(instance=category)
+
+        elif  kwargs['action'] == 'delete':
+            articles = ArticleModel.objects.filter(category=category)
+            if articles:
+                for article in articles:
+                    try:
+                        article.category.remove(category)
+                    except:
+                        pass
+            category.delete()
+            return HttpResponseRedirect(self.index_url)
+
+        if kwargs['action'] == 'show_all' or \
+            kwargs['action'] == 'add' or \
+            kwargs['action'] == 'edit' or \
+            kwargs['action'] == 'delete' :
+            self.set_component(kwargs)
+        else :
+            return HttpResponseRedirect(self.index_url)
+
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
+                                     
+        return render(request, self.template, {
+                'form': form,
+                'featured_image': featured_image,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component,
+            }
+        )
