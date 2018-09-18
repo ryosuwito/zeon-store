@@ -78,7 +78,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 return JsonResponse({'url': article.get_article_url()}, status=200)
 
             return HttpResponseRedirect(self.index_url)
-            
+
         token = get_token(request)
         configs = UserConfigs.objects.get(member = member)
         return render(request, self.template, {
@@ -174,7 +174,20 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             category.save()
 
             return HttpResponseRedirect(self.index_url)
-
+            
+        token = get_token(request)
+        configs = UserConfigs.objects.get(member = member)
+        return render(request, self.template, {
+                'form': self.form,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component
+            }
+        )
+        
     def get(self, request, *args, **kwargs):
         category = ""
         if  kwargs['action'] == 'delete':
