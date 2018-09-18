@@ -40,7 +40,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 if not article.category.all() :
                     article.category.add(Category.objects.get_or_create(site=site, title="post")[0])
                     article.save()
-                return HttpResponseRedirect(reverse('cms:article_all'))
+                return HttpResponseRedirect(self.index_url)
         elif  kwargs['action'] == 'preview':
             self.form = ArticlePreviewForm(request.POST, request.FILES)
         else:
@@ -77,7 +77,8 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 article.save()
                 return JsonResponse({'url': article.get_article_url()}, status=200)
 
-            return HttpResponseRedirect(reverse('cms:article_all'))
+            return HttpResponseRedirect(self.index_url)
+            
         token = get_token(request)
         configs = UserConfigs.objects.get(member = member)
         return render(request, self.template, {
@@ -153,6 +154,26 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     edit_local_script = 'cp_articles/component/cms_category_edit_local_script.html'
     index_url = '/cms/category/'
     form = CategoryAddForm()
+
+    def post(self, request, *args, **kwargs):
+        data = super(CPCategory, self).get(request, args, kwargs)
+        member = data['member']
+        site = data['site']
+        if  kwargs['action'] == 'edit':
+            category = Category.objects.get(pk=kwargs['pk'])
+            self.form = CategoryAddForm(request.POST, request.FILES, instance=article)
+            if self.form.is_valid():
+                category = self.form.save()
+                return HttpResponseRedirect(reverse(self.index_url))
+        else:
+            self.form = ArticleAddForm(request.POST, request.FILES)
+
+        if self.form.is_valid():
+            category = self.form.save(commit=False)
+            category.site = site
+            category.save()
+
+            return HttpResponseRedirect(self.index_url)
 
     def get(self, request, *args, **kwargs):
         category = ""
