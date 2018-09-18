@@ -31,7 +31,8 @@ class PageModel(models.Model):
         return self.title.title()
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title.lower())
+        if not self.slug:
+            self.slug = slugify(self.title.lower())
         super(PageModel, self).save(*args, **kwargs)
     
     def get_banner_image_1_url(self):
@@ -61,6 +62,6 @@ class TempPageModel(PageModel):
         if temps:
             for temp in temps:
                 temp.delete()
-        self.title = self.title + ''.join(random.choices(string.ascii_lowercase + string.digits, k=11))
+        self.slug = slugify(self.title.lower() + ''.join(random.choices(string.ascii_lowercase + string.digits, k=11)))
         self.is_published = False
         super(TempPageModel, self).save(*args, **kwargs)
