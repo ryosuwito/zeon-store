@@ -102,6 +102,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
         form = self.form
+        featured_image = ''
         if  kwargs['action'] == 'edit':
             form = PageAddForm(instance=page)
 
