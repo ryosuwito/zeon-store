@@ -86,6 +86,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             }
         )
     def get(self, request, *args, **kwargs):
+        page = ""
         if  kwargs['action'] == 'delete' or kwargs['action'] == 'edit':
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
