@@ -118,7 +118,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         if method == 'get_component':
             featured_image = ""
-            return self.get_component(request, token, data, configs, site, member, form, featured_image,page=page})
+            return self.get_component(request, token, data, configs, site, member, form, featured_image,page=page)
                                      
         return render(request, self.template, {
                 'form': form,
