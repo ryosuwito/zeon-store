@@ -161,12 +161,12 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         site = data['site']
         if  kwargs['action'] == 'edit':
             category = Category.objects.get(pk=kwargs['pk'])
-            self.form = CategoryAddForm(request.POST, request.FILES, instance=article)
+            self.form = CategoryAddForm(request.POST, request.FILES, instance=category)
             if self.form.is_valid():
                 category = self.form.save()
                 return HttpResponseRedirect(reverse(self.index_url))
         else:
-            self.form = ArticleAddForm(request.POST, request.FILES)
+            self.form = CategoryAddForm(request.POST, request.FILES)
 
         if self.form.is_valid():
             category = self.form.save(commit=False)
@@ -187,7 +187,7 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 'component':self.component
             }
         )
-        
+
     def get(self, request, *args, **kwargs):
         category = ""
         if  kwargs['action'] == 'delete':
