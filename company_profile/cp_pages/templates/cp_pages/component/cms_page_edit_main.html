@@ -50,19 +50,19 @@
                         <div class="card-body">
                             <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
                             <h6>{{ form.banner_image_1.label }}</h6>
-                            {% if banner_image_1 %}
+                            {% if page.banner_image_1 %}
                             <img src="{{ page.banner_image_1}}" width="100%; height:auto">
                             <hr>
                             {% endif %}
                             {{ form.banner_image_1 }}
                             <h6>{{ form.banner_image_2.label }}</h6>
-                            {% if banner_image_2 %}
+                            {% if page.banner_image_2 %}
                             <img src="{{ page.banner_image_2}}" width="100%; height:auto">
                             <hr>
                             {% endif %}
                             {{ form.banner_image_2 }}
                             <h6>{{ form.banner_image_3.label }}</h6>
-                            {% if banner_image_3 %}
+                            {% if page.banner_image_3 %}
                             <img src="{{ page.banner_image_3}}" width="100%; height:auto">
                             <hr>
                             {% endif %}
