@@ -40,6 +40,16 @@
                             <p onclick="getNext('{{ category.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
                             <p onclick="window.open('{{ category.get_delete_url }}', '_parent')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
                         </div>
+                        <div class="col-xs-4 col-sm-6">
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            {% for article in category.article_category.all %}
+                                {% if forloop.first %}
+                                <p>Article in this category :</p>
+                                <h6>Title</h6>{% endif %}
+                                <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ article.title | title }}</p>
+                            {% endfor %}
+                        </div>
                     </div>
                     {% if not forloop.last %}
                     <hr>
