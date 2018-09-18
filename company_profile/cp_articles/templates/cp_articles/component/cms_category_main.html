@@ -42,12 +42,17 @@
                         </div>
                         <div class="col-xs-4 col-sm-6">
                         </div>
-                        <div class="col-xs-12 col-sm-12">
+                        <div class="col-xs-12 col-sm-12" style="word-wrap:break-word">
                             {% for article in category.article_category.all %}
                                 {% if forloop.first %}
                                 <p>Article in this category :</p>
-                                <h6>Title</h6>{% endif %}
+                                <div style="padding-left:25px">
+                                   <h6>Title</h6>{% endif %}
+                                
                                 <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ article.title | title }}</p>
+                                {% if forloop.last %} 
+                                </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
