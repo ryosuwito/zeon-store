@@ -47,10 +47,12 @@
                             {% endif %}
                         </div>
                         <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
-                            {% if page.get_class_name == 'TempPage' %}
-                            <p class="disabled">Temporer</p>
-                            {% endif %}
-                            <p onclick="window.open('{{ page.get_page_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ page.title | title }}</p>
+
+                            <p onclick="window.open('{{ page.get_page_url }}', '_blank')" style="cursor:pointer" class="text-info">
+                                {% if page.get_class_name == 'TempPage' %}
+                                <span class="disabled">Temporer - </span>
+                                {% endif %}
+                                {{ page.title | title }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
                             <p>{{ page.created_date | naturalday }}</p>
