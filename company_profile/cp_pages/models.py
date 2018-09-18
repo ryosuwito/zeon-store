@@ -51,4 +51,12 @@ class PageModel(models.Model):
     
     def get_class_name(self):
         return self.class_name
-        
+
+class TempPageModel(PageModel):
+    def save(self, *args, **kwargs):
+        temps = TempPageModel.objects.all().exclude(pk=self.pk)
+        if temps:
+            for temp in temps:
+                temp.delete()
+        self.is_published = False
+        super(TempPageModel, self).save(*args, **kwargs)

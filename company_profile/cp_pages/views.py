@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonRespons
 from django.middleware.csrf import get_token
 from django.urls import reverse
 from django.template.loader import render_to_string
-from .forms import PageAddForm
+from .forms import PageAddForm, TempPageModel
 from .models import PageModel
 
 import time
@@ -28,6 +28,63 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     index_url = '/cms/page/'
     form = PageAddForm()
 
+    def post(self, request, *args, **kwargs):
+        data = super(CPPage, self).get(request, args, kwargs)
+        member = data['member']
+        site = data['site']
+
+        if  kwargs['action'] == 'edit':
+            page = PageModel.objects.get(pk=kwargs['pk'])
+            self.form = PageAddForm(request.POST, request.FILES, instance=page)
+            if self.form.is_valid():
+                return HttpResponseRedirect(reverse('cms:page_all'))
+        elif  kwargs['action'] == 'preview':
+            self.form = PagePreviewForm(request.POST, request.FILES)
+        else:
+            self.form = PageAddForm(request.POST, request.FILES)
+
+        
+        if self.form.is_valid():
+            page = self.form.save(commit=False)
+            page.site = site
+            page.save()
+            else:
+                referer = request.META['HTTP_REFERER']
+                if '/cms/page/edit' in referer:
+                    parse_object = urlparse(referer)
+                    url_splitted = parse_object.path.split("/")
+                    try:
+                        old_page = PageModel.objects.get(pk = url_splitted[-2])
+                    except:
+                        old_page = ''
+
+                    if old_page and not page.banner_image_1:
+                        page.banner_image_1 = old_page.banner_image_1
+                    if old_page and not page.banner_image_2:
+                        page.banner_image_2 = old_page.banner_image_2
+                    if old_page and not page.banner_image_3:
+                        page.banner_image_3 = old_page.banner_image_3
+                        
+                    page.save()
+            if kwargs['action'] == 'preview':
+                page.class_name='TempPage'
+                page.save()
+                return JsonResponse({'url': page.get_article_url()}, status=200)
+
+            return HttpResponseRedirect(reverse('cms:page_all'))
+
+        token = get_token(request)
+        configs = UserConfigs.objects.get(member = member)
+        return render(request, self.template, {
+                'form': self.form,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component
+            }
+        )
     def get(self, request, *args, **kwargs):
         if  kwargs['action'] == 'delete' or kwargs['action'] == 'edit':
             if kwargs['pk'] == 'none':
