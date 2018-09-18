@@ -58,4 +58,9 @@
         });
     }
     
+    try {
+        ($('#id_is_published').bootstrapToggle())();
+        throw "Exception"; // generates an exception
+    }
+    catch (e) {}
 </script>
