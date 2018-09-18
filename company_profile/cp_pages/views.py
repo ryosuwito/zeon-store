@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
@@ -9,6 +10,7 @@ from .models import PageModel
 import time
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.views import CPArticle
+from dispatcher.views import Dispatcher
 
 class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
