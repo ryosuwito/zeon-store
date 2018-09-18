@@ -104,6 +104,13 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         form = self.form
         if  kwargs['action'] == 'edit':
             form = PageAddForm(instance=page)
+
+            featured_image = {
+                'banner_image_1' : page.banner_image_1,
+                'banner_image_2' : page.banner_image_2,
+                'banner_image_3' : page.banner_image_3,
+            }
+
         elif  kwargs['action'] == 'delete':
             page.delete()
             return HttpResponseRedirect(reverse('cms:page_all'))
@@ -115,12 +122,6 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
-
-        featured_image = {
-            'banner_image_1' : page.banner_image_1,
-            'banner_image_2' : page.banner_image_2,
-            'banner_image_3' : page.banner_image_3,
-        }
 
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
