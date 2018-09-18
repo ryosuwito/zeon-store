@@ -59,5 +59,6 @@ class TempPageModel(PageModel):
         if temps:
             for temp in temps:
                 temp.delete()
+        self.title = self.title + ''.join(random.choices(string.ascii_lowercase + string.digits, k=11))
         self.is_published = False
         super(TempPageModel, self).save(*args, **kwargs)
