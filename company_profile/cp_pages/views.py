@@ -117,8 +117,11 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             return HttpResponseRedirect(self.index_url)
 
         if method == 'get_component':
-            featured_image = ""
-            return self.get_component(request, token, data, configs, site, member, form, featured_image,page=page)
+            featured_image['banner_image_1'] = page.banner_image_1,
+            featured_image['banner_image_2'] = page.banner_image_2,
+            featured_image['banner_image_3'] = page.banner_image_3,
+
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
                                      
         return render(request, self.template, {
                 'form': form,

@@ -250,7 +250,7 @@ class Comment(Dispatcher):
 
 
 class ComponentRenderer:
-    def get_component(self, request, token, data, configs, site, member, form, featured_image, **kwargs):
+    def get_component(self, request, token, data, configs, site, member, form, featured_image):
         main = render_to_string(self.component['main'], 
                                     {'kwargs':kwargs, 'form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
                                     'featured_image' : featured_image})

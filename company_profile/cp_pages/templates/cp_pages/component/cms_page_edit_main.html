@@ -50,30 +50,21 @@
                         <div class="card-body">
                             <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
                             <h6>{{ form.banner_image_1.label }}</h6>
-                            {% if page.banner_image_1 %}
-                            <img src="/media/{{ page.banner_image_1}}" width="100%; height:auto">
+                            {% if featured_image.banner_image_1 %}
+                            <img src="/media/{{ featured_image.banner_image_1}}" width="100%; height:auto">
                             <hr>
-                            {% elif kwargs.page.banner_image_1%}
-                            <img src="/media/{{ kwargs.page.banner_image_1}}" width="100%; height:auto">
-                            
                             {% endif %}
                             {{ form.banner_image_1 }}
                             <h6>{{ form.banner_image_2.label }}</h6>
-                            {% if page.banner_image_2 %}
-                            <img src="/media/{{ page.banner_image_2}}" width="100%; height:auto">
-                            <hr>
-                            {% elif kwargs.page.banner_image_2%}
-                            <img src="/media/{{ kwargs.page.banner_image_2}}" width="100%; height:auto">
+                            {% if featured_image.banner_image_2 %}
+                            <img src="/media/{{ featured_image.banner_image_2}}" width="100%; height:auto">
                             <hr>
                             {% endif %}
                             {{ form.banner_image_2 }}
                             <h6>{{ form.banner_image_3.label }}</h6>
-                            {% if page.banner_image_3 %}
-                            <img src="/media/{{ page.banner_image_3}}" width="100%; height:auto">
+                            {% if featured_image.banner_image_3 %}
+                            <img src="/media/{{ featured_image.banner_image_3}}" width="100%; height:auto">
                             <hr>
-                            {% elif kwargs.page.banner_image_3%}
-                            <img src="/media/{{ kwargs.page.banner_image_3}}" width="100%; height:auto">
-                            
                             {% endif %}
                             {{ form.banner_image_3 }}
                         </div>
