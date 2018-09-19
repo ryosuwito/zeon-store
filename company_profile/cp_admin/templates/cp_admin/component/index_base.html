@@ -297,7 +297,7 @@
                                             <h4 class="m-b-0 m-t-5">5 New</h4>
                                             <span class="font-light">Messages</span>
                                         </div>
-                                    </li>#07131d !important
+                                    </li>
                                     <li>
                                         <div class="message-center message-body">
                                             <!-- Message -->
@@ -405,6 +405,7 @@
                             </div>
                             <!-- End User Profile-->
                         </li>
+                        {% comment %}
                         {% if site.domain != "sidomo.com" %}
                         <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal Info</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
@@ -422,6 +423,7 @@
                             </ul>
                         </li>
                         {% endif %}
+                        {% endcomment %}
                         <li class="nav-small-cap" style="background: #092133"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">My App</span></li>
 
                         {% if site.domain != "sidomo.com" %}
