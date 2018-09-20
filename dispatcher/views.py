@@ -279,7 +279,7 @@ class ComponentRenderer:
 
 class ArticleList(Dispatcher):
     def get(self, request, *args, **kwargs):
-        data = super(Comment, self).get(request, args, kwargs)
+        data = super(ArticleList, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
         try:
