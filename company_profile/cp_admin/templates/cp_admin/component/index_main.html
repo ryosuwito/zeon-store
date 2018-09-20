@@ -79,12 +79,14 @@
                             </div>
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                                 <hr>
+                                {% comment %}
                                 {% for article in site.article_site.all %}
                                 <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ article.title | title | truncatechars:60 }}</p>
                                 <a href='javascript:void(0)' onclick="getNext('{{ article.get_edit_url }}')"class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
                                 <a href='javascript:void(0)' onclick="getNext('{{ article.get_delete_url }}')" class="btn btn-link btn-sm text-danger"><span class="fa fa-trash"></span></a>
                                 <br>
                                 {% endfor %}
+                                {% endcomment %}
                             </div>
                         </div>
                     </div>
