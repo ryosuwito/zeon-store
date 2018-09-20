@@ -80,7 +80,7 @@ class Index(LoginRequiredMixin, Dispatcher):
         self.component['main'] = 'cp_admin/component/index_main.html'
         self.component['local_script'] = 'cp_admin/component/index_local_script.html'
         articles = ArticleModel.objects.filter(site=site, is_preview=False).order_by('-created_date')
-        pages = PageModel.objects.filter(site=site).order_by('-created_date')
+        pages = PageModel.objects.filter(site=site, is_preview=False).order_by('-created_date')
         categories = CategoryModel.objects.filter(site=site).order_by('title')
         if(request.GET.get('method', '') == 'get_component'):
             return self.get_component(request, token, data, configs, site, member)

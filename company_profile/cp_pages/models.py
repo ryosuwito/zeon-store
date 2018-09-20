@@ -23,6 +23,7 @@ class PageModel(models.Model):
                                 verbose_name='owner')
     created_date = models.DateTimeField(db_index=True,default=datetime.datetime.now)
     is_published = models.BooleanField(default=False, db_index=True)
+    is_preview = models.BooleanField(default=False, db_index=True)
     banner_image_1 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     banner_image_2 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     banner_image_3 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
@@ -65,4 +66,5 @@ class TempPageModel(PageModel):
                 temp.delete()
         self.slug = slugify(self.title.lower() + ''.join(random.choices(string.ascii_lowercase + string.digits, k=11)))
         self.is_published = False
+        self.is_preview = True
         super(TempPageModel, self).save(*args, **kwargs)
