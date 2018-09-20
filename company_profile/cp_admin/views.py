@@ -10,6 +10,10 @@ from .forms import CmsLoginForm
 
 import time
 from company_profile.cp_user_configs.models import UserConfigs
+from company_profile.cp_articles.models import Article as ArticleModel
+from company_profile.cp_articles.models import Category as CategoryModel
+from company_profile.cp_pages.models import PageModel
+
 from company_profile.cp_articles.views import CPArticle, CPCategory
 from company_profile.cp_pages.views import CPPage
 from company_profile.cp_user_configs.views import CPAsset, CPIdentity, CPTemplate, CPColor
@@ -75,11 +79,12 @@ class Index(LoginRequiredMixin, Dispatcher):
         self.component['header'] =  'cp_admin/component/index_header.html'
         self.component['main'] = 'cp_admin/component/index_main.html'
         self.component['local_script'] = 'cp_admin/component/index_local_script.html'
-
+        articles = ArticleModel.filter(site=site).order_by('-created_date')[:5]
         if(request.GET.get('method', '') == 'get_component'):
             return self.get_component(request, token, data, configs, site, member)
 
         return render(request, self.template, {
+                'articles':articles,
                 'member': member,
                 'data': data,
                 'configs': configs,
