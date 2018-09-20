@@ -67,4 +67,4 @@ class TempPageModel(PageModel):
         self.slug = slugify(self.title.lower() + ''.join(random.choices(string.ascii_lowercase + string.digits, k=11)))
         self.is_published = False
         self.is_preview = True
-        super(TempPageModel, self).save(*args, **kwargs)
+        super(TempPageModel, self).save(*args, **kwargs) 
