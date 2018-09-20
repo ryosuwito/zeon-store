@@ -16,7 +16,7 @@ class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     edit_main = 'cp_articles/component/cms_category_edit_main.html'
     edit_local_script = 'cp_articles/component/cms_category_edit_local_script.html'
     index_url = '/cms/category/'
-    form = CategoryAddForm()
+    #form = CategoryAddForm()
 
     def post(self, request, *args, **kwargs):
         pass
