@@ -57,6 +57,7 @@ class Article(models.Model):
     published_date = models.DateTimeField(db_index=True,null=True, blank=True)
     is_published = models.BooleanField(default=True, db_index=True)
     is_featured = models.BooleanField(default=False, db_index=True)
+    is_preview = models.BooleanField(default=False, db_index=True)
     featured_image = models.ImageField(upload_to = 'cp/user_uploads/featured_images/', null=True, blank=True)
     page_view = models.IntegerField(default=0)
 
@@ -97,5 +98,6 @@ class TempArticle(Article):
             for temp in temps:
                 temp.delete()
         self.is_published = False
+        self.is_preview = True
         super(TempArticle, self).save(*args, **kwargs)
     
