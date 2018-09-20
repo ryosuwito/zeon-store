@@ -5,10 +5,10 @@ from django.middleware.csrf import get_token
 from django.shortcuts import render
 from django.urls import reverse
 from django.template.loader import render_to_string
-from dispatcher.views import Dispatcher
-from .forms import CmsLoginForm
+from django.db.models import Sum
 
 import time
+from dispatcher.views import Dispatcher
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import Category as CategoryModel
@@ -18,6 +18,8 @@ from company_profile.cp_articles.views import CPArticle, CPCategory
 from company_profile.cp_pages.views import CPPage
 from company_profile.cp_user_configs.views import CPAsset, CPIdentity, CPTemplate, CPColor
 from company_profile.cp_comment.views import CPComment, CPReply
+
+from .forms import CmsLoginForm
 
 class Logout(Dispatcher):
     def get(self, request, *args, **kwargs):
@@ -80,6 +82,7 @@ class Index(LoginRequiredMixin, Dispatcher):
         self.component['main'] = 'cp_admin/component/index_main.html'
         self.component['local_script'] = 'cp_admin/component/index_local_script.html'
         articles = ArticleModel.objects.filter(site=site, is_preview=False).order_by('-created_date')
+        total_page_views = ArticleModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['column__sum']
         pages = PageModel.objects.filter(site=site, is_preview=False).order_by('-created_date')
         categories = CategoryModel.objects.filter(site=site).order_by('title')
         if(request.GET.get('method', '') == 'get_component'):
