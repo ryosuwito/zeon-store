@@ -121,8 +121,12 @@ class Article(Dispatcher):
         self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True)
+        article.page_views += 1
+        article.save()
         return render(request, template, {
             'article': article, 
+            'recent_article': recent_article, 
             'comments':comment_and_reply,
             'visitor_form': visitor_form,
             'comment_form': comment_form,
