@@ -295,4 +295,6 @@ class ArticleList(Dispatcher):
             return HttpResponse('Article Not Found', status=404)
 
         if articles:
-            return JsonResponse([article.title for article in articles], safe=False)
+            return JsonResponse([{
+                "article_title":article.title, 
+                "article_url":article.get_article_url} for article in articles], safe=False)
