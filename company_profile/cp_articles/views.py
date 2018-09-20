@@ -36,6 +36,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.form = ArticleAddForm(request.POST, request.FILES, instance=article)
             if self.form.is_valid():
                 article = self.form.save()
+                return HttpResponse(article.category.all())
                 if not article.category.all() :
                     article.category.add(Category.objects.get_or_create(site=site, title="post")[0])
                     article.save()
