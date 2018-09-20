@@ -87,6 +87,8 @@ class Index(LoginRequiredMixin, Dispatcher):
 
         return render(request, self.template, {
                 'articles':articles,
+                'pages': pages,
+                'categories': categories,
                 'member': member,
                 'data': data,
                 'configs': configs,
