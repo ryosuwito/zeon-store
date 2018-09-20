@@ -297,4 +297,6 @@ class ArticleList(Dispatcher):
         if articles:
             return JsonResponse([{
                 "article_title":article.title, 
-                "article_url":article.get_article_url} for article in articles], safe=False)
+                "article_url":article.get_article_url(),
+                "article_is_published":article.is_published,
+                "article_featured_image":article.get_image_url()} for article in articles], safe=False)
