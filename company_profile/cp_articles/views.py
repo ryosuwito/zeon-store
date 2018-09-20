@@ -36,10 +36,10 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.form = ArticleAddForm(request.POST, request.FILES, instance=article)
             if self.form.is_valid():
                 article = self.form.save()
-                return HttpResponse(article.category.all())
                 if not article.category.all() :
                     article.category.add(Category.objects.get_or_create(site=site, title="post")[0])
                     article.save()
+                return HttpResponse(article.category.all())
                 return HttpResponseRedirect(self.index_url)
         elif  kwargs['action'] == 'preview':
             self.form = ArticlePreviewForm(request.POST, request.FILES)
