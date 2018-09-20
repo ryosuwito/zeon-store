@@ -12,7 +12,7 @@ import time
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.views import CPArticle, CPCategory
 from company_profile.cp_pages.views import CPPage
-from company_profile.cp_user_configs.views import CPAsset, CPIdentity, CPTemplate, CPColor, 
+from company_profile.cp_user_configs.views import CPAsset, CPIdentity, CPTemplate, CPColor
 from company_profile.cp_comment.views import CPComment, CPReply
 
 class Logout(Dispatcher):
