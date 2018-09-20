@@ -71,7 +71,7 @@
                         <div class="row" style="margin: 0">
                             <div class="col-xs-8 col-sm-9" style="text-align: left; padding: 0">
                                 <h3>Articles </h3>
-                                <p>Total Article: {{ site.article_site.all | length}}</p>
+                                <p>Total Article: {{ articles | length}}</p>
                             </div>
                             <div class="col-xs-4 col-sm-3" style="text-align: right; padding: 0">
                                 <span onclick="getNext('/cms/article/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                                 <hr>
-                                {% for article in articles %}
+                                {% for article in articles|slice:":5" %}
                                 <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ article.title | title | truncatechars:60 }}</p>
                                 <a href='javascript:void(0)' onclick="getNext('{{ article.get_edit_url }}')"class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
                                 <a href='javascript:void(0)' onclick="getNext('{{ article.get_delete_url }}')" class="btn btn-link btn-sm text-danger"><span class="fa fa-trash"></span></a>
