@@ -276,4 +276,23 @@ class ComponentRenderer:
         elif kwargs['action'] == 'delete':
             self.component['main'] = self.delete_main
             self.component['local_script'] = self.delete_local_script
-       
+
+class ArticleList(Dispatcher):
+    def get(self, request, *args, **kwargs):
+        data = super(Comment, self).get(request, args, kwargs)
+        configs = UserConfigs.objects.get(member = data['member'])
+        site = data['site']
+        try:
+            method = kwargs['method']
+        except:
+            method = ''
+        
+        if method == 'add':
+            return HttpResponse('Wrong Method', status=403)
+        try:
+            articles = ArticleModel.objects.filter(site=site)
+        except:
+            return HttpResponse('Article Not Found', status=404)
+
+        if articles:
+        return JsonResponse([model_to_dict(article) for article in articles]), safe=False)
