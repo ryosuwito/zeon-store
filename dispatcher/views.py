@@ -122,7 +122,7 @@ class Article(Dispatcher):
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
         recent_articles = ArticleModel.objects.filter(site=site, is_published=True)
-        article.page_views += 1
+        article.page_view += 1
         article.save()
         return render(request, template, {
             'article': article, 
