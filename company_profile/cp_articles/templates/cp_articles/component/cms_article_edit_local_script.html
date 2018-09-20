@@ -57,5 +57,11 @@
             processData: false
         });
     }
+    try {
+        ($('#id_is_published').bootstrapToggle())();
+        ($('#id_is_featured').bootstrapToggle())();
+        throw "Exception"; // generates an exception
+    }
+    catch (e) {}
     
 </script>
