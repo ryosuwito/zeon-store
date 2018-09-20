@@ -90,6 +90,7 @@ class Index(LoginRequiredMixin, Dispatcher):
 
         return render(request, self.template, {
                 'articles':articles,
+                'total_page_views':total_page_views,
                 'pages': pages,
                 'categories': categories,
                 'member': member,
