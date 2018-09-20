@@ -126,7 +126,7 @@ class Article(Dispatcher):
         article.save()
         return render(request, template, {
             'article': article, 
-            'recent_article': recent_article, 
+            'recent_articles': recent_articles, 
             'comments':comment_and_reply,
             'visitor_form': visitor_form,
             'comment_form': comment_form,
