@@ -295,4 +295,4 @@ class ArticleList(Dispatcher):
             return HttpResponse('Article Not Found', status=404)
 
         if articles:
-            return JsonResponse([model_to_dict(article) for article in articles], safe=False)
+            return JsonResponse([article.title for article in articles], safe=False)
