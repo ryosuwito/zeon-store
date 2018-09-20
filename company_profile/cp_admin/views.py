@@ -79,7 +79,7 @@ class Index(LoginRequiredMixin, Dispatcher):
         self.component['header'] =  'cp_admin/component/index_header.html'
         self.component['main'] = 'cp_admin/component/index_main.html'
         self.component['local_script'] = 'cp_admin/component/index_local_script.html'
-        articles = ArticleModel.objects.filter(site=site).order_by('-created_date')[:5]
+        articles = ArticleModel.objects.filter(site=site).order_by('created_date')[:5]
         if(request.GET.get('method', '') == 'get_component'):
             return self.get_component(request, token, data, configs, site, member)
 
