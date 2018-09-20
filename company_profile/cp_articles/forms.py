@@ -15,7 +15,6 @@ class CategoryAddForm(forms.ModelForm):
 class ArticleAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleAddForm, self).__init__(*args, **kwargs)
-        self.fields['category'].widget.attrs['form'] = 'addArticleForm'
         self.fields['category'].help_text = 'Pilih Kategori Artikel *(bisa lebih dari 1)'
         self.fields['category'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['title'].widget.attrs['style'] = 'width:100%; padding:10px'
