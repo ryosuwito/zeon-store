@@ -92,14 +92,10 @@ class Article(Dispatcher):
         if kwargs['kategori'] != 'preview':
             try:
                 category = CategoryModel.objects.get(site=site, slug=kwargs['kategori'])
-             
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]site=site, slug=kwargs['slug'])
-            e
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
-             
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
+                article = ArticleModel.objects.get(site=site, slug=kwargs['slug'])
+            except:
+                return HttpResponse("Not Found")
         else:
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
             category = 'preview'
             try:
                 article = TempArticleModel.objects.get(site=site, slug=kwargs['slug'])
