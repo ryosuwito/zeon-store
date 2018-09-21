@@ -56,7 +56,7 @@ class Index(Dispatcher):
 
 class Blog(Dispatcher):
     def get(self, request, *args, **kwargs):
-        article = ArticleModel.objects.all()
+        articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')
         data = super(Blog, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
@@ -70,9 +70,9 @@ class Blog(Dispatcher):
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
+        recent_articles = articles[:3]
         return render(request, template, {
-            'article': article,
+            'articles': articles
             'recent_articles': recent_articles, 
             'component': self.component,
             'configs':configs,
