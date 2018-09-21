@@ -313,7 +313,7 @@ class Reply(Dispatcher):
         #try:
         method = kwargs['method']
         article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
-            """
+        """
         except:
             method = ''
             article = ''
