@@ -70,8 +70,10 @@ class Blog(Dispatcher):
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
         return render(request, template, {
             'article': article,
+            'recent_articles': recent_articles, 
             'component': self.component,
             'configs':configs,
             'site':site,
@@ -90,10 +92,14 @@ class Article(Dispatcher):
         if kwargs['kategori'] != 'preview':
             try:
                 category = CategoryModel.objects.get(site=site, slug=kwargs['kategori'])
-                article = ArticleModel.objects.get(site=site, slug=kwargs['slug'])
-            except:
-                return HttpResponse("Not Found")
+             
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]site=site, slug=kwargs['slug'])
+            e
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
+             
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
         else:
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
             category = 'preview'
             try:
                 article = TempArticleModel.objects.get(site=site, slug=kwargs['slug'])
@@ -127,7 +133,6 @@ class Article(Dispatcher):
         recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
         return render(request, template, {
             'article': article, 
-            'recent_articles': recent_articles, 
             'recent_articles': recent_articles, 
             'comments':comment_and_reply,
             'visitor_form': visitor_form,
