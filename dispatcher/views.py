@@ -327,7 +327,7 @@ class Reply(Dispatcher):
             visitor = VisitorModel.objects.get_or_create(email=visitor_form_data['email'],
                     name=visitor_form_data['name'])[0]
             try:
-                comment = CommentModel.objects.get(pk=request.POST.get('comment_pk'))
+                comment = CommentModel.objects.get(pk=kwargs['comment_pk'])
             except:
                 return HttpResponse('Not Found', status=404)
             
