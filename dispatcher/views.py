@@ -310,13 +310,14 @@ class Reply(Dispatcher):
         data = super(Reply, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
-        try:
-            method = kwargs['method']
-            article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
+        #try:
+        method = kwargs['method']
+        article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
+            """
         except:
             method = ''
             article = ''
-        
+        """
         if method != 'add' or not article:
             return HttpResponse('Wrong Method', status=403)
 
