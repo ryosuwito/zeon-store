@@ -72,7 +72,7 @@ class Blog(Dispatcher):
         identity = configs.brand_identity
         recent_articles = articles[:3]
         return render(request, template, {
-            'articles': articles
+            'articles': articles,
             'recent_articles': recent_articles, 
             'component': self.component,
             'configs':configs,
