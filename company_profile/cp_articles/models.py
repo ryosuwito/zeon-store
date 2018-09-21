@@ -1,9 +1,11 @@
 from django.contrib.sites.models import Site
 from django.db import models
+from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-
+from django.dispatch import receiver
 from django.utils.crypto import get_random_string
+
 from taggit_selectize.managers import TaggableManager
 from ckeditor.fields import RichTextField
 
@@ -65,13 +67,16 @@ class Article(models.Model):
         return self.title.title()
 
 
-    def save(self, *args, **kwargs):
-        slug = slugify(self.title.lower())
-        while Article.objects.filter(slug = slug).exists():
-            slug = slugify("%s-%s"%(self.title.lower(),get_random_string(5, allowed_chars='12345677890')))
+    @receiver(post_save, sender=Article)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            slug = slugify(instance.title.lower())
+            while Article.objects.filter(slug = slug).exists():
+                slug = slugify("%s-%s"%(instance.title.lower(),get_random_string(5, allowed_chars='12345677890')))
 
-        self.slug = slug
-        super(Article, self).save(*args, **kwargs)
+            instance.slug = slug
+            instance.save()
+            
 
     def get_all_tags(self):
         return self.tags.all()
