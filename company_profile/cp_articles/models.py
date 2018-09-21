@@ -66,16 +66,6 @@ class Article(models.Model):
     def __str__(self):
         return self.title.title()
 
-
-    @receiver(post_save, sender=Article)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            slug = slugify(instance.title.lower())
-            while Article.objects.filter(slug = slug).exists():
-                slug = slugify("%s-%s"%(instance.title.lower(),get_random_string(5, allowed_chars='12345677890')))
-
-            instance.slug = slug
-            instance.save()
             
 
     def get_all_tags(self):
@@ -96,6 +86,17 @@ class Article(models.Model):
     def get_class_name(self):
         return self.class_name
 
+
+@receiver(post_save, sender=Article)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        slug = slugify(instance.title.lower())
+        while Article.objects.filter(slug = slug).exists():
+            slug = slugify("%s-%s"%(instance.title.lower(),get_random_string(5, allowed_chars='12345677890')))
+
+        instance.slug = slug
+        instance.save()
+
 class TempArticle(Article):
     def save(self, *args, **kwargs):
         temps = TempArticle.objects.all().exclude(pk=self.pk)
@@ -106,3 +107,14 @@ class TempArticle(Article):
         self.is_preview = True
         super(TempArticle, self).save(*args, **kwargs)
     
+
+
+@receiver(post_save, sender=TempArticle)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        slug = slugify(instance.title.lower())
+        while TempArticle.objects.filter(slug = slug).exists():
+            slug = slugify("%s-%s"%(instance.title.lower(),get_random_string(5, allowed_chars='12345677890')))
+
+        instance.slug = slug
+        instance.save()
