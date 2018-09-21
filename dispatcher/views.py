@@ -333,7 +333,6 @@ class Reply(Dispatcher):
             
             reply_form_data = reply_form.cleaned_data
             reply = ReplyModel.objects.create(visitor=visitor,
-                    content=reply_form_data['content'], comment=comment,
-                    article=article)
+                    content=reply_form_data['content'], comment=comment)
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
