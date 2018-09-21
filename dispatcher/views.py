@@ -124,8 +124,10 @@ class Article(Dispatcher):
         recent_articles = ArticleModel.objects.filter(site=site, is_published=True)
         article.page_view += 1
         article.save()
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
         return render(request, template, {
             'article': article, 
+            'recent_articles': recent_articles, 
             'recent_articles': recent_articles, 
             'comments':comment_and_reply,
             'visitor_form': visitor_form,
@@ -316,7 +318,7 @@ class Reply(Dispatcher):
         except:
             method = ''
             article = ''
-            
+
         if method != 'add' or not article:
             return HttpResponse('Wrong Method', status=403)
 
