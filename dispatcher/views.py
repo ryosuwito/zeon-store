@@ -218,8 +218,8 @@ class Comment(Dispatcher):
         comment_form = AddCommentForm(request.POST)
         if visitor_form.is_valid() and comment_form.is_valid():
             visitor_form_data = visitor_form.cleaned_data
-            visitor = VisitorModel.objects.create(email=visitor_form_data['email'],
-                    name=visitor_form_data['name'])
+            visitor = VisitorModel.objects.get_or_create(email=visitor_form_data['email'],
+                    name=visitor_form_data['name'])[0]
             comment_form_data = comment_form.cleaned_data
             comment = CommentModel.objects.create(visitor=visitor,
                     content=comment_form_data['content'],
@@ -300,3 +300,40 @@ class ArticleList(Dispatcher):
                 "article_url":article.get_article_url(),
                 "article_is_published":article.is_published,
                 "article_featured_image":article.get_image_url()} for article in articles], safe=False)
+
+class Reply(Dispatcher):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('Not Found' , status=404)
+    
+    
+    def post(self, request, *args, **kwargs):
+        data = super(Reply, self).get(request, args, kwargs)
+        configs = UserConfigs.objects.get(member = data['member'])
+        site = data['site']
+        try:
+            method = kwargs['method']
+            article = ArticleModel.objects.get(site=site, slug=kwargs['article_slug'])
+        except:
+            method = ''
+            article = ''
+        
+        if method != 'add' or not article:
+            return HttpResponse('Wrong Method', status=403)
+
+        visitor_form = AddVisitorForm(request.POST)
+        reply_form = AddReplyForm(request.POST)
+        if visitor_form.is_valid() and reply_form.is_valid():
+            visitor_form_data = visitor_form.cleaned_data
+            visitor = VisitorModel.objects.get_or_create(email=visitor_form_data['email'],
+                    name=visitor_form_data['name'])[0]
+            try:
+                comment = CommentModel.objects.get(pk=request.POST.get('comment_pk'))
+            except:
+                return HttpResponse('Not Found', status=404)
+            
+            reply_form_data = reply_form.cleaned_data
+            reply = ReplyModel.objects.create(visitor=visitor,
+                    content=reply_form_data['content'], comment=comment
+                    article=article)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

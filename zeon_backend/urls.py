@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from dispatcher.views import Index, Blog, Article, Page, Comment, ArticleList
+from dispatcher.views import Index, Blog, Article, Page, Comment, ArticleList, Reply
 from django.conf import settings
 from django.conf.urls.static import static
 from company_profile.cp_admin import urls as cp_admin
@@ -31,6 +31,7 @@ urlpatterns = [
     path('blog/<str:kategori>/<str:slug>/', Article.as_view(), name="blog_detail"),
     path('comment/<str:article_slug>/<str:method>/', Comment.as_view(), name="add_comment"),
     path('comment/<str:article_slug>/', Comment.as_view(), name="view_all_comment"),
+    path('reply/<str:article_slug>/<int:comment_pk>/<str:method>/', Reply.as_view(), name="add_reply"),
     path('articlelist/', ArticleList.as_view()),
     path('<str:page_slug>/', Page.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
