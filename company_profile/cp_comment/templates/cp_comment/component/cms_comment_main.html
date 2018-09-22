@@ -39,8 +39,8 @@
                 </div>
                 <hr>
                 {% for comment in site.comment_site.all %}
-                    {% if not forloop.counter|divisibleby:2 %}
-                    <div class="row" style="margin: 0; background-color: #ccc">
+                    {% if forloop.counter|divisibleby:2 %}
+                    <div class="row" style="margin: 0; background-color: #eee; padding-top:15px">
                     {% else %}
                     <div class="row" style="margin: 0">
                     {% endif %}
