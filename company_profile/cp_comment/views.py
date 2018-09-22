@@ -16,12 +16,12 @@ class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     component = {}
     component['base'] = 'cp_admin/component/index_base.html'
     component['header'] =  'cp_admin/component/index_header.html'
-    index_main = 'cp_articles/component/cms_comment_main.html'
-    index_local_script = 'cp_articles/component/cms_comment_local_script.html'
-    add_main = 'cp_articles/component/cms_comment_add_main.html'
-    add_local_script = 'cp_articles/component/cms_ommenty_add_local_script.html'
-    edit_main = 'cp_articles/component/cms_comment_edit_main.html'
-    edit_local_script = 'cp_articles/component/cms_comment_edit_local_script.html'
+    index_main = 'cp_comment/component/cms_comment_main.html'
+    index_local_script = 'cp_comment/component/cms_comment_local_script.html'
+    add_main = 'cp_comment/component/cms_comment_add_main.html'
+    add_local_script = 'cp_comment/component/cms_comment_add_local_script.html'
+    edit_main = 'cp_comment/component/cms_comment_edit_main.html'
+    edit_local_script = 'cp_comment/component/cms_comment_edit_local_script.html'
     index_url = '/cms/comment/'
     form = AddCommentForm()
 
