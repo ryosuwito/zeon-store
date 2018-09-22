@@ -67,11 +67,11 @@
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
                             {% if not comment_is_approved %}
-                            <button onclick="getNext('{{ comment.get_approve_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button>
+                            <a href="javascript:void(0);" onclick="getNext('{{ comment.get_approve_url }}')" ><button style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button></a>
                             {% else %}
-                            <button onclick="getNext('{{ comment.get_reply_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Reply</button>
+                            <a href="javascript:void(0);" onclick="getNext('{{ comment.get_reply_url }}')"><button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Reply</button></a>
                             {% endif %}
-                            <button onclick="getNext('{{ comment.get_delete_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
+                            <a href="javascript:void(0);" onclick="getNext('{{ comment.get_delete_url }}')"><button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button></a>
                         </div>
                     {% if not forloop.last %}
                         {% if not comment.comment_reply.all %}
@@ -129,9 +129,9 @@
                                 </div>
                                 <div class="col-xs-4 col-sm-1" style="text-align: left">
                                     {% if not reply_is_approved %}
-                                    <button onclick="getNext('{{ reply.get_approve_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button>
+                                    <a href="javascript:void(0);" onclick="getNext('{{ reply.get_approve_url }}')"><button style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button></a>
                                     {% endif %}
-                                    <button onclick="getNext('{{ reply.get_reply_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
+                                    <a href="javascript:void(0);" onclick="getNext('{{ reply.get_delete_url }}')"><button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button></a>
                                 </div>
                             {% if not forloop.last %}
                             <hr>
