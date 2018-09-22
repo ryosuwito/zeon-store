@@ -13,13 +13,15 @@
             $('.button-show').each(function() {
                 var currentElement = $(this);
 
-                currentElement.text('Show Reply');
+                currentElement.removeClass('hidden');
             });
             $('#reply-container-'+id).removeClass('hidden');
-            $('#button-show-'+id).text('Hide Reply');
+            $('#button-show-'+id).addClass('hidden');
+            $('#button-hide-'+id).removeClass('hidden');
         }else{
             $('#reply-container-'+id).addClass('hidden');
-            $('#button-show-'+id).text('Show Reply');
+            $('#button-show-'+id).removeClass('hidden');
+            $('#button-hide-'+id).addClass('hidden');
         }
         
     }
