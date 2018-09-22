@@ -40,7 +40,7 @@ class Category(models.Model):
 
 class Article(models.Model):
     class_name = models.CharField(max_length=200, blank=True)
-    category = models.ManyToManyField(Category, related_name="article_category", blank=True, null=True)
+    category = models.ManyToManyField(Category, related_name="article_category", blank=True)
     slug = models.SlugField(max_length=200,unique=True, db_index=True, blank=True, null=True)
     tags = TaggableManager(blank=True)
     title = models.CharField(max_length=200)
