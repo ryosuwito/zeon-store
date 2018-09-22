@@ -58,14 +58,14 @@
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: center">
                             <p>{{ comment.comment_reply.all | length }}</p>
+                            {% if comment.comment_reply.all %}
+                            <button id="button-show-{{comment.id}}" onclick="showReply('{{comment.id}}')" style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs button-show">Show Reply</button>
+                            {% endif %}
                         </div>
                         <div class="col-xs-4 col-sm-7">
                             <p>{{ comment.content }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            {% if comment.comment_reply.all %}
-                            <button id="button-show-{{comment.id}}" onclick="showReply('{{comment.id}}')" style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs button-show">Show Reply</button>
-                            {% endif %}
                             <button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Reply</button>
                             <button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
                         </div>
