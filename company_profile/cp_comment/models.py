@@ -22,8 +22,8 @@ class Comment(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='comment_site', null=True, blank=True)
     is_approved = models.BooleanField(default=False)
 
-    def get_edit_url(self):
-        return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'edit', 'pk':self.pk}))
+    def get_reply_url(self):
+        return "%s" % (reverse('cms:reply_add', kwargs={'pk':self.pk}))
 
     def get_delete_url(self):
         return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'delete', 'pk':self.pk}))
@@ -38,8 +38,6 @@ class Reply(models.Model):
     content = models.TextField(null=True)
     is_approved = models.BooleanField(default=False)
 
-    def get_edit_url(self):
-        return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'edit', 'pk':self.pk}))
 
     def get_delete_url(self):
         return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'delete', 'pk':self.pk}))

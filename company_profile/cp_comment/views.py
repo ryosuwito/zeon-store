@@ -61,15 +61,27 @@ class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
     def get(self, request, *args, **kwargs):
         comment = ""
-        if  kwargs['action'] == 'delete':
+        if  kwargs['action'] == 'delete' or \
+            kwargs['action'] == 'approve' :
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
             else :
                 try:
                     comment = Comment.objects.get(pk=kwargs['pk'])
-                    comment.delete()
                 except:
                     return HttpResponseRedirect(self.index_url)
+
+        if kwargs['action'] == 'delete' and \
+            comment :
+            comment.delete()
+            return HttpResponseRedirect(self.index_url)
+
+        elif kwargs['action'] == 'approve' and \
+            comment :
+            comment.is_approved = True
+            comment.save()
+            return HttpResponseRedirect(self.index_url)
+
 
         method = request.GET.get('method', '')
         data = super(CPComment, self).get(request, args, kwargs)
@@ -78,18 +90,8 @@ class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
         form = self.form
-        if  kwargs['action'] == 'edit':
-            try:
-                comment = Comment.objects.get(pk=kwargs['pk'])
-            except:
-                return HttpResponseRedirect(self.index_url)
-            form = AddCommentForm(instance=comment)
 
-
-        if kwargs['action'] == 'show_all' or \
-            kwargs['action'] == 'add' or \
-            kwargs['action'] == 'edit' or \
-            kwargs['action'] == 'delete' :
+        if kwargs['action'] == 'show_all':
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
