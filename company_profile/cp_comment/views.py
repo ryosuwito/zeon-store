@@ -4,7 +4,7 @@ from dispatcher.views import ComponentRenderer
 from dispatcher.views import Dispatcher
 
 from .models import Comment, Reply, Visitor
-from .forns import 
+from .forms import AddCommentForm, AddReplyForm
       
 class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
@@ -89,7 +89,7 @@ class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
-            
+
         featured_image = ""
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
