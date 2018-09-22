@@ -1,0 +1,70 @@
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/')">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/page/')">Page</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-sm-12">
+        <form id='addArticleForm' method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
+            <div class="row">
+                <!-- column -->
+                <div class="col-xs-12 col-sm-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Add New Page</h1>
+                            <hr>
+                            <h4>{{ form.title.label }}</h4>
+                            {{ form.title }}
+                            <br>
+                            <br>
+                            <h4>{{ form.content.label }}</h4>
+                            {{ form.content }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
+                            <h6>{{ form.banner_image_1.label }}</h6>
+                            {{ form.banner_image_1 }}
+                            <h6>{{ form.banner_image_2.label }}</h6>
+                            {{ form.banner_image_2 }}
+                            <h6>{{ form.banner_image_3.label }}</h6>
+                            {{ form.banner_image_3 }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="display: flex; justify-content: center">
+                            <p class="btn btn-info" style="margin: auto" onclick="previewNewArticle()">PREVIEW</p>
+                            <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
