@@ -66,8 +66,8 @@
                             <p>{{ comment.content }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Reply</button>
-                            <button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
+                            <button onclick="getNext('{{ comment.get_reply_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Reply</button>
+                            <button onclick="getNext('{{ comment.get_delete_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
                         </div>
                     {% if not forloop.last %}
                         {% if not comment.comment_reply.all %}
@@ -123,7 +123,7 @@
                                     <p>{{ reply.content }}</p>
                                 </div>
                                 <div class="col-xs-4 col-sm-1" style="text-align: left">
-                                    <button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
+                                    <button onclick="getNext('{{ comment.get_reply_url }}')" style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
                                 </div>
                             {% if not forloop.last %}
                             <hr>

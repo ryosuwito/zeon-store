@@ -31,6 +31,8 @@ urlpatterns = [
     path('comment/<str:action>/<int:pk>/', CmsComment.as_view(), name='comment_edit_approve_delete'),
     path('comment/', CmsComment.as_view(), name='comment_all'),
     
+    path('reply/<str:action>/<int:pk>/', CmsReply.as_view(), name='reply_edit_approve_delete'),
+
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     path('', Index.as_view(), name='index'),
