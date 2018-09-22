@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.middleware.csrf import get_token
 from dispatcher.views import ComponentRenderer
 from dispatcher.views import Dispatcher
 
