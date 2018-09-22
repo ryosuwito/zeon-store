@@ -3,6 +3,7 @@ from django.db import models
 from company_profile.cp_articles.models import Article
 from django.utils import timezone
 
+from django.urls import reverse
 
 def default_now():
     return timezone.now()
