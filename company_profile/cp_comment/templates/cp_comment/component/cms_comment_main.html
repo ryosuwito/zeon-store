@@ -131,7 +131,7 @@
                                     {% if not reply_is_approved %}
                                     <a href="javascript:void(0);" onclick="window.open('{{ reply.get_approve_url }}', '_self')"><button style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button></a>
                                     {% endif %}
-                                    <a href="javascript:void(0);" onclick="window.open('{{ reply.get_delete_url }}'), '_self'"><button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button></a>
+                                    <a href="javascript:void(0);" onclick="window.open('{{ reply.get_delete_url }}', '_self')"><button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button></a>
                                 </div>
                             {% if not forloop.last %}
                             <hr>
