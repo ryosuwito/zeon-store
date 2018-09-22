@@ -56,7 +56,9 @@
                             <p>{{ comment.content }}</p>
                         </div>
                     {% if not forloop.last %}
-                    <hr>
+                        <div class="col-xs-12 col-sm-12" style="text-align: right">
+                            <hr>
+                        </div>
                     {% endif %}
                     </div>
                     {% if comment.comment_reply.all %}
@@ -107,10 +109,6 @@
                             </div>
                         {% endfor %}
                     {% endif %}
-
-                    <div class="row" style="margin: 0">
-                        <hr>
-                    </div>
                 {% endfor %}
             </div>
         </div>
