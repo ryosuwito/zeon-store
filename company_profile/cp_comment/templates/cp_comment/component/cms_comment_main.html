@@ -59,9 +59,9 @@
                             <p>{{ comment.content }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <button style="width:100%" class="btn btn-success btn-xs">Show Reply</button>
-                            <button style="width:100%" class="btn btn-info btn-xs">Edit</button>
-                            <button style="width:100%" class="btn btn-danger btn-xs">Delete</button>
+                            <button style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Show Reply</button>
+                            <button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Edit</button>
+                            <button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
                         </div>
                     {% if not forloop.last %}
                         {% if not comment.comment_reply.all %}
