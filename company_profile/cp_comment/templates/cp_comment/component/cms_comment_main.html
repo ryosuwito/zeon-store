@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
                             <button id="button-show-{{comment.id}}" onclick="showReply('{{comment.id}}')" style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs button-show">Show Reply</button>
-                            <button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Edit</button>
+                            <button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Reply</button>
                             <button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
                         </div>
                     {% if not forloop.last %}
@@ -94,7 +94,6 @@
                                 <h6>Content</h6>
                             </div>
                             <div class="col-xs-4 col-sm-1" style="text-align: left">
-                                <h6>Action</h6>
                             </div>
                         </div>
                         <div class="row" style="margin: 0">
@@ -122,7 +121,6 @@
                                     <p>{{ reply.content }}</p>
                                 </div>
                                 <div class="col-xs-4 col-sm-1" style="text-align: left">
-                                   <button style="width:100%; margin-bottom:5px" class="btn btn-info btn-xs">Edit</button>
                                     <button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button>
                                 </div>
                             {% if not forloop.last %}
