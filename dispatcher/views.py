@@ -225,6 +225,7 @@ class Comment(Dispatcher):
                     name=visitor_form_data['name'])[0]
             comment_form_data = comment_form.cleaned_data
             comment = CommentModel.objects.create(visitor=visitor,
+                    site=site,
                     content=comment_form_data['content'],
                     article=article)
 
