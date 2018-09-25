@@ -49,9 +49,7 @@
                 </div>
                 <hr>
                 {% for comment in data.comments %}
-                    <div class="row"  onmouseover="showAction('{{ comment.id }}')"
-                    onmouseleave="hideAction('{{ comment.id }}')"
-                    style="margin: 0">
+                    <div class="row"  onmouseover="showAction('{{ comment.id }}')" style="margin: 0">
                         <div class="col-xs-2 col-sm-1" style="text-align: center">
                             <p>{{ comment.visitor.name }}</p>
                         </div>
@@ -70,7 +68,7 @@
                         <div class="col-xs-4 col-sm-6">
                             <p>{{ comment.content }}</p>
                         </div>
-                        <div id="action-box-{{ comment.id }}" class="hidden col-xs-4 col-sm-1" style="text-align: left">
+                        <div id="action-box-{{ comment.id }}" class="action-box hidden col-xs-4 col-sm-1" style="text-align: left">
                             {% if not comment.is_approved %}
                             <a href="javascript:void(0);" onclick="window.open('{{ comment.get_approve_url }}', '_self')" ><button style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button></a>
                             {% else %}
@@ -116,9 +114,7 @@
                         </div>
 
                         {% for reply in comment.comment_reply.all %}
-                            <div class="row" onmouseover="showAction('{{ comment.id }}{{ reply.id }}')" 
-                            onmouseleave="hideAction('{{ comment.id }}{{ reply.id }}')"
-                            style="margin: 0">
+                            <div class="row" onmouseover="showAction('{{ comment.id }}{{ reply.id }}')" style="margin: 0">
                                 <div class="col-xs-2 col-sm-2" style="text-align: right">
                                 </div>
                                 <div class="col-xs-2 col-sm-1" style="text-align: center">
@@ -133,7 +129,7 @@
                                 <div class="col-xs-4 col-sm-6">
                                     <p>{{ reply.content }}</p>
                                 </div>
-                                <div id="action-box-{{ comment.id }}{{ reply.id }}" class="hidden col-xs-4 col-sm-1" style="text-align: left">
+                                <div id="action-box-{{ comment.id }}{{ reply.id }}" class="action-box hidden col-xs-4 col-sm-1" style="text-align: left">
                                     {% if not reply.is_approved %}
                                     <a href="javascript:void(0);" onclick="window.open('{{ reply.get_approve_url }}', '_self')"><button style="width:100%; margin-bottom:5px" class="btn btn-success btn-xs">Approve</button></a>
                                     {% endif %}
@@ -160,15 +156,19 @@
 </div>
 <script>
     function showAction(id){
-        $('#action-box-'+id).removeClass('hidden')
         $('.reply-container').each(function() {
             var currentElement = $(this);
 
             currentElement.addClass('hidden');
         });
         $('#reply-container-'+id).removeClass('hidden');
-    }
-    function hideAction(id){
-        $('#action-box-'+id).addClass('hidden')
+
+
+        $('.action-box').each(function() {
+            var currentElement = $(this);
+
+            currentElement.addClass('hidden');
+        });
+        $('#action-box-'+id).removeClass('hidden');
     }
 </script>
