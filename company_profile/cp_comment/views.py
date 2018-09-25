@@ -124,8 +124,8 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     add_local_script = 'cp_articles/component/cms_category_add_local_script.html'
     edit_main = 'cp_articles/component/cms_category_edit_main.html'
     edit_local_script = 'cp_articles/component/cms_category_edit_local_script.html'
-    index_url = '/cms/category/'
-    #form = CategoryAddForm()
+    index_url = '/cms/comment/'
+    form = ""
 
     def post(self, request, *args, **kwargs):
         pass
@@ -162,53 +162,43 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         )"""
 
     def get(self, request, *args, **kwargs):
-        pass
-        """category = ""
-        if  kwargs['action'] == 'delete':
+        reply = ""
+        if  kwargs['action'] == 'delete' or \
+            kwargs['action'] == 'approve' :
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
             else :
                 try:
-                    category = Category.objects.get(pk=kwargs['pk'])
+                    reply = Reply.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
-        if category.title == 'post':
+
+        if kwargs['action'] == 'delete' and \
+            reply :
+            reply.delete()
             return HttpResponseRedirect(self.index_url)
 
+        elif kwargs['action'] == 'approve' and \
+            reply :
+            reply.is_approved = True
+            reply.save()
+            return HttpResponseRedirect(self.index_url)
+
+
         method = request.GET.get('method', '')
-        data = super(CPCategory, self).get(request, args, kwargs)
+        data = super(CPReply, self).get(request, args, kwargs)
         token = get_token(request)
         member = data['member']
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
         form = self.form
-        featured_image = ''
-        if  kwargs['action'] == 'edit':
-            try:
-                category = Category.objects.get(pk=kwargs['pk'])
-            except:
-                return HttpResponseRedirect(self.index_url)
-            form = CategoryAddForm(instance=category)
 
-        elif  kwargs['action'] == 'delete':
-            articles = ArticleModel.objects.filter(category=category)
-            if articles:
-                for article in articles:
-                    try:
-                        article.category.remove(category)
-                    except:
-                        pass
-            category.delete()
-            return HttpResponseRedirect(self.index_url)
-
-        if kwargs['action'] == 'show_all' or \
-            kwargs['action'] == 'add' or \
-            kwargs['action'] == 'edit' or \
-            kwargs['action'] == 'delete' :
+        if kwargs['action'] == 'show_all':
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
 
+        featured_image = ""
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
                                      
@@ -222,4 +212,4 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 'token': token,
                 'component':self.component,
             }
-        )"""
+        )
