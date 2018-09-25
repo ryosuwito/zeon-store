@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <hr>
-                {% for comment in comments %}
+                {% for comment in data.comments %}
                     <div class="row"  onmouseover="showAction('{{ comment.id }}')"
                     onmouseleave="hideAction('{{ comment.id }}')"
                     style="margin: 0">
