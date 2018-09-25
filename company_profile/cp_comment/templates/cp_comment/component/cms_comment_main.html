@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <hr>
-                {% for comment in site.comment_site.all %}
+                {% for comment in comments %}
                     <div class="row"  onmouseover="showAction('{{ comment.id }}')"
                     onmouseleave="hideAction('{{ comment.id }}')"
                     style="margin: 0">
@@ -67,7 +67,7 @@
                         <div class="col-xs-4 col-sm-1" style="text-align: center">
                             <p>{{ comment.comment_reply.all | length }}</p>
                             {% if comment.comment_reply.all %}
-                            <button id="button-show-{{comment.id}}" onclick="showReply('{{comment.id}}')" style="width:100%; margin-bottom:5px" class="btn btn-primary btn-xs button-show">Show Reply</button>
+                            <button id="button-show-{{comment.id}}" style="width:100%; margin-bottom:5px" class="btn btn-primary btn-xs button-show">Show Reply</button>
                             {% endif %}
                         </div>
                         <div class="col-xs-4 col-sm-6">
@@ -82,19 +82,19 @@
                             <a href="javascript:void(0);" onclick="window.open('{{ comment.get_delete_url }}', '_self')"><button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button></a>
                         </div>
                     {% if not forloop.last %}
-                        {% if not comment.comment_reply.all %}
+                        {% if not replies %}
                             <div class="col-xs-12 col-sm-12" style="text-align: right">
                                 <hr>
                             </div>
                         {% endif %}
                     {% endif %}
                     </div>
-                    {% if comment.comment_reply.all %}
+                    {% if replies %}
                     <div id="reply-container-{{ comment.id }}" class="hidden reply-container">
                         <div class="row" style="margin: 0">
                             <div class="col-xs-2 col-sm-2" style="text-align: right">
                                 <h6>Replies </h6>
-                                <button id="button-hide-{{comment.id}}" onclick="showReply('{{comment.id}}')" style="width:auto; margin-bottom:5px" class="btn btn-primary btn-xs button-show">Hide Reply</button>
+                                <button id="button-hide-{{comment.id}}" style="width:auto; margin-bottom:5px" class="btn btn-primary btn-xs button-show">Hide Reply</button>
                             </div>
                             <div class="col-xs-2 col-sm-1" style="text-align: center">
                                 <h6>Visitor Name</h6>
@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                        {% for reply in comment.comment_reply.all %}
+                        {% for reply in replies %}
                             <div class="row" onmouseover="showAction('{{ comment.id }}{{ reply.id }}')" 
                             onmouseleave="hideAction('{{ comment.id }}{{ reply.id }}')"
                             style="margin: 0">
@@ -165,8 +165,48 @@
 <script>
     function showAction(id){
         $('#action-box-'+id).removeClass('hidden')
+        
+        if($('#reply-container-'+id).hasClass('hidden')){
+            $('.reply-container').each(function() {
+                var currentElement = $(this);
+
+                currentElement.addClass('hidden');
+            });
+            $('.button-show').each(function() {
+                var currentElement = $(this);
+
+                currentElement.removeClass('hidden');
+            });
+            $('#reply-container-'+id).removeClass('hidden');
+            $('#button-show-'+id).addClass('hidden');
+            $('#button-hide-'+id).removeClass('hidden');
+        }else{
+            $('#reply-container-'+id).addClass('hidden');
+            $('#button-show-'+id).removeClass('hidden');
+            $('#button-hide-'+id).addClass('hidden');
+        }
     }
     function hideAction(id){
         $('#action-box-'+id).addClass('hidden')
+        
+        if($('#reply-container-'+id).hasClass('hidden')){
+            $('.reply-container').each(function() {
+                var currentElement = $(this);
+
+                currentElement.addClass('hidden');
+            });
+            $('.button-show').each(function() {
+                var currentElement = $(this);
+
+                currentElement.removeClass('hidden');
+            });
+            $('#reply-container-'+id).removeClass('hidden');
+            $('#button-show-'+id).addClass('hidden');
+            $('#button-hide-'+id).removeClass('hidden');
+        }else{
+            $('#reply-container-'+id).addClass('hidden');
+            $('#button-show-'+id).removeClass('hidden');
+            $('#button-hide-'+id).addClass('hidden');
+        }
     }
 </script>

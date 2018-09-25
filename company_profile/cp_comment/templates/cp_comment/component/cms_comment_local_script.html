@@ -2,27 +2,4 @@
     function localScript(){
     }
 
-    function showReply(id){
-
-        if($('#reply-container-'+id).hasClass('hidden')){
-            $('.reply-container').each(function() {
-                var currentElement = $(this);
-
-                currentElement.addClass('hidden');
-            });
-            $('.button-show').each(function() {
-                var currentElement = $(this);
-
-                currentElement.removeClass('hidden');
-            });
-            $('#reply-container-'+id).removeClass('hidden');
-            $('#button-show-'+id).addClass('hidden');
-            $('#button-hide-'+id).removeClass('hidden');
-        }else{
-            $('#reply-container-'+id).addClass('hidden');
-            $('#button-show-'+id).removeClass('hidden');
-            $('#button-hide-'+id).addClass('hidden');
-        }
-        
-    }
 </script>
