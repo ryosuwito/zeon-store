@@ -77,7 +77,7 @@
                             <a href="javascript:void(0);" onclick="window.open('{{ comment.get_delete_url }}', '_self')"><button style="width:100%; margin-bottom:5px" class="btn btn-danger btn-xs">Delete</button></a>
                         </div>
                     {% if not forloop.last %}
-                        {% if not replies %}
+                        {% if not comment.comment_reply.all %}
                             <div class="col-xs-12 col-sm-12" style="text-align: right">
                                 <hr>
                             </div>
