@@ -89,7 +89,7 @@
                         {% endif %}
                     {% endif %}
                     </div>
-                    {% if replies %}
+                    {% if comment.comment_reply.all %}
                     <div id="reply-container-{{ comment.id }}" class="hidden reply-container">
                         <div class="row" style="margin: 0">
                             <div class="col-xs-2 col-sm-2" style="text-align: right">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                        {% for reply in replies %}
+                        {% for reply in comment.comment_reply.all %}
                             <div class="row" onmouseover="showAction('{{ comment.id }}{{ reply.id }}')" 
                             onmouseleave="hideAction('{{ comment.id }}{{ reply.id }}')"
                             style="margin: 0">
@@ -188,7 +188,7 @@
     }
     function hideAction(id){
         $('#action-box-'+id).addClass('hidden')
-        
+
         if($('#reply-container-'+id).hasClass('hidden')){
             $('.reply-container').each(function() {
                 var currentElement = $(this);

@@ -96,10 +96,14 @@ class CPComment(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         else :
             return HttpResponseRedirect(self.index_url)
 
+        comments = Comment.objects.filter(site=site)
+        data['comments'] = comments
+
         featured_image = ""
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                                     
+
+                              
         return render(request, self.template, {
                 'form': form,
                 'featured_image': featured_image,
