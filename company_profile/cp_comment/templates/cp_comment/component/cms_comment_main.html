@@ -66,9 +66,6 @@
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: center">
                             <p>{{ comment.comment_reply.all | length }}</p>
-                            {% if comment.comment_reply.all %}
-                            <button id="button-show-{{comment.id}}" style="width:100%; margin-bottom:5px" class="btn btn-primary btn-xs button-show">Show Reply</button>
-                            {% endif %}
                         </div>
                         <div class="col-xs-4 col-sm-6">
                             <p>{{ comment.content }}</p>
@@ -94,7 +91,6 @@
                         <div class="row" style="margin: 0">
                             <div class="col-xs-2 col-sm-2" style="text-align: right">
                                 <h6>Replies </h6>
-                                <button id="button-hide-{{comment.id}}" style="width:auto; margin-bottom:5px" class="btn btn-primary btn-xs button-show">Hide Reply</button>
                             </div>
                             <div class="col-xs-2 col-sm-1" style="text-align: center">
                                 <h6>Visitor Name</h6>
@@ -165,10 +161,28 @@
 <script>
     function showAction(id){
         $('#action-box-'+id).removeClass('hidden')
-        $('#reply-container-'+id).removeClass('hidden');
+        
+        if($('#reply-container-'+id).hasClass('hidden')){
+            $('.reply-container').each(function() {
+                var currentElement = $(this);
+
+                currentElement.addClass('hidden');
+            });
+            $('.button-show').each(function() {
+                var currentElement = $(this);
+
+                currentElement.removeClass('hidden');
+            });
+            $('#reply-container-'+id).removeClass('hidden');
+            $('#button-show-'+id).addClass('hidden');
+            $('#button-hide-'+id).removeClass('hidden');
+        }else{
+            $('#reply-container-'+id).addClass('hidden');
+            $('#button-show-'+id).removeClass('hidden');
+            $('#button-hide-'+id).addClass('hidden');
+        }
     }
     function hideAction(id){
         $('#action-box-'+id).addClass('hidden')
-        $('#reply-container-'+id).addClass('hidden');
     }
 </script>
