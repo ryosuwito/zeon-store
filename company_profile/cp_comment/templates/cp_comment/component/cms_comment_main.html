@@ -35,9 +35,12 @@
                         <h6>Created Date</h6>
                     </div>
                     <div class="col-xs-4 col-sm-1" style="text-align: left">
+                        <h6>Article</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-1" style="text-align: left">
                         <h6>Reply</h6>
                     </div>
-                    <div class="col-xs-4 col-sm-7" style="text-align: left">
+                    <div class="col-xs-4 col-sm-6" style="text-align: left">
                         <h6>Content</h6>
                     </div>
                     <div class="col-xs-4 col-sm-1" style="text-align: left">
@@ -55,6 +58,9 @@
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: center">
                             <p>{{ comment.created_date | naturalday }}</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-1" style="text-align: left">
+                            <p onclick="window.open('{{comment.article.get_article_url}}', '_blank')">{{ comment.article.title | title | truncatechars:30 }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: center">
                             <p>{{ comment.comment_reply.all | length }}</p>
@@ -97,7 +103,7 @@
                             <div class="col-xs-4 col-sm-1" style="text-align: left">
                                 <h6>Created Date</h6>
                             </div>
-                            <div class="col-xs-4 col-sm-6" style="text-align: left">
+                            <div class="col-xs-4 col-sm-5" style="text-align: left">
                                 <h6>Content</h6>
                             </div>
                             <div class="col-xs-4 col-sm-1" style="text-align: left">
@@ -124,7 +130,7 @@
                                 <div class="col-xs-4 col-sm-1" style="text-align: center">
                                     <p>{{ reply.created_date | naturalday }}</p>
                                 </div>
-                                <div class="col-xs-4 col-sm-6">
+                                <div class="col-xs-4 col-sm-5">
                                     <p>{{ reply.content }}</p>
                                 </div>
                                 <div class="col-xs-4 col-sm-1" style="text-align: left">
