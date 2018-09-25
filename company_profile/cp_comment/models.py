@@ -40,7 +40,7 @@ class Reply(models.Model):
 
 
     def get_delete_url(self):
-        return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'delete', 'pk':self.pk}))
+        return "%s" % (reverse('cms:reply_edit_approve_delete', kwargs={'action':'delete', 'pk':self.pk}))
 
     def get_approve_url(self):
-        return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'approve', 'pk':self.pk}))
+        return "%s" % (reverse('cms:reply_edit_approve_delete', kwargs={'action':'approve', 'pk':self.pk}))
