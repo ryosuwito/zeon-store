@@ -60,7 +60,7 @@
                             <p>{{ comment.created_date | naturalday }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <p onclick="window.open('{{comment.article.get_article_url}}', '_blank')">{{ comment.article.title | title | truncatechars:30 }}</p>
+                            <a href="javascript:void(0)" onclick="window.open('{{comment.article.get_article_url}}', '_blank')"><p>{{ comment.article.title | title | truncatechars:30 }}</p></a>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: center">
                             <p>{{ comment.comment_reply.all | length }}</p>
