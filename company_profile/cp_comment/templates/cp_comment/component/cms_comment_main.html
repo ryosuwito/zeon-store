@@ -161,26 +161,12 @@
 <script>
     function showAction(id){
         $('#action-box-'+id).removeClass('hidden')
-        
-        if($('#reply-container-'+id).hasClass('hidden')){
-            $('.reply-container').each(function() {
-                var currentElement = $(this);
+        $('.reply-container').each(function() {
+            var currentElement = $(this);
 
-                currentElement.addClass('hidden');
-            });
-            $('.button-show').each(function() {
-                var currentElement = $(this);
-
-                currentElement.removeClass('hidden');
-            });
-            $('#reply-container-'+id).removeClass('hidden');
-            $('#button-show-'+id).addClass('hidden');
-            $('#button-hide-'+id).removeClass('hidden');
-        }else{
-            $('#reply-container-'+id).addClass('hidden');
-            $('#button-show-'+id).removeClass('hidden');
-            $('#button-hide-'+id).addClass('hidden');
-        }
+            currentElement.addClass('hidden');
+        });
+        $('#reply-container-'+id).removeClass('hidden');
     }
     function hideAction(id){
         $('#action-box-'+id).addClass('hidden')
