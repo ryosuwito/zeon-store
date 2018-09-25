@@ -1,7 +1,9 @@
 from django.contrib.sites.models import Site
 from django.db import models
+from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.dispatch import receiver
 
 from ckeditor.fields import RichTextField
 
@@ -31,11 +33,6 @@ class PageModel(models.Model):
 
     def __str__(self):
         return self.title.title()
-    
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title.lower())
-        super(PageModel, self).save(*args, **kwargs)
     
     def get_banner_image_1_url(self):
         return ("/media/%s"%self.banner_image_1)
@@ -68,3 +65,14 @@ class TempPageModel(PageModel):
         self.is_published = False
         self.is_preview = True
         super(TempPageModel, self).save(*args, **kwargs) 
+
+
+@receiver(post_save, sender=PageModel)
+def create_page(sender, instance, created, **kwargs):
+    if created:
+        slug = slugify(instance.title.lower())
+        while PageModel.objects.filter(slug = slug).exists():
+            slug = slugify("%s-%s"%(instance.title.lower(),get_random_string(5, allowed_chars='12345677890')))
+
+        instance.slug = slug
+        instance.save()

@@ -88,7 +88,7 @@ class Article(models.Model):
 
 
 @receiver(post_save, sender=Article)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_article(sender, instance, created, **kwargs):
     if created:
         slug = slugify(instance.title.lower())
         while Article.objects.filter(slug = slug).exists():
@@ -110,7 +110,7 @@ class TempArticle(Article):
 
 
 @receiver(post_save, sender=TempArticle)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_temp_article(sender, instance, created, **kwargs):
     if created:
         slug = slugify(instance.title.lower())
         while TempArticle.objects.filter(slug = slug).exists():
