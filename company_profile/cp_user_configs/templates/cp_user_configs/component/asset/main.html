@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/')">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Page</li>
+            <li class="breadcrumb-item active" aria-current="page">Brand Asset</li>
         </ol>
     </nav>
 {% endblock %}
@@ -14,55 +14,17 @@
         <div class="card">
             <div class="card-body">
                 <div class="row" style="margin: 0">
-                    <div class="col-xs-10 col-sm-10" style="text-align: left">
-                        <h3>Pages </h3>
-                        <p>Total Article: {{ site.site_page.all | length }}</p>
-                    </div>
-                    <div class="col-xs-2 col-sm-2" style="text-align: right; display: flex; flex-direction: column; justify-content: flex-end">
-                        <p onclick="getNext('/cms/article/add/')" class="btn btn-primary btn-md"><span class="fa fa-plus"></span> CREATE NEW</p>
+                    <div class="col-xs-10 col-sm-12" style="text-align: left">
+                        <h3>Brand Asset </h3>
                     </div>
                 </div>
                 <hr>
                 <div class="row" style="margin: 0">
-                    <div class="col-xs-2 col-sm-1" style="text-align: center">
-                        <h6>Published</h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4" style="text-align: left">
-                        <h6>Title</h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-1" style="text-align: left">
-                        <h6>Created Date</h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-2" style="text-align: left">
+                    <div class="col-xs-12 col-sm-12" style="text-align: center">
+                        <h6>Brand Logo</h6>
+                        <img src="{{ configs.brand_asset.get_brand_logo_url}}" width="130px">
                     </div>
                 </div>
-                <hr>
-                {% for page in site.site_page.all %}
-                    {% if page.category.all %}
-                        <div class="row" style="margin: 0">
-                            <div class="col-xs-2 col-sm-1" style="text-align: center">
-                                {% if  page.is_published %}
-                                <span class="text-success fa fa-check"></span>
-                                {% else %}
-                                <span class="text-danger fa fa-times"></span>
-                                {% endif %}
-                            </div>
-                            <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
-                                <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ article.title | title }}</p>
-                            </div>
-                            <div class="col-xs-4 col-sm-1" style="text-align: left">
-                                <p>{{ article.created_date | naturalday }}</p>
-                            </div>
-                            <div class="col-xs-4 col-sm-2" style="display: flex; justify-content: center">
-                                <p onclick="getNext('{{ article.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
-                                <p onclick="window.open('{{ article.get_delete_url }}', '_parent')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
-                            </div>
-                        </div>
-                        {% if not forloop.last %}
-                        <hr>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
             </div>
         </div>
     </div>

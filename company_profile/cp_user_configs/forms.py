@@ -1,5 +1,5 @@
 from django import forms
-from company_profile.cp_configs.models import BrandAsset, Template, ColorScheme
+from company_profile.cp_configs.models import BrandAsset, BrandIdentity, Template, ColorScheme
 
 class AssetEditForm(forms.ModelForm):
     class Meta:
@@ -14,6 +14,19 @@ class AssetEditForm(forms.ModelForm):
                     'extra_image_1',
                     'extra_image_2',
                     'extra_image_3',)
+
+class IdentityEditForm(forms.ModelForm):
+    class Meta:
+        model = BrandIdentity
+        fields = ('company_name',
+            'company_tagline', 
+            'company_address', 
+            'company_email_address',
+            'company_phone_number',
+            'company_fax_number',
+            'company_facebook',
+            'company_instagram',
+            'company_whatsapp',)
 
 class TemplateEditForm(forms.ModelForm):
     class Meta:
