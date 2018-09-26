@@ -7,6 +7,8 @@ from .forms import PageAddForm, PagePreviewForm
 from .models import PageModel, TempPageModel
 
 import time
+from urllib.parse import urlparse
+
 from company_profile.cp_user_configs.models import UserConfigs
 from company_profile.cp_articles.views import CPArticle
 from dispatcher.views import ComponentRenderer
