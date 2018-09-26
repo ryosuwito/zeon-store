@@ -158,9 +158,50 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = IdentityEditForm()
 
     def get(self, request, *args, **kwargs):
-        action = kwargs['action']
-        pk = kwargs['pk']
-        return super(CPIdentity, self).get(request, args, action=action, pk=pk)
+        identity = ""
+        if  kwargs['action'] == 'delete' or kwargs['action'] == 'edit':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                try:
+                    identity = BrandIdentity.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
+
+        method = request.GET.get('method', '')
+        data = super(CPIdentity, self).get(request, args, kwargs)
+        token = get_token(request)
+        member = data['member']
+        configs = UserConfigs.objects.get(member = member)
+        site = data['site']
+        form = self.form
+
+        featured_image = ''
+        if  kwargs['action'] == 'edit':
+            form = IdentityEditForm(instance=identity)
+
+        if kwargs['action'] == 'show_all' or \
+            kwargs['action'] == 'edit' :
+            self.set_component(kwargs)
+        else :
+            return HttpResponseRedirect(self.index_url)
+
+        
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
+                                     
+        return render(request, self.template, {
+                'form': form,
+                'featured_image': featured_image,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component,
+                'identity' : identity,
+            }
+        )
 
 class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
