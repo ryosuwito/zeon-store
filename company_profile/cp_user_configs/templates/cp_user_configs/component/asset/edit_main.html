@@ -83,20 +83,25 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-12 col-sm-6">
                                     <h4>{{ form.main_photo_1.label }}</h4>
                                     {% if configs.brand_assets.main_photo_1 %}
                                     <img src="{{ configs.brand_assets.get_main_photo_1_url }}" width="100px" height="auto">
                                     {% endif %}
                                     {{ form.main_photo_1 }}
                                 </div>
-                                <div class="col-xs-12 col-sm-4">
+                                <div class="col-xs-12 col-sm-6">
                                     <h4>{{ form.main_photo_2.label }}</h4>
                                     {% if configs.brand_assets.main_photo_2 %}
                                     <img src="{{ configs.brand_assets.get_main_photo_2_url }}" width="100px" height="auto">
                                     {% endif %}
                                     {{ form.main_photo_2 }}
                                 </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-4">
                                     <h4>{{ form.extra_image_1.label }}</h4>
                                     {% if configs.brand_assets.extra_image_1 %}
@@ -104,19 +109,14 @@
                                     {% endif %}
                                     {{ form.extra_image_1 }}
                                 </div>
-                                <div class="col-xs-12 col-sm-12">
-                                    <hr>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6">
+                                <div class="col-xs-12 col-sm-4">
                                     <h4>{{ form.extra_image_2.label }}</h4>
                                     {% if configs.brand_assets.extra_image_2 %}
                                     <img src="{{ configs.brand_assets.get_extra_image_2_url }}" width="100px" height="auto">
                                     {% endif %}
                                     {{ form.extra_image_2 }}
                                 </div>
-                                <div class="col-xs-12 col-sm-6">
+                                <div class="col-xs-12 col-sm-4">
                                     <h4>{{ form.extra_image_3.label }}</h4>
                                     {% if configs.brand_assets.extra_image_3 %}
                                     <img src="{{ configs.brand_assets.get_extra_image_3_url }}" width="100px" height="auto">
