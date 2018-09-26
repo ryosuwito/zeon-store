@@ -38,7 +38,7 @@
                             <hr>
                             {% csrf_token %}
                             <div class="row">
-                                <div class="col-xs-12 col-sm-3">
+                                <div class="col-xs-12 col-sm-2">
                                     <h4>{{ form.brand_logo.label }}</h4>
                                     {% if configs.brand_assets.brand_logo %}
                                     <img src="{{ configs.brand_assets.get_brand_logo_url }}" width="100%" height="auto">
@@ -48,7 +48,7 @@
                                     {% endif %}
                                     {{ form.brand_logo }}
                                 </div>
-                                <div class="col-xs-12 col-sm-3">
+                                <div class="col-xs-12 col-sm-2">
                                     <h4>{{ form.favicon.label }}</h4>
                                     {% if configs.brand_assets.favicon %}
                                     <img src="{{ configs.brand_assets.get_favicon }}" width="100%" height="auto">
