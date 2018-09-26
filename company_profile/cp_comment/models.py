@@ -18,7 +18,7 @@ class Comment(models.Model):
     created_date = models.DateTimeField(db_index=True,default=default_now)
     visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE, null=True)
     article = models.ForeignKey(Article, related_name="article_comment", on_delete=models.CASCADE)
-    content = models.TextField(null=True)
+    content = models.TextField(max_length=550,null=True)
     site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='comment_site', null=True, blank=True)
     is_approved = models.BooleanField(default=False)
 
@@ -35,7 +35,7 @@ class Reply(models.Model):
     created_date = models.DateTimeField(db_index=True,default=default_now)
     visitor = models.ForeignKey(Visitor, on_delete=models.CASCADE, null=True)
     comment = models.ForeignKey(Comment, related_name="comment_reply", on_delete=models.CASCADE)
-    content = models.TextField(null=True)
+    content = models.TextField(max_length=550,null=True)
     is_approved = models.BooleanField(default=False)
 
 
