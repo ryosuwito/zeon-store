@@ -11,7 +11,10 @@ from dispatcher.views import Dispatcher
 
 from .models import UserConfigs
 from .forms import AssetEditForm, TemplateEditForm, ColorEditForm, IdentityEditForm
-        
+
+from urllib.parse import urlparse
+
+
 class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
