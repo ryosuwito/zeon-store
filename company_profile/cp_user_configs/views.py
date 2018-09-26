@@ -26,7 +26,7 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = AssetEditForm()
 
     def post(self, request, *args, **kwargs):
-        data = super(CPPage, self).get(request, args, kwargs)
+        data = super(CPAsset, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
 
