@@ -39,7 +39,7 @@
                             {% csrf_token %}
                             <h4>{{ form.brand_logo.label }}</h4>
                             {% if configs.brand_assets.brand_logo %}
-                            <img src="{{ configs.brand_assets.get_brand_logo_url }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_brand_logo_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.brand_logo }}
@@ -47,7 +47,7 @@
                             <br>
                             <h4>{{ form.favicon.label }}</h4>
                             {% if configs.brand_assets.favicon %}
-                            <img src="{{ configs.brand_assets.get_favicon }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_favicon }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.favicon }}
@@ -55,7 +55,7 @@
                             <br>
                             <h4>{{ form.hero_image_1.label }}</h4>
                             {% if configs.brand_assets.hero_image_1 %}
-                            <img src="{{ configs.brand_assets.get_hero_image_1_url }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_hero_image_1_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.hero_image_1 }}
@@ -63,7 +63,7 @@
                             <br>
                             <h4>{{ form.hero_image_2.label }}</h4>
                             {% if configs.brand_assets.hero_image_2 %}
-                            <img src="{{ configs.brand_assets.get_hero_image_2_url }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_hero_image_2_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.hero_image_2 }}
@@ -71,7 +71,7 @@
                             <br>
                             <h4>{{ form.hero_image_3.label }}</h4>
                             {% if configs.brand_assets.hero_image_3 %}
-                            <img src="{{ configs.brand_assets.get_hero_image_3_url }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_hero_image_3_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.hero_image_3 }}
@@ -79,7 +79,7 @@
                             <br>
                             <h4>{{ form.main_photo_1.label }}</h4>
                             {% if configs.brand_assets.main_photo_1 %}
-                            <img src="{{ configs.brand_assets.get_main_photo_1_url }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_main_photo_1_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.main_photo_1 }}
@@ -87,7 +87,7 @@
                             <br>
                             <h4>{{ form.main_photo_2.label }}</h4>
                             {% if configs.brand_assets.main_photo_2 %}
-                            <img src="{{ configs.brand_assets.get_main_photo_2_url }}" width="100%; height:auto">
+                            <img src="{{ configs.brand_assets.get_main_photo_2_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.main_photo_2 }}
