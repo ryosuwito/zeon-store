@@ -122,6 +122,10 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
+
+        
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
                                      
         return render(request, self.template, {
                 'form': form,
