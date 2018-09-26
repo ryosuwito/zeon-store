@@ -36,7 +36,7 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         if self.form.is_valid():
             asset = self.form.save(commit=False)
-
+            referer = request.META['HTTP_REFERER']
             if '/cms/asset/edit' in referer:
                 parse_object = urlparse(referer)
                 url_splitted = parse_object.path.split("/")
