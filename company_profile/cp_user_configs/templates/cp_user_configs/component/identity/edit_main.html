@@ -36,7 +36,16 @@
                         <div class="card-body">
                             <h1>Brand Identity</h1>
                             <p>Semua konten di bagian ini akan ditampilkan pada semua halaman web</p>
-                            {{form.as_table}}
+                            {% for field in form.fields %}
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4">
+                                    {{ field.label }}
+                                </div>
+                                <div class="col-xs-8 col-sm-8">
+                                    {{ field }}
+                                </div>
+                            </div>
+                            {% endfor %}
                             <button class="btn btn-primary" form="editArticleForm" style="margin: auto" type="submit">SUBMIT</button>
                         </div>
                     </div>
