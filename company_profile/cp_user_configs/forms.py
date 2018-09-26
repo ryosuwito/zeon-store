@@ -2,6 +2,19 @@ from django import forms
 from company_profile.cp_configs.models import BrandAsset, BrandIdentity, Template, ColorScheme
 
 class AssetEditForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AssetEditForm, self).__init__(*args, **kwargs)
+        self.fields['favicon'].widget = forms.FileInput() 
+        self.fields['hero_image_1'].widget = forms.FileInput() 
+        self.fields['hero_image_2'].widget = forms.FileInput() 
+        self.fields['hero_image_3'].widget = forms.FileInput() 
+        self.fields['brand_logo'].widget = forms.FileInput() 
+        self.fields['main_photo_1'].widget = forms.FileInput() 
+        self.fields['main_photo_2'].widget = forms.FileInput() 
+        self.fields['extra_image_1'].widget = forms.FileInput() 
+        self.fields['extra_image_2'].widget = forms.FileInput() 
+        self.fields['extra_image_3'].widget = forms.FileInput() 
+
     class Meta:
         model = BrandAsset
         fields = ('favicon',
