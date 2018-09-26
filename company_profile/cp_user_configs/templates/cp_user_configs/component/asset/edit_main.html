@@ -91,16 +91,25 @@
                             <hr>
                             {% endif %}
                             {{ form.main_photo_2 }}
+                            <br>
+                            <br>
+                            <h4>{{ form.extra_image_1.label }}</h4>
                             {% if configs.brand_assets.extra_image_1 %}
                             <img src="{{ configs.brand_assets.get_extra_image_1_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
                             {{ form.extra_image_1 }}
+                            <br>
+                            <br>
+                            <h4>{{ form.extra_image_2.label }}</h4>
                             {% if configs.brand_assets.extra_image_2 %}
                             <img src="{{ configs.brand_assets.get_extra_image_2_url }}" width="100px" height="auto">
                             <hr>
                             {% endif %}
-                            {{ form.extra_image_3 }}
+                            {{ form.extra_image_2 }}
+                            <br>
+                            <br>
+                            <h4>{{ form.extra_image_2.label }}</h4>
                             {% if configs.brand_assets.extra_image_3 %}
                             <img src="{{ configs.brand_assets.get_extra_image_3_url }}" width="100px" height="auto">
                             <hr>
