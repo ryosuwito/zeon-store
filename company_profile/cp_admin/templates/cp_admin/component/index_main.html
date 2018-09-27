@@ -18,7 +18,7 @@
                     {% for package in member.package_group.all %}
                     <i class="fa fa-check text-success"></i> {{package.name}}<br>
                     {% endfor %}
-                    <a href="#" class="btn btn-xs btn-info">UPGRADE <span class="fa fa-arrow-up"></span></a>
+                    <a href="javascript:void(0)" onclick="window.open('https://accounts.sidomo.com/','_blank')" class="btn btn-xs btn-info">UPGRADE <span class="fa fa-arrow-up"></span></a>
                 </p>
             </div>
             <div class="row" style="margin: 0">
