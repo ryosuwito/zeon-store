@@ -47,6 +47,9 @@
                             </div>
                             {% for scheme in data.available_schemes %}
                                 <div class="row" style="margin: 0">
+                                    <div class="col-xs-12 col-sm-12" style="text-align: left">
+                                        <p>{{ scheme.name | title }}</p>
+                                    </div>
                                     <div class="col-xs-12 col-sm-1" style="text-align: left">
                                         <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.primary_color }}"></div>
                                         <p>Primary Color</p>
