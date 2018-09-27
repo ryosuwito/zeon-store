@@ -27,47 +27,50 @@
     {% endif %}
     </div>
     <div class="col-sm-12">
-        <form id='editArticleForm' method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
-            <div class="row">
-                <!-- column -->
-                <div class="col-xs-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
+        <div class="row">
+            <!-- column -->
+            <div class="col-xs-12 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="text-align: left">
+                                <h3>Template </h3>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="text-align: left">
+                                <h6>Template Yang Tersedia Saat Ini : {{ data.available_templates.count }}</h6>
+                            </div>
+                        </div>
+                        {% for template in data.available_templates %}
                             <div class="row" style="margin: 0">
                                 <div class="col-xs-12 col-sm-12" style="text-align: left">
-                                    <h3>Template </h3>
+                                    <p>{{ template.name | title }}</p>
+                                </div>
+                                <div class="col-xs-3 col-sm-3" style="text-align: left">
+                                    <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_1_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3" style="text-align: left">
+                                    <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_2_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3" style="text-align: left">
+                                    <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_3_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3" style="text-align: right">
+                                    {% if template.pk != configs.template.pk %}
+                                    <form id='editArticleForm' method="POST">
+                                        <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
+                                        <p onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</p>
+                                    </form>
+                                    {% endif %}
                                 </div>
                             </div>
                             <hr>
-                            <div class="row" style="margin: 0">
-                                <div class="col-xs-12 col-sm-12" style="text-align: left">
-                                    <h6>Template Yang Tersedia Saat Ini : {{ data.available_templates.count }}</h6>
-                                </div>
-                            </div>
-                            {% for template in data.available_templates %}
-                                <div class="row" style="margin: 0">
-                                    <div class="col-xs-12 col-sm-12" style="text-align: left">
-                                        <p>{{ template.name | title }}</p>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-3" style="text-align: left">
-                                        <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_1_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-3" style="text-align: left">
-                                        <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_2_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-3" style="text-align: left">
-                                        <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_3_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
-                                    </div>
-                                </div>
-                                <hr>
-                            {% endfor %}
-                            <p class="btn btn-info" style="margin: auto" onclick="previewNewArticle()">PREVIEW</p>
-                            <button class="btn btn-primary" form="editArticleForm" style="margin: auto" type="submit">SUBMIT</button>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
