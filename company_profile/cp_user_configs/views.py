@@ -245,6 +245,7 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         else :
             return HttpResponseRedirect(self.index_url)
 
+        data['available_templates'] = Template.objects.all()
         
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
@@ -302,6 +303,7 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         else :
             return HttpResponseRedirect(self.index_url)
 
+        data['available_scheme'] = ColorScheme.objects.all()
         
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
