@@ -21,7 +21,7 @@
                     <div class="col-xs-2 col-sm-2" style="text-align: right; display: flex; flex-direction: column; justify-content: flex-end">
                         <p onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> CHANGE TEMPLATE</p>
                         <p onclick="getNext('/cms/color/edit/{{ configs.color_scheme.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> CHANGE COLOR</p>
-                        <p onclick="window.open('http://{{ site.domain }}/')" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> VIEW SITE</p>
+                        <p onclick="window.open('http://{{ request.get_host }}/')" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> VIEW SITE</p>
                     </div>
                 </div>
                 <hr>
