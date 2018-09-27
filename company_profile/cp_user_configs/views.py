@@ -217,7 +217,7 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = ''
 
     def post(self, request, *args, **kwargs):
-        data = super(CPAsset, self).get(request, args, kwargs)
+        data = super(CPTemplate, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
 
@@ -304,7 +304,7 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = ""
 
     def post(self, request, *args, **kwargs):
-        data = super(CPAsset, self).get(request, args, kwargs)
+        data = super(CPColor, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
 
