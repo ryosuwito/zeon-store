@@ -58,7 +58,7 @@
                                     <div style="width:100%; height:140px; overflow:hidden" ><img src="{{ template.get_sample_image_3_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
                                 </div>
                                 <div class="col-xs-3 col-sm-3" style="text-align: right">
-                                    {% if template.pk != configs.template.pk %}
+                                    {% if template.pk != configs.templates.pk %}
                                     <form id='editArticleForm' method="POST">
                                         <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
                                         <p onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</p>
