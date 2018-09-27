@@ -29,7 +29,6 @@ class PackageGroup(models.Model):
 
     name = models.CharField(db_index=True, max_length=50, blank=True) 
     code = models.PositiveSmallIntegerField(unique=True,choices=TYPE_CHOICES,default=0)
-    activation_code = models.CharField(max_length=8, blank=True)
 
     def __str__(self):
         return self.name
@@ -37,6 +36,7 @@ class PackageGroup(models.Model):
 class Member(models.Model):
     user = models.OneToOneField(User, related_name="user_member", on_delete=models.CASCADE)
     package_group = models.ManyToManyField(PackageGroup, blank=True, related_name="package_group")
+    activation_code = models.CharField(max_length=8, blank=True)
     site = models.OneToOneField(Site, on_delete=models.SET_NULL, null=True)
     def __str__(self):
         return self.user.username
