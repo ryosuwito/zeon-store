@@ -19,9 +19,7 @@
                         <p>Semua konten di bagian ini akan ditampilkan pada halaman home</p>
                     </div>
                     <div class="col-xs-2 col-sm-2">
-                        <a href='javascript:void(0)' onclick="getNext('/cms/asset/edit/{{ configs.brand_assets.id }}/')">
-                            <p class="btn btn-info">EDIT</p>
-                        </a>
+                        <p onclick="getNext('/cms/asset/edit/{{ configs.brand_assets.id }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> CHANGE ASSETS</p>
                     </div>
                 </div>
                 <hr>
@@ -142,12 +140,6 @@
                             <br>
                             
                             {% endif %}
-                        </div>
-                        <div class="col-xs-12 col-sm-12">
-                            <hr>
-                            <a href='javascript:void(0)' onclick="getNext('/cms/asset/edit/{{ configs.brand_assets.id }}/')">
-                                <p class="btn btn-info">EDIT</p>
-                            </a>
                         </div>
                     </div>
 
