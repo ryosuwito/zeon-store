@@ -40,13 +40,3 @@ class IdentityEditForm(forms.ModelForm):
             'company_facebook',
             'company_instagram',
             'company_whatsapp',)
-
-class TemplateEditForm(forms.ModelForm):
-    class Meta:
-        model = Template
-        fields = ('name',)
-
-class ColorEditForm(forms.ModelForm):
-    class Meta:
-        model = ColorScheme
-        fields = ('name','primary_color', 'dark_color', 'accent_color',)

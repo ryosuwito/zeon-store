@@ -64,7 +64,8 @@
                                     {% if scheme.pk != configs.color_scheme.pk %}
                                     <form id='editArticleForm' method="POST">
                                         <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
-                                        <p onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</p>
+                                        <input type="hidden" name="scheme_pk" value="{{ scheme.pk }}">
+                                        <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</button>
                                     </form>
                                     {% endif %}
                                 </div>

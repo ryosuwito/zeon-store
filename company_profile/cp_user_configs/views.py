@@ -10,7 +10,7 @@ from dispatcher.views import ComponentRenderer
 from dispatcher.views import Dispatcher
 
 from .models import UserConfigs
-from .forms import AssetEditForm, TemplateEditForm, ColorEditForm, IdentityEditForm
+from .forms import AssetEditForm, IdentityEditForm
 
 from urllib.parse import urlparse
 
@@ -65,7 +65,7 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
                 if old_asset and not asset.main_photo_1:
                     asset.main_photo_1 = old_asset.main_photo_1
-                    
+
                 if old_asset and not asset.main_photo_2:
                     asset.main_photo_2 = old_asset.main_photo_2
 
@@ -79,7 +79,7 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                     asset.extra_image_3 = old_asset.extra_image_3
 
                 asset.save()
-                
+
             return HttpResponseRedirect(self.index_url)
 
         token = get_token(request)
@@ -126,10 +126,10 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         else :
             return HttpResponseRedirect(self.index_url)
 
-        
+
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                                     
+
         return render(request, self.template, {
                 'form': form,
                 'featured_image': featured_image,
@@ -142,7 +142,7 @@ class CPAsset(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 'asset' : asset,
             }
         )
-        
+
 
 class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
@@ -186,10 +186,10 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         else :
             return HttpResponseRedirect(self.index_url)
 
-        
+
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                                     
+
         return render(request, self.template, {
                 'form': form,
                 'featured_image': featured_image,
@@ -214,7 +214,36 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     edit_main = 'cp_user_configs/component/template/edit_main.html'
     edit_local_script = 'cp_user_configs/component/template/edit_local_script.html'
     index_url = '/cms/template/'
-    form = TemplateEditForm()
+    form = ''
+
+    def post(self, request, *args, **kwargs):
+        data = super(CPAsset, self).get(request, args, kwargs)
+        member = data['member']
+        site = data['site']
+
+        referer = request.META['HTTP_REFERER']
+
+        token = get_token(request)
+        configs = UserConfigs.objects.get(member = member)
+
+        if  kwargs['action'] == 'edit':
+            if request.POST.get('scheme_pk'):
+                try:
+                    user_template = Template.objects.get(pk=kwargs['template_pk'])
+                except:
+                    user_template = ""
+            else:
+                return HttpResponseRedirect(referer)
+
+        if user_template:
+            if '/cms/asset/edit' in referer:
+                configs.templates = user_template
+                configs.save()
+
+            return HttpResponseRedirect(self.index_url)
+
+        return HttpResponseRedirect(referer)
+
 
     def get(self, request, *args, **kwargs):
         user_template = ""
@@ -237,7 +266,7 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         featured_image = ''
         if  kwargs['action'] == 'edit':
-            form = TemplateEditForm(instance=user_template)
+            pass
 
         if kwargs['action'] == 'show_all' or \
             kwargs['action'] == 'edit' :
@@ -246,10 +275,10 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             return HttpResponseRedirect(self.index_url)
 
         data['available_templates'] = Template.objects.all()
-        
+
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                                     
+
         return render(request, self.template, {
                 'form': form,
                 'featured_image': featured_image,
@@ -272,7 +301,35 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     edit_main = 'cp_user_configs/component/color/edit_main.html'
     edit_local_script = 'cp_user_configs/component/color/edit_local_script.html'
     index_url = '/cms/template/'
-    form = ColorEditForm()
+    form = ""
+
+    def post(self, request, *args, **kwargs):
+        data = super(CPAsset, self).get(request, args, kwargs)
+        member = data['member']
+        site = data['site']
+
+        referer = request.META['HTTP_REFERER']
+
+        token = get_token(request)
+        configs = UserConfigs.objects.get(member = member)
+
+        if  kwargs['action'] == 'edit':
+            if request.POST.get('scheme_pk'):
+                try:
+                    scheme = ColorScheme.objects.get(pk=kwargs['scheme_pk'])
+                except:
+                    scheme = ""
+            else:
+                return HttpResponseRedirect(referer)
+
+        if scheme:
+            if '/cms/asset/edit' in referer:
+                configs.color_scheme = scheme
+                configs.save()
+
+            return HttpResponseRedirect(self.index_url)
+
+        return HttpResponseRedirect(referer)
 
     def get(self, request, *args, **kwargs):
         scheme = ""
@@ -294,8 +351,6 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         form = self.form
 
         featured_image = ''
-        if  kwargs['action'] == 'edit':
-            form = ColorEditForm(instance=scheme)
 
         if kwargs['action'] == 'show_all' or \
             kwargs['action'] == 'edit' :
@@ -304,10 +359,10 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             return HttpResponseRedirect(self.index_url)
 
         data['available_scheme'] = ColorScheme.objects.all()
-        
+
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                                     
+
         return render(request, self.template, {
                 'form': form,
                 'featured_image': featured_image,
