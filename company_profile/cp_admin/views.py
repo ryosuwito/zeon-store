@@ -86,7 +86,7 @@ class Index(LoginRequiredMixin, Dispatcher):
         total_article_views = ArticleModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
         total_page_views = ArticleModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
         total_comments = Comment.objects.filter(article__site=site).count()
-        total_comments += Reply.objects.filter(article__site=site).count()
+        total_comments += Reply.objects.filter(comment__article__site=site).count()
         total_visitors = Visitor.objects.filter(site=site).count()
         pages = PageModel.objects.filter(site=site, is_preview=False).order_by('-created_date')
         categories = CategoryModel.objects.filter(site=site).order_by('title')
