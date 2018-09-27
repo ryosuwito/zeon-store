@@ -236,9 +236,8 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 return HttpResponseRedirect(referer)
 
         if user_template:
-            if '/cms/asset/edit' in referer:
-                configs.templates = user_template
-                configs.save()
+            configs.templates = user_template
+            configs.save()
 
             return HttpResponseRedirect(self.index_url)
 
@@ -323,9 +322,8 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 return HttpResponseRedirect(referer)
 
         if scheme:
-            if '/cms/asset/edit' in referer:
-                configs.color_scheme = scheme
-                configs.save()
+            configs.color_scheme = scheme
+            configs.save()
 
             return HttpResponseRedirect(self.index_url)
 
