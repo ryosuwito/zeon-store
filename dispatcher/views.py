@@ -167,6 +167,8 @@ class Page(Dispatcher):
         else:
             page = PageModel.objects.get(slug=kwargs['page_slug'])
 
+        page.page_view += 1
+        page.save()
         template = "company_profile/%s/page.html"%(configs.templates.dir_name)
         return render(request, template, {
             'component': self.component,
