@@ -29,7 +29,11 @@
                         Company Name
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_name }}</p>
+                        {% if configs.brand_identity.company_name %}
+                        <p>: {{ configs.brand_identity.company_name }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -37,7 +41,11 @@
                         Company Tagline
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_tagline }}</p>
+                        {% if configs.brand_identity.company_tagline %}
+                        <p>: {{ configs.brand_identity.company_tagline }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -45,7 +53,11 @@
                         Company Address
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_address }}</p>
+                        {% if configs.brand_identity.company_address %}
+                        <p>: {{ configs.brand_identity.company_address }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -53,7 +65,11 @@
                         Company Email Address
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_email_address }}</p>
+                        {% if configs.brand_identity.company_email_address %}
+                        <p>: {{ configs.brand_identity.company_email_address }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -61,7 +77,11 @@
                         Company Phone Number
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_phone_number  }}</p>
+                        {% if configs.brand_identity.company_phone_number %}
+                        <p>: {{ configs.brand_identity.company_phone_number  }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -69,7 +89,11 @@
                         Company Fax Number
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_fax_number  }}</p>
+                        {% if configs.brand_identity.company_fax_number  %}
+                        <p>: {{ configs.brand_identity.company_fax_number  }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -77,7 +101,11 @@
                         Company Facebook
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_facebook  }}</p>
+                        {% if configs.brand_identity.company_facebook  %}
+                        <p>: {{ configs.brand_identity.company_facebook  }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -85,7 +113,11 @@
                         Company Instagram
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_instagram  }}</p>
+                        {% if configs.brand_identity.company_instagram %}
+                        <p>: {{ configs.brand_identity.company_instagram  }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row" style="margin: 0">
@@ -93,7 +125,11 @@
                         Company Whatsapp
                     </div>
                     <div class="col-xs-12 col-sm-9" style="padding:0;text-align: left">
-                        <p>{{ configs.brand_identity.company_whatsapp  }}</p>
+                        {% if configs.brand_identity.company_whatsapp %}
+                        <p>: {{ configs.brand_identity.company_whatsapp  }}</p>
+                        {% else %}
+                        <p>:  - </p>
+                        {% endif %}
                     </div>
                 </div>
                 </div>
