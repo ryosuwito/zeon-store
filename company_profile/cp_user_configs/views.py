@@ -159,7 +159,7 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
     def get(self, request, *args, **kwargs):
         identity = ""
-        if  kwargs['action'] == 'delete' or kwargs['action'] == 'edit':
+        if kwargs['action'] == 'edit':
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
             else :
@@ -213,13 +213,54 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     index_local_script = 'cp_user_configs/component/template/local_script.html'
     edit_main = 'cp_user_configs/component/template/edit_main.html'
     edit_local_script = 'cp_user_configs/component/template/edit_local_script.html'
-    index_url = '/cms/'
+    index_url = '/cms/template/'
     form = TemplateEditForm()
 
     def get(self, request, *args, **kwargs):
-        action = kwargs['action']
-        pk = kwargs['pk']
-        return super(CPTemplate, self).get(request, args, action=action, pk=pk)
+        user_template = ""
+        if kwargs['action'] == 'edit':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                try:
+                    user_template = Template.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
+
+        method = request.GET.get('method', '')
+        data = super(CPTemplate, self).get(request, args, kwargs)
+        token = get_token(request)
+        member = data['member']
+        configs = UserConfigs.objects.get(member = member)
+        site = data['site']
+        form = self.form
+
+        featured_image = ''
+        if  kwargs['action'] == 'edit':
+            form = TemplateEditForm(instance=user_template)
+
+        if kwargs['action'] == 'show_all' or \
+            kwargs['action'] == 'edit' :
+            self.set_component(kwargs)
+        else :
+            return HttpResponseRedirect(self.index_url)
+
+        
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
+                                     
+        return render(request, self.template, {
+                'form': form,
+                'featured_image': featured_image,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component,
+                'user_template' : user_template,
+            }
+        )
 
 class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
@@ -229,12 +270,53 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     component['header'] =  'cp_admin/component/index_header.html'
     edit_main = 'cp_user_configs/component/color/edit_main.html'
     edit_local_script = 'cp_user_configs/component/color/edit_local_script.html'
-    index_url = '/cms/'
+    index_url = '/cms/template/'
     form = ColorEditForm()
 
     def get(self, request, *args, **kwargs):
-        action = kwargs['action']
-        pk = kwargs['pk']
-        return super(CPColor, self).get(request, args, action=action, pk=pk)
+        scheme = ""
+        if kwargs['action'] == 'edit':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                try:
+                    scheme = ColorScheme.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
+
+        method = request.GET.get('method', '')
+        data = super(CPColor, self).get(request, args, kwargs)
+        token = get_token(request)
+        member = data['member']
+        configs = UserConfigs.objects.get(member = member)
+        site = data['site']
+        form = self.form
+
+        featured_image = ''
+        if  kwargs['action'] == 'edit':
+            form = ColorEditForm(instance=scheme)
+
+        if kwargs['action'] == 'show_all' or \
+            kwargs['action'] == 'edit' :
+            self.set_component(kwargs)
+        else :
+            return HttpResponseRedirect(self.index_url)
+
+        
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
+                                     
+        return render(request, self.template, {
+                'form': form,
+                'featured_image': featured_image,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component,
+                'scheme' : scheme,
+            }
+        )
 
 
