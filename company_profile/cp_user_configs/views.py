@@ -158,7 +158,7 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = IdentityEditForm()
 
     def post(self, request, *args, **kwargs):
-        data = super(CPTemplate, self).get(request, args, kwargs)
+        data = super(CPIdentity, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
 
@@ -174,7 +174,7 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         if self.form.is_valid():
             identity = self.form.save(commit=False)
             identity.save()
-            
+
             return HttpResponseRedirect(self.index_url)
 
         return HttpResponseRedirect(referer)
