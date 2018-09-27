@@ -224,6 +224,7 @@ class Comment(Dispatcher):
         if visitor_form.is_valid() and comment_form.is_valid():
             visitor_form_data = visitor_form.cleaned_data
             visitor = VisitorModel.objects.get_or_create(email=visitor_form_data['email'],
+                    site=site,
                     name=visitor_form_data['name'])[0]
             comment_form_data = comment_form.cleaned_data
             comment = CommentModel.objects.create(visitor=visitor,
