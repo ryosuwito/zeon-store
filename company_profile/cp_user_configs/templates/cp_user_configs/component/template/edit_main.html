@@ -31,46 +31,32 @@
             <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
             <div class="row">
                 <!-- column -->
-                <div class="col-xs-12 col-sm-9">
+                <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <h1>Add New Article</h1>
+
+                            <div class="row" style="margin: 0">
+                                <div class="col-xs-10 col-sm-10" style="text-align: left">
+                                    <h3>Template </h3>
+                                </div>
+                            </div>
                             <hr>
-                            {% csrf_token %}
-                            <h4>{{ form.title.label }}</h4>
-                            {{ form.title }}
-                            <br>
-                            <br>
-                            <h4>{{ form.content.label }}</h4>
-                            {{ form.content }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>{{ form.tags.label }}</h6>
-                            {{ form.tags }}
-                            <h6>{{ form.category.label }}</h6>
-                            {{ form.category }}
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>{{ form.published_date }}  {{ form.published_date.label }}</h6>
-                            <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
-                            <h6>{{ form.is_featured }}  {{ form.is_featured.label }}</h6>
-                            <hr>
-                            <h6>{{ form.featured_image.label }}</h6>
-                            {% if featured_image %}
-                            <img src="{{ featured_image }}" width="100%; height:auto">
-                            <hr>
-                            {% endif %}
-                            {{ form.featured_image }}
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body" style="display: flex; justify-content: center">
+                            <div class="row" style="margin: 0">
+                                <div class="col-xs-12 col-sm-12" style="text-align: left">
+                                    <h6>Template Saat Ini : {{ configs.templates.name | title }}</h6>
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 0">
+                                <div class="col-xs-12 col-sm-4" style="text-align: left">
+                                    <div style="width:100%; height:240px; overflow:hidden" ><img src="{{ configs.templates.get_sample_image_1_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="text-align: left">
+                                    <div style="width:100%; height:240px; overflow:hidden" ><img src="{{ configs.templates.get_sample_image_2_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4" style="text-align: left">
+                                    <div style="width:100%; height:240px; overflow:hidden" ><img src="{{ configs.templates.get_sample_image_3_url }}" style="object-fit:cover; width:100%;height:100%" ></div>
+                                </div>
+                            </div>
                             <p class="btn btn-info" style="margin: auto" onclick="previewNewArticle()">PREVIEW</p>
                             <button class="btn btn-primary" form="editArticleForm" style="margin: auto" type="submit">SUBMIT</button>
                         </div>
