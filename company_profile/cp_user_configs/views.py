@@ -227,9 +227,9 @@ class CPTemplate(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         configs = UserConfigs.objects.get(member = member)
 
         if  kwargs['action'] == 'edit':
-            if request.POST.get('scheme_pk'):
+            if request.POST.get('template_pk'):
                 try:
-                    user_template = Template.objects.get(pk=kwargs['template_pk'])
+                    user_template = Template.objects.get(pk=request.POST.get('template_pk'))
                 except:
                     user_template = ""
             else:
@@ -316,7 +316,7 @@ class CPColor(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         if  kwargs['action'] == 'edit':
             if request.POST.get('scheme_pk'):
                 try:
-                    scheme = ColorScheme.objects.get(pk=kwargs['scheme_pk'])
+                    scheme = ColorScheme.objects.get(pk=request.POST.get('scheme_pk'))
                 except:
                     scheme = ""
             else:
