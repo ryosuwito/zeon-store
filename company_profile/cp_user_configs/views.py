@@ -157,24 +157,43 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     index_url = '/cms/asset/'
     form = IdentityEditForm()
 
+    def post(self, request, *args, **kwargs):
+        data = super(CPTemplate, self).get(request, args, kwargs)
+        member = data['member']
+        site = data['site']
+
+        referer = request.META['HTTP_REFERER']
+
+        token = get_token(request)
+        configs = UserConfigs.objects.get(member = member)
+
+        if  kwargs['action'] == 'edit':
+            identity = configs.brand_identity
+            self.form = IdentityEditForm(request.POST, instance=identity)
+
+        if self.form.is_valid():
+            identity = self.form.save(commit=False)
+            identity.save()
+            
+            return HttpResponseRedirect(self.index_url)
+
+        return HttpResponseRedirect(referer)
+
     def get(self, request, *args, **kwargs):
         identity = ""
-        if kwargs['action'] == 'edit':
-            if kwargs['pk'] == 'none':
-                return HttpResponseRedirect(self.index_url)
-            else :
-                try:
-                    identity = BrandIdentity.objects.get(pk=kwargs['pk'])
-                except:
-                    return HttpResponseRedirect(self.index_url)
-
-        method = request.GET.get('method', '')
         data = super(CPIdentity, self).get(request, args, kwargs)
+        method = request.GET.get('method', '')
         token = get_token(request)
         member = data['member']
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
         form = self.form
+        if kwargs['action'] == 'edit':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                identity = configs.brand_identity
+
 
         featured_image = ''
         if  kwargs['action'] == 'edit':
