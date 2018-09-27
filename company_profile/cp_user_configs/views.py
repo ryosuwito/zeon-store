@@ -154,7 +154,7 @@ class CPIdentity(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     index_local_script = 'cp_user_configs/component/identity/local_script.html'
     edit_main = 'cp_user_configs/component/identity/edit_main.html'
     edit_local_script = 'cp_user_configs/component/identity/edit_local_script.html'
-    index_url = '/cms/asset/'
+    index_url = '/cms/identity/'
     form = IdentityEditForm()
 
     def post(self, request, *args, **kwargs):
