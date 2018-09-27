@@ -3,8 +3,18 @@ from django.db import models
 class Template(models.Model):
     name = models.CharField(max_length=150, blank=True)
     dir_name = models.CharField(max_length=150, blank=True)
+    sample_image_1 = models.ImageField(upload_to = 'cp/sample_image', blank=True, null=True)
+    sample_image_2 = models.ImageField(upload_to = 'cp/sample_image', blank=True, null=True)
+    sample_image_3 = models.ImageField(upload_to = 'cp/sample_image', blank=True, null=True)
     def __str__(self):
         return self.name.title()
+
+    def get_sample_image_1_url(self):
+        return ("/media/%s"%self.sample_image_1)
+    def get_sample_image_2_url(self):
+        return ("/media/%s"%self.sample_image_2)
+    def get_sample_image_3_url(self):
+        return ("/media/%s"%self.sample_image_3)
 
     class Meta:
         verbose_name_plural = "Templates"
