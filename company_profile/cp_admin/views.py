@@ -84,7 +84,7 @@ class Index(LoginRequiredMixin, Dispatcher):
         self.component['local_script'] = 'cp_admin/component/index_local_script.html'
         articles = ArticleModel.objects.filter(site=site, is_preview=False).order_by('-created_date')
         total_article_views = ArticleModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
-        total_page_views = ArticleModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
+        total_page_views = PageModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
         total_comments = Comment.objects.filter(article__site=site).count()
         total_comments += Reply.objects.filter(comment__article__site=site).count()
         total_visitors = Visitor.objects.filter(site=site).count()
