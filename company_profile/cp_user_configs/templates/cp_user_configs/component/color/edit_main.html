@@ -27,50 +27,53 @@
     {% endif %}
     </div>
     <div class="col-sm-12">
-        <form id='editArticleForm' method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
-            <div class="row">
-                <!-- column -->
-                <div class="col-xs-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
+        <div class="row">
+            <!-- column -->
+            <div class="col-xs-12 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="text-align: left">
+                                <h3>Color Sheme </h3>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-12 col-sm-12" style="text-align: left">
+                                <h6>Skema Warna Yang Tersedia Saat Ini : {{ data.available_schemes.count }}</h6>
+                            </div>
+                        </div>
+                        {% for scheme in data.available_scheme %}
                             <div class="row" style="margin: 0">
                                 <div class="col-xs-12 col-sm-12" style="text-align: left">
-                                    <h3>Color Sheme </h3>
+                                    <p>{{ scheme.name | title }}</p>
+                                </div>
+                                <div class="col-xs-2 col-sm-1" style="text-align: left">
+                                    <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.primary_color }}"></div>
+                                    <p>Primary Color</p>
+                                </div>
+                                <div class="col-xs-2 col-sm-1" style="text-align: left">
+                                    <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.dark_color }}"></div>
+                                    <p>Dark Color</p>
+                                </div>
+                                <div class="col-xs-2 col-sm-1" style="text-align: left">
+                                    <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.accent_color }}"></div>
+                                    <p>Accent Color</p>
+                                </div>
+                                <div class="col-xs-6 col-sm-9" style="text-align: right">
+                                    {% if scheme.pk != configs.color_scheme.pk %}
+                                    <form id='editArticleForm' method="POST">
+                                        <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
+                                        <p onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</p>
+                                    </form>
+                                    {% endif %}
                                 </div>
                             </div>
                             <hr>
-                            <div class="row" style="margin: 0">
-                                <div class="col-xs-12 col-sm-12" style="text-align: left">
-                                    <h6>Skema Warna Yang Tersedia Saat Ini : {{ data.available_schemes.count }}</h6>
-                                </div>
-                            </div>
-                            {% for scheme in data.available_scheme %}
-                                <div class="row" style="margin: 0">
-                                    <div class="col-xs-12 col-sm-12" style="text-align: left">
-                                        <p>{{ scheme.name | title }}</p>
-                                    </div>
-                                    <div class="col-xs-2 col-sm-1" style="text-align: left">
-                                        <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.primary_color }}"></div>
-                                        <p>Primary Color</p>
-                                    </div>
-                                    <div class="col-xs-2 col-sm-1" style="text-align: left">
-                                        <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.dark_color }}"></div>
-                                        <p>Dark Color</p>
-                                    </div>
-                                    <div class="col-xs-2 col-sm-1" style="text-align: left">
-                                        <div style="width:60px; height:60px; overflow:hidden; display: block; background-color: #{{ scheme.accent_color }}"></div>
-                                        <p>Accent Color</p>
-                                    </div>
-                                </div>
-                                <hr>
-                            {% endfor %}
-                            <p class="btn btn-info" style="margin: auto" onclick="previewNewArticle()">PREVIEW</p>
-                            <button class="btn btn-primary" form="editArticleForm" style="margin: auto" type="submit">SUBMIT</button>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
