@@ -29,6 +29,7 @@ class PackageGroup(models.Model):
 
     name = models.CharField(db_index=True, max_length=50, blank=True) 
     code = models.PositiveSmallIntegerField(unique=True,choices=TYPE_CHOICES,default=0)
+    activation_code = models.CharField(max_length=8, blank=True)
 
     def __str__(self):
         return self.name
