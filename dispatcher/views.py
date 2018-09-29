@@ -280,7 +280,6 @@ class Comment(Dispatcher):
 
     def get_comment_and_reply(self, article):
         comments = CommentModel.objects.filter(
-                    site=site,
                     is_approved=True,
                     article=article)
         return [self.format_comment(comment) for comment in comments]
