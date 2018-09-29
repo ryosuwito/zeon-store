@@ -123,7 +123,6 @@ class Article(Dispatcher):
         self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True)
         article.page_view += 1
         article.save()
         recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
