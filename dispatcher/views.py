@@ -276,6 +276,7 @@ class Comment(Dispatcher):
             'created_date' : comment.created_date.strftime("%d/%B/%Y %H:%m"),
             'visitor': comment.visitor.name, 
             'content': comment.content,
+            'is_approved': comment.is_approved,
             'reply' : self.format_replies(comment),
         }
         
