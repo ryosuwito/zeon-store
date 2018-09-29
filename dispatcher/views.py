@@ -76,6 +76,7 @@ class Blog(Dispatcher):
         min_page = 0
         articles = ''
         if article_list and len(article_list) > 1:
+            is_paginated = True
             try:
                 paginator = Paginator(article_list,1)
                 page = request.GET.get('page', 1)
@@ -91,6 +92,7 @@ class Blog(Dispatcher):
             except:
                 pass
         else:
+            is_paginated = False
             articles = article_list
                 
         recent_articles = articles[:3]
@@ -98,6 +100,7 @@ class Blog(Dispatcher):
             'articles': articles,
             'max_page':max_page,
             'min_page':min_page,
+            'is_paginated' : is_paginated,
             'recent_articles': recent_articles, 
             'component': self.component,
             'configs':configs,
