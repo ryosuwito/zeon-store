@@ -149,6 +149,8 @@ class Article(Dispatcher):
 
         if msg == 'add':
             message = 'Komentar Anda akan tampil setelah disetujui Admin'
+        else:
+            message = ''
 
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
