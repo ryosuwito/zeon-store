@@ -1,4 +1,5 @@
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
