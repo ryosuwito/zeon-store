@@ -107,11 +107,14 @@ class Article(Dispatcher):
         reply_form = AddReplyForm()
         comment = Comment()
         comment_and_reply = comment.get_comment_and_reply(article)
-
+        article.page_view += 1
+        article.save()
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
             return render(request, template, 
                 {'article': article, 
+                'recent_articles': recent_articles, 
                 'comments':comment_and_reply,
                 'visitor_form': visitor_form,
                 'comment_form': comment_form,
@@ -123,9 +126,6 @@ class Article(Dispatcher):
         self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
-        article.page_view += 1
-        article.save()
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
         return render(request, template, {
             'article': article, 
             'recent_articles': recent_articles, 
