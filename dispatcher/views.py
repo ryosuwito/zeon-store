@@ -69,10 +69,32 @@ class Blog(Dispatcher):
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
-        articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')
+        article_list = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')
+
+        max_page = 4
+        min_page = 0
+        articles = ''
+        if article_list:
+            try:
+                paginator = Paginator(article_list,6)
+                page = request.GET.get('page', 1)
+                try:
+                    articles = paginator.page(page)
+                except PageNotAnInteger:
+                    articles = paginator.page(1)
+                except EmptyPage:
+                    articles = paginator.page(paginator.num_pages)
+
+                max_page = articles.number + 4
+                min_page = articles.number - 4
+            except:
+                pass
+                
         recent_articles = articles[:3]
         return render(request, template, {
             'articles': articles,
+            'max_page':max_page,
+            'min_page':min_page,
             'recent_articles': recent_articles, 
             'component': self.component,
             'configs':configs,
