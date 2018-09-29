@@ -144,10 +144,17 @@ class Article(Dispatcher):
         article.page_view += 1
         article.save()
         recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('-created_date')[:3]
+
+        msg = request.GET.get('msg', 'none')
+
+        if msg == 'add':
+            message = 'Komentar Anda akan tampil setelah disetujui Admin'
+
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
             return render(request, template, 
                 {'article': article, 
+                'message': message,
                 'recent_articles': recent_articles, 
                 'comments':comment_and_reply,
                 'visitor_form': visitor_form,
@@ -162,6 +169,7 @@ class Article(Dispatcher):
         template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
         return render(request, template, {
             'article': article, 
+            'message': message,
             'recent_articles': recent_articles, 
             'comments':comment_and_reply,
             'visitor_form': visitor_form,
@@ -265,7 +273,7 @@ class Comment(Dispatcher):
                     content=comment_form_data['content'],
                     article=article)
 
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER')+'?msg=add')
     
 
     def get_comment_and_reply(self, article):
