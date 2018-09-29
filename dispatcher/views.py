@@ -32,8 +32,6 @@ class Dispatcher(View):
 
 class Index(Dispatcher):
     def get(self, request, *args, **kwargs):
-        if get_current_site(request).domain == 'sidomo.com':
-           return render(request, "zeon_backend/templates/index-3.html")
         data = super(Index, self).get(request, args, kwargs)
         configs, is_created = UserConfigs.objects.get_or_create(member = data['member'])
         if is_created:
@@ -42,6 +40,14 @@ class Index(Dispatcher):
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
+        if site.domain == 'sidomo.com':
+           recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('-created_date')[:3]
+           return render(request, 
+                "zeon_backend/templates/index-3.html",
+                {
+                    'recent_article':recent_articles
+                }
+           )
         self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
         template = "company_profile/%s/index.html"%(configs.templates.dir_name)
@@ -70,7 +76,7 @@ class Blog(Dispatcher):
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
-        article_list = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')
+        article_list = ArticleModel.objects.filter(site=site, is_published=True).order_by('-created_date')
 
         max_page = 4
         min_page = 0
@@ -137,7 +143,7 @@ class Article(Dispatcher):
         comment_and_reply = comment.get_comment_and_reply(article)
         article.page_view += 1
         article.save()
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('created_date')[:3]
+        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('-created_date')[:3]
         if site.domain == 'sidomo.com':
             template = "zeon_backend/templates/blog-post.html"
             return render(request, template, 
