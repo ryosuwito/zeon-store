@@ -75,7 +75,7 @@ class Blog(Dispatcher):
         max_page = 4
         min_page = 0
         articles = ''
-        if article_list:
+        if article_list and len(article_list) > 6:
             try:
                 paginator = Paginator(article_list,6)
                 page = request.GET.get('page', 1)
@@ -90,6 +90,8 @@ class Blog(Dispatcher):
                 min_page = articles.number - 4
             except:
                 pass
+        else:
+            articles = article_list
                 
         recent_articles = articles[:3]
         return render(request, template, {
