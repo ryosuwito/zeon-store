@@ -201,11 +201,11 @@ class Page(Dispatcher):
                 return render(request, "zeon_backend/templates/coming-soon.html")
 
             elif kwargs['page_slug'] == 'website-builder':
-                return render(request, "zeon_backend/templates/coming-soon.html")
+                return render(request, "zeon_backend/templates/website-builder.html")
             elif kwargs['page_slug'] == 'android-builder':
-                return render(request, "zeon_backend/templates/coming-soon.html")
+                return render(request, "zeon_backend/templates/android-builder.html")
             elif kwargs['page_slug'] == 'ios-builder':
-                return render(request, "zeon_backend/templates/coming-soon.html")
+                return render(request, "zeon_backend/templates/ios-builder.html")
 
             elif kwargs['page_slug'] == 'harga':
                 return render(request, "zeon_backend/templates/pricing-tables.html")
