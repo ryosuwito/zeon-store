@@ -190,14 +190,50 @@ class Page(Dispatcher):
         configs = UserConfigs.objects.get(member = data['member'])
         site = data['site']
         if site.domain == 'sidomo.com':
-            if kwargs['page_slug'] == 'contact':
+            if kwargs['page_slug'] == 'hubungi':
                 return render(request, "zeon_backend/templates/contact.html")
-            elif kwargs['page_slug'] == 'about':
+            elif kwargs['page_slug'] == 'profil':
                 return render(request, "zeon_backend/templates/about.html")
-            elif kwargs['page_slug'] == 'services':
+                
+            elif kwargs['page_slug'] == 'marketing-plan':
                 return render(request, "zeon_backend/templates/services.html")
-            elif kwargs['page_slug'] == 'pricing':
+            elif kwargs['page_slug'] == 'partner':
+
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'website-builder':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'android-builder':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'ios-builder':
+                return render(request, "zeon_backend/templates/services.html")
+
+            elif kwargs['page_slug'] == 'harga':
                 return render(request, "zeon_backend/templates/pricing-tables.html")
+
+            elif kwargs['page_slug'] == 'galeri-event':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'testimoni':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'kebijakan-privasi':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'syarat-ketentuan':
+                return render(request, "zeon_backend/templates/services.html")
+
+            elif kwargs['page_slug'] == 'faq':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'stockist-cabang':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'metode-pembayaran':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'karir':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'developer-club':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'kritik-saran':
+                return render(request, "zeon_backend/templates/services.html")
+            elif kwargs['page_slug'] == 'report':
+                return render(request, "zeon_backend/templates/services.html")
+                
             else:
                 return render(request, "zeon_backend/templates/index-3.html")
         assets = configs.brand_assets
