@@ -196,7 +196,7 @@ class Page(Dispatcher):
                 return render(request, "zeon_backend/templates/about.html")
                 
             elif kwargs['page_slug'] == 'marketing-plan':
-                return render(request, "zeon_backend/templates/coming-soon.html")
+                return render(request, "zeon_backend/templates/marketing-plan.html")
             elif kwargs['page_slug'] == 'partner':
                 return render(request, "zeon_backend/templates/coming-soon.html")
 
