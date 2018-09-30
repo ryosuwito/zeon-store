@@ -193,7 +193,7 @@ class Page(Dispatcher):
             if kwargs['page_slug'] == 'hubungi':
                 return render(request, "zeon_backend/templates/contact.html")
             elif kwargs['page_slug'] == 'profil':
-                return render(request, "zeon_backend/templates/coming-soon.html")
+                return render(request, "zeon_backend/templates/about.html")
                 
             elif kwargs['page_slug'] == 'marketing-plan':
                 return render(request, "zeon_backend/templates/coming-soon.html")
