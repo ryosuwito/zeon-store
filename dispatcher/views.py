@@ -233,9 +233,9 @@ class Page(Dispatcher):
                 return render(request, "zeon_backend/templates/coming-soon.html")
             elif kwargs['page_slug'] == 'report':
                 return render(request, "zeon_backend/templates/coming-soon.html")
+            elif:
+                return render(request, "zeon_backend/templates/404.html")
 
-            else:
-                return render(request, "zeon_backend/templates/index-3.html")
         assets = configs.brand_assets
         scheme = configs.color_scheme
         identity = configs.brand_identity
