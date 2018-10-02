@@ -396,9 +396,9 @@
                                         <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/page/add/')"><i class="fa fa-clone m-r-5 m-l-5"></i> Page</a>
                                         <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/category/add/')"><i class="fa fa-object-ungroup m-r-5 m-l-5"></i> Category</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Template</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Identity</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Brand Assets</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Template</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/identity/edit/{{ configs.brand_identity.pk }}/')"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Identity</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" onclick="getNext('/cms/asset/edit/{{ configs.brand_assets.pk }}/')"><i class="fa fa-edit m-r-5 m-l-5"></i> Change Brand Assets</a>
                                         {% endif %}
                                     </div>
                                 </div>
