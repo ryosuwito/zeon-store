@@ -15,6 +15,7 @@ class PageAddForm(forms.ModelForm):
         self.fields['content'].widget = CKEditorUploadingWidget()
         self.fields['meta_keyword'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['meta_keyword'].help_text = 'Bisa lebih dari 1, pisahkan dengan koma ( , )'
+        self.fields['meta_keyword'].label = 'Meta Keyword'
         self.fields['meta_keyword'].required = False
     class Meta:
         model = PageModel
