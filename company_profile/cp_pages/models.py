@@ -5,6 +5,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.dispatch import receiver
 
+from taggit_selectize.managers import TaggableManager
 from ckeditor.fields import RichTextField
 
 from membership.models import Member
@@ -29,6 +30,8 @@ class PageModel(models.Model):
     banner_image_1 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     banner_image_2 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     banner_image_3 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
+    meta_description = models.CharField(max_length=1000, default="", blank=True)
+    meta_keyword = TaggableManager(blank=True)
     page_view = models.IntegerField(default=0)
 
     def __str__(self):
