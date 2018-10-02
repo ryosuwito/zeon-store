@@ -49,7 +49,7 @@ class CPPage(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             page = self.form.save(commit=False)
             page.site = site
             page.save()
-            
+            self.form.save_m2m()
 
             if kwargs['action'] == 'preview':
                 referer = request.META['HTTP_REFERER']
