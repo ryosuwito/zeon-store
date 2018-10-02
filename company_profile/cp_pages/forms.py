@@ -6,8 +6,8 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class PageAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-         super(PageAddForm, self).__init__(*args, **kwargs)
-         self.fields['title'].widget.attrs['style'] = 'width:100%; padding:10px'
+        super(PageAddForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['meta_description'].widget = forms.Textarea() 
         self.fields['meta_description'].widget.attrs['rows'] = '3'
         self.fields['meta_description'].widget.attrs['style'] = 'width:100%; padding:10px'
