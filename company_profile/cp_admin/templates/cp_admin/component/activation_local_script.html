@@ -1,17 +1,17 @@
 
 <script>
     function formLogin(){
-    var username = $("#id_username").val();
-    var password = $("#id_password").val();
-    $('#formTitle').html('<h2>Trying to login as <br>' + username + "</h2>");
+    var user_id = $("#id_user_id").val();
+    var access_key = $("#id_access_key").val();
+    $('#formTitle').html('<h2>Mencoba memverifikasi akun <br>' + user_id + "</h2>");
     $('#formContainer').html('');
     $('#gearContainer').removeClass('hidden');
     $('#gearContainer').addClass('show');
     $.post($("loginForm").attr("action"),
         {
             csrfmiddlewaretoken:"{{token}}",
-            username:username,
-            password:password,
+            user_id:user_id,
+            access_key:access_key,
         },
             //or your custom data either as object {foo: "bar", ...} or foo=bar&...
             function (data, status){    

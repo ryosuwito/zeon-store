@@ -49,20 +49,15 @@
                             <form method="post" id="loginForm">
                                 {% csrf_token %}
                                 <div class="col-xs-12" style="padding: 0 40px">
-                                    {{ form.username.label }}
-                                    {{ form.username }}
+                                    {{ form.user_id.label }}
+                                    {{ form.user_id }}
                                 </div>
                                 <div class="col-xs-12" style="padding: 0 40px">
-                                    {{ form.password.label }}
-                                    {{ form.password }}
+                                    {{ form.access_key.label }}
+                                    {{ form.access_key }}
                                 </div>
                                 <div class="col-xs-12" style="margin: 20px 0 0 0; padding: 0 40px">
-                                    <p onclick="formLogin();" style="width: 100%;" class="btn btn-primary">Masuk</p>
-                                </div>
-                                <div class="col-xs-12" style="margin: 0 0 20px 0; padding: 0 40px">
-                                    <span onclick="forgot();" style="width: 100%; cursor:pointer" class="btn-link text-primary">Lupa Password</span>
-                                    <hr>
-                                    <span onclick="activation();" style="width: 100%; cursor:pointer" class="btn-link text-primary">Aktivasi Akun</span>
+                                    <p onclick="formLogin();" style="width: 100%;" class="btn btn-primary">Aktifkan</p>
                                 </div>
                             </form>
                         </div>
