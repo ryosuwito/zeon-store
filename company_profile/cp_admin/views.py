@@ -33,6 +33,10 @@ class Activation(Dispatcher):
     template = "cp_admin/index.html"
     form = CmsActivationForm()
     def get(self, request, *args, **kwargs):
+        user_id = request.GET.get('id', '')
+        access_key = request.GET.get('access_key', '')
+        if user_id and access_key:
+            self.form = CmsActivationForm(initial={'user_id': user_id, 'access_key':access_key})
         code = request.GET.get('code', 200)
         token = get_token(request)
         data = super(Activation, self).get(request, args, kwargs)
