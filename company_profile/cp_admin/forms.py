@@ -8,3 +8,8 @@ class CmsLoginForm(forms.Form):
         "type": "password"
     }
     password = forms.CharField(label='Password :', widget=forms.PasswordInput(attrs=attrs))
+
+
+class CmsActivationForm(forms.Form):
+    user_id = forms.CharField(label='User ID:', max_length=150)
+    access_key = forms.CharField(label='Access Key :')

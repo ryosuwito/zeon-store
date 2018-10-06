@@ -1,0 +1,38 @@
+
+<script>
+    function formLogin(){
+    var username = $("#id_username").val();
+    var password = $("#id_password").val();
+    $('#formTitle').html('<h2>Trying to login as <br>' + username + "</h2>");
+    $('#formContainer').html('');
+    $('#gearContainer').removeClass('hidden');
+    $('#gearContainer').addClass('show');
+    $.post($("loginForm").attr("action"),
+        {
+            csrfmiddlewaretoken:"{{token}}",
+            username:username,
+            password:password,
+        },
+            //or your custom data either as object {foo: "bar", ...} or foo=bar&...
+            function (data, status){    
+                if(status=='success'){    
+                    $('#formTitle').html('<h1 class="success">Login Success</h1>');
+                    $('#gearContainer').removeClass('show');
+                    $('#gearContainer').addClass('hidden');
+                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Wait a moment, you'll be redirected to dashboard</p>");
+                    setTimeout(function(){
+                       window.open(data['redirect_url'], '_self');
+                    }, 5000);
+                }
+                },
+        ).fail(function(xhr) {
+            if(xhr.status == 403){
+                window.open("{% url 'cms:login' %}?code=403", "_self");
+            }else if(xhr.status == 404){
+                window.open("{% url 'cms:login' %}?code=404", "_self");
+            }else if(xhr.status == 500){
+                window.open("{% url 'cms:login' %}?code=500", "_self");
+            }
+        });
+    }
+</script>

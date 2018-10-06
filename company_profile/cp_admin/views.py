@@ -20,12 +20,34 @@ from company_profile.cp_user_configs.views import CPAsset, CPIdentity, CPTemplat
 from company_profile.cp_comment.views import CPComment, CPReply
 from company_profile.cp_comment.models import Comment, Reply, Visitor
 
-from .forms import CmsLoginForm
+from .forms import CmsLoginForm, CmsActivationForm
 
 class Logout(Dispatcher):
     def get(self, request, *args, **kwargs):
         logout(request)
         return HttpResponseRedirect(reverse('cms:login'))
+    def post(self, request, *args, **kwargs):
+        pass
+
+class Activation(Dispatcher):
+    template = "cp_admin/index.html"
+    form = CmsActivationForm()
+    def get(self, request, *args, **kwargs):
+        code = request.GET.get('code', 200)
+        token = get_token(request)
+        data = super(Activation, self).get(request, args, kwargs)
+        configs = UserConfigs.objects.get(member = data['member'])
+        self.component['base']='cp_admin/component/activation_base.html'
+        self.component['header']='cp_admin/component/activation_header.html'
+        self.component['main']='cp_admin/component/activation_main.html'
+        self.component['local_script']='cp_admin/component/activation_local_script.html'
+        return render(request, self.template, {
+                'component': self.component,
+                'form' : self.form,
+                'token' : token,
+                'code' : code
+            }
+        )
     def post(self, request, *args, **kwargs):
         pass
 
