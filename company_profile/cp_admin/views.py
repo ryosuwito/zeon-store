@@ -54,9 +54,9 @@ class Activation(Dispatcher):
         )
     def post(self, request, *args, **kwargs):
         token = get_token(request)
-        self.form = CmsLoginForm(request.POST)
+        self.form = CmsActivationForm(request.POST)
         if self.form.is_valid():
-            data = super(Login, self).get(request, args, kwargs)
+            data = super(Activation, self).get(request, args, kwargs)
             post_data = self.form.cleaned_data
             user_id = post_data.get('user_id')
             access_key = post_data.get('access_key')
@@ -74,6 +74,7 @@ class Activation(Dispatcher):
                 'form' : self.form,
                 'token' : token,
             }
+        )
 
 class Login(Dispatcher):
     template = "cp_admin/index.html"
