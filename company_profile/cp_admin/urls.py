@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import Activation, Login, Index, CmsArticle, Logout, CmsPage, CmsCategory, CmsAsset, CmsIdentity, CmsTemplate, CmsColor, CmsComment, CmsReply
+from .views import Activation, Register, Login, Index, CmsArticle, Logout, CmsPage, CmsCategory, CmsAsset, CmsIdentity, CmsTemplate, CmsColor, CmsComment, CmsReply
 
 app_name = 'cms'
 
@@ -37,5 +37,6 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     path('activation/', Activation.as_view(), name='activation'),
+    path('register/<str:key>/', Register.as_view(), name='register'),
     path('', Index.as_view(), name='index'),
 ]

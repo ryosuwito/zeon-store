@@ -1,0 +1,38 @@
+
+<script>
+    function formLogin(){
+    var user_id = $("#id_user_id").val();
+    var access_key = $("#id_access_key").val();
+    $('#formTitle').html('<h2>Mencoba memverifikasi akun <br>' + user_id + "</h2>");
+    $('#formContainer').html('');
+    $('#gearContainer').removeClass('hidden');
+    $('#gearContainer').addClass('show');
+    $.post($("loginForm").attr("action"),
+        {
+            csrfmiddlewaretoken:"{{token}}",
+            user_id:user_id,
+            access_key:access_key,
+        },
+            //or your custom data either as object {foo: "bar", ...} or foo=bar&...
+            function (data, status){    
+                if(status=='success'){    
+                    $('#formTitle').html('<h1 class="success">Aktivasi Akun Berhasil</h1>');
+                    $('#gearContainer').removeClass('show');
+                    $('#gearContainer').addClass('hidden');
+                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke formulir pendaftaran.</p>");
+                    setTimeout(function(){
+                       window.open(data['redirect_url'], '_self');
+                    }, 5000);
+                }
+                },
+        ).fail(function(xhr) {
+            if(xhr.status == 403){
+                window.open("{% url 'cms:activation' %}?code=403", "_self");
+            }else if(xhr.status == 404){
+                window.open("{% url 'cms:activation' %}?code=404", "_self");
+            }else if(xhr.status == 500){
+                window.open("{% url 'cms:activation' %}?code=500", "_self");
+            }
+        });
+    }
+</script>

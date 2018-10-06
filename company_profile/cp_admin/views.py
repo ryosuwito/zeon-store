@@ -1,11 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.sites.models import Site
 from django.http import HttpResponseRedirect, HttpResponseForbidden, JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
 from django.shortcuts import render
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.db.models import Sum
+from django.utils.crypto import get_random_string
 
 import time
 from dispatcher.views import Dispatcher
@@ -20,7 +23,9 @@ from company_profile.cp_user_configs.views import CPAsset, CPIdentity, CPTemplat
 from company_profile.cp_comment.views import CPComment, CPReply
 from company_profile.cp_comment.models import Comment, Reply, Visitor
 
-from .forms import CmsLoginForm, CmsActivationForm
+from membership.models import Member, PackageGroup
+
+from .forms import CmsLoginForm, CmsActivationForm, CmsRegisterForm
 
 class Logout(Dispatcher):
     def get(self, request, *args, **kwargs):
@@ -60,15 +65,113 @@ class Activation(Dispatcher):
             post_data = self.form.cleaned_data
             user_id = post_data.get('user_id')
             access_key = post_data.get('access_key')
+
+            random_string = get_random_string(10, allowed_chars='12345677890SIDOM10')
+            while User.objects.filter(username = random_string).exists():
+               random_string = get_random_string(10, allowed_chars='12345677890SIDOM10')
+
+            user = User.objects.create(username=random_string, 
+                password=get_random_string(10, allowed_chars='12345677890SIDOM10'),
+                )
+            if user:
+                package_group = PackageGroup.objects.all()[0]
+                member = Member.objects.create(user=user, 
+                sidomo_user_id = user_id,
+                activation_code=access_key,
+                package_group=package_group)
+
             if request.user.is_authenticated:
                 return  HttpResponse(status=403)
 
-            return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
+            return JsonResponse({'new_token': get_token(request), 
+                'redirect_url':reverse('cms:register', kwargs={'key':access_key})}, status=200)
         
         self.component['base']='cp_admin/component/activation_base.html'
         self.component['header']='cp_admin/component/activation_header.html'
         self.component['main']='cp_admin/component/activation_main.html'
         self.component['local_script']='cp_admin/component/activation_local_script.html'
+        return render(request, self.template, {
+                'component': self.component,
+                'form' : self.form,
+                'token' : token,
+            }
+        )
+
+class Register(Dispatcher):
+    template = "cp_admin/index.html"
+    form = CmsRegisterForm()
+    def get(self, request, *args, **kwargs):
+        access_key = kwargs['key']
+        if access_key:
+            member = Member.objects.get(activation_code=access_key)
+            if not member:
+                return HttpResponseRedirect(reverse('cms:activation'))
+            self.form = CmsRegisterForm(initial={'user_id': member.sidomo_user_id, 
+                'site_domain': 'username.sidomo.com',
+                'access_key':access_key})
+        else :
+            return HttpResponseRedirect(reverse('cms:activation'))
+        code = request.GET.get('code', 200)
+        token = get_token(request)
+        data = super(Register, self).get(request, args, kwargs)
+        configs = UserConfigs.objects.get(member = data['member'])
+        self.component['base']='cp_admin/component/register_base.html'
+        self.component['header']='cp_admin/component/register_header.html'
+        self.component['main']='cp_admin/component/register_main.html'
+        self.component['local_script']='cp_admin/component/register_local_script.html'
+        return render(request, self.template, {
+                'component': self.component,
+                'form' : self.form,
+                'token' : token,
+                'code' : code
+            }
+        )
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return  HttpResponse(status=403)
+        access_key = kwargs['key']
+        if access_key:
+            member = Member.objects.get(activation_code=access_key)
+            if not member:
+                return HttpResponseRedirect(reverse('cms:activation'))
+        else :
+            return  HttpResponse(status=404)
+
+        token = get_token(request)
+        self.form = CmsRegisterForm(request.POST)
+        if self.form.is_valid():
+            data = super(Register, self).get(request, args, kwargs)
+            post_data = self.form.cleaned_data
+            submitted_user_id = post_data.get('user_id')
+            submitted_access_key = post_data.get('access_key')
+            submitted_username = post_data.get('username')
+            submitted_password = post_data.get('password')
+            submitted_site_domain = post_data.get('site_domain') 
+
+            is_exist = User.objects.filter(username=submitted_username).exists()
+            is_domain_used = Site.objects.filter(domain_name=submitted_site_domain).exists()
+            if (not submitted_access_key == access_key) or\
+                (not submitted_access_key == member.activation_code) or\
+                (not access_key == member.activation_code) or\
+                (not submitted_user_id == member.sidomo_user_id) or (is_exist == True) or (is_domain_used == True) :
+                return  HttpResponse(status=404)
+
+            user = member.user
+            user.username = submitted_username
+            user.set_password(submitted_password)
+            user.save()
+
+            site = Site.objects.create(domain_name='%s.sidomo.com'*(submitted_site_domain),
+                    display_name='%s.sidomo.com'*(submitted_site_domain))
+            member.site = site 
+            member.save()
+
+            return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
+        
+        self.component['base']='cp_admin/component/register_base.html'
+        self.component['header']='cp_admin/component/register_header.html'
+        self.component['main']='cp_admin/component/register_main.html'
+        self.component['local_script']='cp_admin/component/register_local_script.html'
         return render(request, self.template, {
                 'component': self.component,
                 'form' : self.form,

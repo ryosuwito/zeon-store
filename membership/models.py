@@ -34,6 +34,7 @@ class PackageGroup(models.Model):
         return self.name
 
 class Member(models.Model):
+    sidomo_user_id = models.CharField(max_length=50, blank=True)
     user = models.OneToOneField(User, related_name="user_member", on_delete=models.CASCADE)
     package_group = models.ManyToManyField(PackageGroup, blank=True, related_name="package_group")
     activation_code = models.CharField(max_length=8, blank=True)
