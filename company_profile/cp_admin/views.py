@@ -53,7 +53,27 @@ class Activation(Dispatcher):
             }
         )
     def post(self, request, *args, **kwargs):
-        pass
+        token = get_token(request)
+        self.form = CmsLoginForm(request.POST)
+        if self.form.is_valid():
+            data = super(Login, self).get(request, args, kwargs)
+            post_data = self.form.cleaned_data
+            user_id = post_data.get('user_id')
+            access_key = post_data.get('access_key')
+            if request.user.is_authenticated:
+                return  HttpResponse(status=403)
+
+            return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
+        
+        self.component['base']='cp_admin/component/activation_base.html'
+        self.component['header']='cp_admin/component/activation_header.html'
+        self.component['main']='cp_admin/component/activation_main.html'
+        self.component['local_script']='cp_admin/component/activation_local_script.html'
+        return render(request, self.template, {
+                'component': self.component,
+                'form' : self.form,
+                'token' : token,
+            }
 
 class Login(Dispatcher):
     template = "cp_admin/index.html"
