@@ -36,6 +36,6 @@ urlpatterns = [
 
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
-    path('activation/', Activation.as_view(), name='logout'),
+    path('activation/', Activation.as_view(), name='activation'),
     path('', Index.as_view(), name='index'),
 ]

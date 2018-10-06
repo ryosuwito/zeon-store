@@ -3,7 +3,7 @@
     function formLogin(){
     var username = $("#id_username").val();
     var password = $("#id_password").val();
-    $('#formTitle').html('<h2>Trying to login as <br>' + username + "</h2>");
+    $('#formTitle').html('<h2>Mencoba masuk sebagai <br>' + username + "</h2>");
     $('#formContainer').html('');
     $('#gearContainer').removeClass('hidden');
     $('#gearContainer').addClass('show');
@@ -16,10 +16,10 @@
             //or your custom data either as object {foo: "bar", ...} or foo=bar&...
             function (data, status){    
                 if(status=='success'){    
-                    $('#formTitle').html('<h1 class="success">Login Success</h1>');
+                    $('#formTitle').html('<h1 class="success">Login Berhasil</h1>');
                     $('#gearContainer').removeClass('show');
                     $('#gearContainer').addClass('hidden');
-                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Wait a moment, you'll be redirected to dashboard</p>");
+                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke dashboard</p>");
                     setTimeout(function(){
                        window.open(data['redirect_url'], '_self');
                     }, 5000);

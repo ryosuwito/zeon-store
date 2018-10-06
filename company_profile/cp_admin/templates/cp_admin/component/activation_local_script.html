@@ -16,10 +16,10 @@
             //or your custom data either as object {foo: "bar", ...} or foo=bar&...
             function (data, status){    
                 if(status=='success'){    
-                    $('#formTitle').html('<h1 class="success">Login Success</h1>');
+                    $('#formTitle').html('<h1 class="success">Aktivasi Akun Berhasil</h1>');
                     $('#gearContainer').removeClass('show');
                     $('#gearContainer').addClass('hidden');
-                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Wait a moment, you'll be redirected to dashboard</p>");
+                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke formulir pendaftaran.</p>");
                     setTimeout(function(){
                        window.open(data['redirect_url'], '_self');
                     }, 5000);
@@ -27,11 +27,11 @@
                 },
         ).fail(function(xhr) {
             if(xhr.status == 403){
-                window.open("{% url 'cms:login' %}?code=403", "_self");
+                window.open("{% url 'cms:activation' %}?code=403", "_self");
             }else if(xhr.status == 404){
-                window.open("{% url 'cms:login' %}?code=404", "_self");
+                window.open("{% url 'cms:activation' %}?code=404", "_self");
             }else if(xhr.status == 500){
-                window.open("{% url 'cms:login' %}?code=500", "_self");
+                window.open("{% url 'cms:activation' %}?code=500", "_self");
             }
         });
     }
