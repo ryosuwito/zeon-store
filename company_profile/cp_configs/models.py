@@ -42,6 +42,9 @@ class BrandAsset(models.Model):
     extra_image_1 = models.ImageField(upload_to = 'cp/extra_image', blank=True, null=True)
     extra_image_2 = models.ImageField(upload_to = 'cp/extra_image', blank=True, null=True)
     extra_image_3 = models.ImageField(upload_to = 'cp/extra_image', blank=True, null=True)
+    def __str__(self):
+        return self.name.title()
+
     class Meta:
         verbose_name_plural = "Brand Assets"
 
@@ -77,5 +80,8 @@ class BrandIdentity(models.Model):
     company_facebook = models.CharField(max_length=150, blank=True)
     company_instagram = models.CharField(max_length=150, blank=True)
     company_whatsapp = models.CharField(max_length=35, blank=True)
+    def __str__(self):
+        return self.name.title()
+        
     class Meta:
         verbose_name_plural = "Brand Identities"
