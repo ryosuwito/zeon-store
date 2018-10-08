@@ -38,6 +38,8 @@ class Member(models.Model):
     user = models.OneToOneField(User, related_name="user_member", on_delete=models.CASCADE)
     package_group = models.ManyToManyField(PackageGroup, blank=True, related_name="package_group")
     activation_code = models.CharField(max_length=8, blank=True)
+    android_activation_code = models.CharField(max_length=8, blank=True)
+    ios_activation_code = models.CharField(max_length=8, blank=True)
     site = models.OneToOneField(Site, on_delete=models.SET_NULL, null=True)
     def __str__(self):
         return self.user.username
