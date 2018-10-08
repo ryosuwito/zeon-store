@@ -183,7 +183,8 @@ class Register(Dispatcher):
 
             form_template = UserFormTemplate.objects.create(member=member)
 
-            return JsonResponse({'new_token': get_token(request), 
+            return JsonResponse({'new_token': get_token(request),
+                'domain':site.domain, 
                 'redirect_url':'http://%s:8000%s?u=%s&p=%s'%(site.domain, 
                     reverse('cms:login'),
                     user.username,

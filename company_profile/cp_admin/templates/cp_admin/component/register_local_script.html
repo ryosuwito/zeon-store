@@ -26,7 +26,8 @@
                     $('#formTitle').html('<h1 class="success">Pendaftaran Telah Selesai</h1>');
                     $('#gearContainer').removeClass('show');
                     $('#gearContainer').addClass('hidden');
-                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke <br>"+data['redirect_url']+"</p>");
+                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke <br>"+
+                        +'<span style="font-weight:600; font-size:24pt">'+data['domain']+"</span></p>");
                     setTimeout(function(){
                        window.open(data['redirect_url'], '_self');
                     }, 5000);
