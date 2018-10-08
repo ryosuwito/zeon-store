@@ -66,12 +66,12 @@ class Activation(Dispatcher):
             user_id = post_data.get('user_id')
             access_key = post_data.get('access_key')
 
-            random_string = get_random_string(10, allowed_chars='12345677890SIDOM10')
+            random_string = get_random_string(10, allowed_chars='1234567890SIDOM')
             while User.objects.filter(username = random_string).exists():
-               random_string = get_random_string(10, allowed_chars='12345677890SIDOM10')
+               random_string = get_random_string(10, allowed_chars='12345677890SIDOM')
 
             user = User.objects.create(username=random_string, 
-                password=get_random_string(10, allowed_chars='12345677890SIDOM10'),
+                password=get_random_string(10, allowed_chars='1234567890SIDOM'),
                 )
             if user:
                 package_group = PackageGroup.objects.all()[0]
