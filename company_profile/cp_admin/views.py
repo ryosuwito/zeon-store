@@ -177,6 +177,8 @@ class Register(Dispatcher):
             form_template = UserFormTemplate.objects.create(member=member)
 
             return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
+        else:    
+            return HttpResponse([e for e in self.form.errors],status=400)
         
         self.component['base']='cp_admin/component/register_base.html'
         self.component['header']='cp_admin/component/register_header.html'
