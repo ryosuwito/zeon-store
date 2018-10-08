@@ -23,7 +23,7 @@ class UserFormTemplate(models.Model):
     TYPE_NUMBER = 'number'
     TEXTAREA = 'textarea'
     member = models.OneToOneField(Member, on_delete=models.CASCADE, null=True, blank=True)
-    data = JSONField() 
+    data = JSONField(null=True) 
     def __str__(self):
         return self.member.user.username.title()
 
