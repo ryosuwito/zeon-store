@@ -12,7 +12,7 @@ from django.utils.crypto import get_random_string
 
 import time
 from dispatcher.views import Dispatcher
-from company_profile.cp_user_configs.models import UserConfigs
+from company_profile.cp_user_configs.models import UserConfigs, UserFormTemplate
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import Category as CategoryModel
 from company_profile.cp_pages.models import PageModel
@@ -24,6 +24,7 @@ from company_profile.cp_comment.views import CPComment, CPReply
 from company_profile.cp_comment.models import Comment, Reply, Visitor
 
 from membership.models import Member, PackageGroup
+
 
 from .forms import CmsLoginForm, CmsActivationForm, CmsRegisterForm
 
@@ -152,7 +153,7 @@ class Register(Dispatcher):
             submitted_access_key = post_data.get('access_key')
             submitted_username = post_data.get('username')
             submitted_password = post_data.get('password')
-            submitted_site_domain = post_data.get('site_domain') 
+            submitted_site_domain = post_data.get('site_domain')+'.sidomo.com' 
 
             is_exist = User.objects.filter(username=submitted_username).exists()
             is_domain_used = Site.objects.filter(domain_name=submitted_site_domain).exists()
@@ -168,9 +169,12 @@ class Register(Dispatcher):
             user.save()
 
             site = Site.objects.create(domain_name='%s.sidomo.com'*(submitted_site_domain),
-                    display_name='%s.sidomo.com'*(submitted_site_domain))
+                    display_name=submitted_site_domain)
             member.site = site 
             member.save()
+
+            configs = UserConfigs.objects.create(member = member)
+            form_template = UserFormTemplate.objects.create(member=member)
 
             return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
         
