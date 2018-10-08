@@ -168,7 +168,7 @@ class Register(Dispatcher):
             user.set_password(submitted_password)
             user.save()
 
-            site = Site.objects.create(domain='%s.sidomo.com'*(submitted_site_domain),
+            site = Site.objects.create(domain='%s.sidomo.com'%(submitted_site_domain),
                     name=submitted_site_domain)
             member.site = site 
             member.save()
