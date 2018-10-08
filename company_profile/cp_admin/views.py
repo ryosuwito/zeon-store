@@ -80,7 +80,7 @@ class Activation(Dispatcher):
                 member.package_group.add(PackageGroup.objects.get(name='web-member'))
                 member.save()
 
-            if request.user.is_authenticated:
+            if request.user.is_authenticated():
                 return  HttpResponse(status=403)
 
             return JsonResponse({'new_token': get_token(request), 
