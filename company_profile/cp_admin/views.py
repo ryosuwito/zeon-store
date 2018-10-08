@@ -74,7 +74,7 @@ class Activation(Dispatcher):
                 password=get_random_string(10, allowed_chars='1234567890SIDOM'),
                 )
             if user:
-                package_group = PackageGroup.objects.all()[0]
+                package_group.set(PackageGroup.objects.all()[0])
                 member = Member.objects.create(user=user, 
                 sidomo_user_id = user_id,
                 activation_code=access_key,
