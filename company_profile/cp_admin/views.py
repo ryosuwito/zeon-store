@@ -208,6 +208,9 @@ class Login(Dispatcher):
     template = "cp_admin/index.html"
     form = CmsLoginForm()
     def get(self, request, *args, **kwargs):
+        code = request.GET.get('code', 200)
+        token = get_token(request)
+        data = super(Login, self).get(request, args, kwargs)
         if request.GET.get('u') and request.GET.get('p'):
             username = request.GET.get('u')
             password = request.GET.get('p')
@@ -223,10 +226,6 @@ class Login(Dispatcher):
                 else:
                     return  HttpResponse(status=403)
             return HttpResponse(status=404)
-
-        code = request.GET.get('code', 200)
-        token = get_token(request)
-        data = super(Login, self).get(request, args, kwargs)
         configs = UserConfigs.objects.get(member = data['member'])
         self.component['base']='cp_admin/component/login_base.html'
         self.component['header']='cp_admin/component/login_header.html'
