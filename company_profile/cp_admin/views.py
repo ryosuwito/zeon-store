@@ -177,7 +177,7 @@ class Register(Dispatcher):
             form_template = UserFormTemplate.objects.create(member=member)
 
             return JsonResponse({'new_token': get_token(request), 
-                'redirect_url':'http://%s/%s'%(site.domain, reverse('cms:index'))}, status=200)
+                'redirect_url':'http://%s:8000/%s'%(site.domain, reverse('cms:index'))}, status=200)
         else:    
             fields = [f for f in self.form]
             return HttpResponse(['%s; '%e.errors for e in fields],status=400)
