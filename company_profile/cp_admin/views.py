@@ -40,6 +40,10 @@ class Activation(Dispatcher):
     def get(self, request, *args, **kwargs):
         user_id = request.GET.get('id', '')
         access_key = request.GET.get('access_key', '')
+
+        if Member.objects.filter(activation_code=access_key).exists()
+            return  HttpResponse(status=404)
+
         if user_id and access_key:
             self.form = CmsActivationForm(initial={'user_id': user_id, 'access_key':access_key})
         code = request.GET.get('code', 200)
@@ -65,6 +69,8 @@ class Activation(Dispatcher):
             post_data = self.form.cleaned_data
             user_id = post_data.get('user_id')
             access_key = post_data.get('access_key')
+            if Member.objects.filter(activation_code=access_key).exists()
+                return  HttpResponse(status=404)
 
             random_string = get_random_string(10, allowed_chars='1234567890SIDOMO')
             while User.objects.filter(username = random_string).exists():
