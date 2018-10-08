@@ -31,6 +31,7 @@ class ColorScheme(models.Model):
         verbose_name_plural = "Color Schemes"
 
 class BrandAsset(models.Model):
+    name = models.CharField(max_length=150, blank=True)
     favicon = models.ImageField(upload_to = 'cp/favicon', blank=True, null=True)
     hero_image_1 = models.ImageField(upload_to = 'cp/hero_image', blank=True, null=True)
     hero_image_2 = models.ImageField(upload_to = 'cp/hero_image', blank=True, null=True)
@@ -66,6 +67,7 @@ class BrandAsset(models.Model):
         return ("/media/%s"%self.brand_logo)
         
 class BrandIdentity(models.Model):
+    name = models.CharField(max_length=150, blank=True)
     company_name = models.CharField(max_length=250, blank=True)
     company_tagline = models.CharField(max_length=350, blank=True)
     company_address = models.CharField(max_length=450, blank=True)
