@@ -222,7 +222,7 @@ class Login(Dispatcher):
             if user is not None : 
                 if user.user_member.site == data['site']:
                     login(request, user)
-                    return HttpResponseRedirect(reverse('cms:index'), status=200)
+                    return HttpResponseRedirect(reverse('cms:index'))
                 else:
                     return  HttpResponse(status=403)
             return HttpResponse(status=404)
