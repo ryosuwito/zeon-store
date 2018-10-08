@@ -168,7 +168,7 @@ class Register(Dispatcher):
             user.set_password(submitted_password)
             user.save()
 
-            site = Site.objects.create(domain='%s.sidomo.com'%(submitted_site_domain),
+            site = Site.objects.create(domain=submitted_site_domain,
                     name=submitted_site_domain)
             member.site = site 
             member.save()
@@ -176,7 +176,8 @@ class Register(Dispatcher):
             configs = UserConfigs.objects.create(member = member)
             form_template = UserFormTemplate.objects.create(member=member)
 
-            return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
+            return JsonResponse({'new_token': get_token(request), 
+                'redirect_url':'http://%s/%s'%(site.domain, reverse('cms:index'))}, status=200)
         else:    
             fields = [f for f in self.form]
             return HttpResponse(['%s; '%e.errors for e in fields],status=400)
