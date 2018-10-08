@@ -66,12 +66,12 @@ class Activation(Dispatcher):
             user_id = post_data.get('user_id')
             access_key = post_data.get('access_key')
 
-            random_string = get_random_string(10, allowed_chars='1234567890SIDOM')
+            random_string = get_random_string(10, allowed_chars='1234567890SIDOMO')
             while User.objects.filter(username = random_string).exists():
-               random_string = get_random_string(10, allowed_chars='12345677890SIDOM')
+               random_string = get_random_string(10, allowed_chars='12345677890SIDOMO')
 
             user = User.objects.create(username=random_string, 
-                password=get_random_string(10, allowed_chars='1234567890SIDOM'),
+                password=get_random_string(10, allowed_chars='1234567890SIDOMO'),
                 )
             if user:
                 member = Member.objects.create(user=user, 
@@ -80,7 +80,7 @@ class Activation(Dispatcher):
                 member.package_group.add(PackageGroup.objects.get(name='web-member'))
                 member.save()
 
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 return  HttpResponse(status=403)
 
             return JsonResponse({'new_token': get_token(request), 
