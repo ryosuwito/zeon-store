@@ -50,11 +50,9 @@
                             <form method="post" id="loginForm">
                                 {% csrf_token %}
                                 <div class="col-xs-12" style="padding: 0 40px">
-                                    {{ form.user_id.label }}
                                     {{ form.user_id }}
                                 </div>
                                 <div class="col-xs-12" style="padding: 0 40px">
-                                    {{ form.access_key.label }}
                                     {{ form.access_key }}
                                 </div>
                                 <div class="col-xs-12" style="margin: 20px 0 0 0; padding: 0 40px">
