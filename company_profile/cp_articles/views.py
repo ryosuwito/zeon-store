@@ -109,7 +109,6 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         member = data['member']
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
-        self.form.fields["category"].queryset = Category.objects.filter(site=site)
         form = self.form
         featured_image = ''
         if  kwargs['action'] == 'edit':
@@ -126,6 +125,8 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
+
+        form.fields["category"].queryset = Category.objects.filter(site=site)
 
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
