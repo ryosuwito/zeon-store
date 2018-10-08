@@ -13,7 +13,7 @@ class CmsLoginForm(forms.Form):
 
 class CmsActivationForm(forms.Form):
     user_id = forms.CharField(label='User ID:', max_length=150)
-    access_key = forms.CharField(label='Access Key :'))
+    access_key = forms.CharField(label='Access Key :')
 
     def __init__(self, *args, **kwargs):
         super(CmsActivationForm, self).__init__(*args, **kwargs)
