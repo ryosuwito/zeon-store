@@ -77,7 +77,7 @@ class Activation(Dispatcher):
                 member = Member.objects.create(user=user, 
                 sidomo_user_id = user_id,
                 activation_code=access_key)
-                member.package_group.set(PackageGroup.objects.all()[0])
+                member.package_group.set(PackageGroup.objects.get(name='web-member'))
 
             if request.user.is_authenticated:
                 return  HttpResponse(status=403)
