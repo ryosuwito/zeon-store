@@ -3,6 +3,10 @@
     function formLogin(){
     var user_id = $("#id_user_id").val();
     var access_key = $("#id_access_key").val();
+    var username = $("#id_username").val();
+    var password = $("#id_password").val();
+    var site_domain = $("#id_site_domain").val();
+
     $('#formTitle').html('<h2>Mencoba memverifikasi akun <br>' + user_id + "</h2>");
     $('#formContainer').html('');
     $('#gearContainer').removeClass('hidden');
@@ -12,6 +16,9 @@
             csrfmiddlewaretoken:"{{token}}",
             user_id:user_id,
             access_key:access_key,
+            username:username,
+            password:password,
+            site_domain:site_domain
         },
             //or your custom data either as object {foo: "bar", ...} or foo=bar&...
             function (data, status){    
