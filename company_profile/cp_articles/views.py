@@ -80,6 +80,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
             return HttpResponseRedirect(self.index_url)
 
+        self.form.fields["category"].queryset = Category.objects.filter(site=site)
         token = get_token(request)
         configs = UserConfigs.objects.get(member = member)
         return render(request, self.template, {
@@ -108,6 +109,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         member = data['member']
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
+        self.form.fields["category"].queryset = Category.objects.filter(site=site)
         form = self.form
         featured_image = ''
         if  kwargs['action'] == 'edit':
@@ -124,10 +126,10 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
-            
+
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                            
+
         return render(request, self.template, {
                 'form': form,
                 'member': member,
@@ -139,8 +141,8 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 'featured_image' : featured_image,
             }
         )
-   
-        
+
+
 class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
@@ -175,7 +177,7 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             category.save()
 
             return HttpResponseRedirect(self.index_url)
-            
+
         token = get_token(request)
         configs = UserConfigs.objects.get(member = member)
         return render(request, self.template, {
@@ -238,7 +240,7 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         if method == 'get_component':
             return self.get_component(request, token, data, configs, site, member, form, featured_image)
-                                     
+
         return render(request, self.template, {
                 'form': form,
                 'featured_image': featured_image,
