@@ -177,7 +177,7 @@ class Register(Dispatcher):
             configs = UserConfigs.objects.create(member = member)
             configs.templates = Template.objects.get(name = 'default')
             configs.color_scheme = ColorScheme.objects.get(name = 'default')
-            configs.brand_asset = BrandAsset.objects.get(name = 'default')
+            configs.brand_assets = BrandAsset.objects.get(name = 'default')
             configs.brand_identity = BrandIdentity.objects.get(name = 'default')
             configs.save()
 
