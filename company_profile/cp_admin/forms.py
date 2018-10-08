@@ -25,6 +25,10 @@ class CmsRegisterForm(forms.Form):
     password = forms.CharField(label='Password :', widget=forms.PasswordInput(attrs=attrs))
     site_domain = forms.CharField(label='Site Domain:', max_length=150)
 
+    def __init__(self, *args, **kwargs):
+        super(CmsRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['site_domain'].widget.attrs['style'] = 'width:50%; padding:10px; display:inline-block'
+
 class CmsBrandAssetsForm(AssetEditForm):
     def __init__(self, *args, **kwargs):
             super(CmsBrandAssetsForm, self).__init__(*args, **kwargs)

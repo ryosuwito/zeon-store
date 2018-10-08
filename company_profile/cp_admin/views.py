@@ -113,7 +113,7 @@ class Register(Dispatcher):
             if not member:
                 return HttpResponseRedirect(reverse('cms:activation'))
             self.form = CmsRegisterForm(initial={'user_id': member.sidomo_user_id, 
-                'site_domain': 'username.sidomo.com',
+                'site_domain': 'username',
                 'access_key':access_key})
         else :
             return HttpResponseRedirect(reverse('cms:activation'))
