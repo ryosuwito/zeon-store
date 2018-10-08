@@ -179,7 +179,7 @@ class Register(Dispatcher):
             return JsonResponse({'new_token': get_token(request), 'redirect_url':reverse('cms:index')}, status=200)
         else:    
             fields = [f for f in self.form]
-            return HttpResponse(['%s; '*e.errors for e in fields],status=400)
+            return HttpResponse(['%s; '%e.errors for e in fields],status=400)
         
         self.component['base']='cp_admin/component/register_base.html'
         self.component['header']='cp_admin/component/register_header.html'
