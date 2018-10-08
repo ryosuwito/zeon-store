@@ -12,17 +12,12 @@ class CmsLoginForm(forms.Form):
 
 
 class CmsActivationForm(forms.Form):
-    user_id = forms.CharField(label='User ID:', max_length=150)
-    access_key = forms.CharField(label='Access Key :')
-
-    def __init__(self, *args, **kwargs):
-        super(CmsActivationForm, self).__init__(*args, **kwargs)
-        self.fields['user_id'].widget.attrs['type'] = 'hidden'
-        self.fields['access_key'].widget.attrs['type'] = 'hidden'
+    user_id = forms.CharField(widget = forms.HiddenInput(), max_length=150)
+    access_key = forms.CharField(widget = forms.HiddenInput())
 
 class CmsRegisterForm(forms.Form):
-    user_id = forms.CharField(label='User ID:', max_length=150)
-    access_key = forms.CharField(label='Access Key :')
+    user_id = forms.CharField(widget = forms.HiddenInput(), max_length=150)
+    access_key = forms.CharField(widget = forms.HiddenInput())
     username = forms.CharField(label='Username:', max_length=150)
     attrs = {
         "type": "password"
@@ -33,8 +28,6 @@ class CmsRegisterForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(CmsRegisterForm, self).__init__(*args, **kwargs)
         self.fields['site_domain'].widget.attrs['style'] = 'width:50%; padding:10px; display:inline-block'
-        self.fields['user_id'].widget.attrs['type'] = 'hidden'
-        self.fields['access_key'].widget.attrs['type'] = 'hidden'
 
 class CmsBrandAssetsForm(AssetEditForm):
     def __init__(self, *args, **kwargs):
