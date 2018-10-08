@@ -154,7 +154,7 @@ class Register(Dispatcher):
             submitted_access_key = post_data.get('access_key')
             submitted_username = post_data.get('username')
             submitted_password = post_data.get('password')
-            submitted_site_domain = post_data.get('site_domain')+'.sidomo.com' 
+            submitted_site_domain = post_data.get('site_domain').lower()+'.sidomo.com' 
 
             is_exist = User.objects.filter(username=submitted_username).exists()
             is_domain_used = Site.objects.filter(domain=submitted_site_domain).exists()
