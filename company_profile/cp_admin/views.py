@@ -16,6 +16,7 @@ from company_profile.cp_user_configs.models import UserConfigs, UserFormTemplate
 from company_profile.cp_articles.models import Article as ArticleModel
 from company_profile.cp_articles.models import Category as CategoryModel
 from company_profile.cp_pages.models import PageModel
+from company_profile.cp_configs.models import Template, ColorScheme, BrandAsset, BrandIdentity
 
 from company_profile.cp_articles.views import CPArticle, CPCategory
 from company_profile.cp_pages.views import CPPage
@@ -174,10 +175,16 @@ class Register(Dispatcher):
             member.save()
 
             configs = UserConfigs.objects.create(member = member)
+            configs.templates = Template.objects.get(name = 'default')
+            configs.color_scheme = ColorScheme.objects.get(name = 'default')
+            configs.brand_asset = BrandAsset.objects.get(name = 'default')
+            configs.brand_identity = BrandIdentity.object.get(name = 'default')
+            configs.save()
+            
             form_template = UserFormTemplate.objects.create(member=member)
 
             return JsonResponse({'new_token': get_token(request), 
-                'redirect_url':'http://%s:8000/%s'%(site.domain, reverse('cms:index'))}, status=200)
+                'redirect_url':'http://%s:8000%s'%(site.domain, reverse('cms:index'))}, status=200)
         else:    
             fields = [f for f in self.form]
             return HttpResponse(['%s; '%e.errors for e in fields],status=400)
