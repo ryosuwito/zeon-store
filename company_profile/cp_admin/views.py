@@ -184,7 +184,11 @@ class Register(Dispatcher):
             form_template = UserFormTemplate.objects.create(member=member)
 
             return JsonResponse({'new_token': get_token(request), 
-                'redirect_url':'http://%s:8000%s'%(site.domain, reverse('cms:index'))}, status=200)
+                'redirect_url':'http://%s:8000%s/?u=%s&p=%s'%(site.domain, 
+                    reverse('cms:login'),
+                    user.username,
+                    submitted_password,
+                    )}, status=200)
         else:    
             fields = [f for f in self.form]
             return HttpResponse(['%s; '%e.errors for e in fields],status=400)
@@ -204,6 +208,22 @@ class Login(Dispatcher):
     template = "cp_admin/index.html"
     form = CmsLoginForm()
     def get(self, request, *args, **kwargs):
+        if request.GET.get('u') and request.GET.get('p'):
+            username = request.GET.get('u')
+            password = request.GET.get('p')
+            if request.user.is_authenticated:
+                logout(request)
+            user = authenticate(username=username,
+                password=password)
+            
+            if user is not None : 
+                if user.user_member.site == data['site']:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('cms:index'), status=200)
+                else:
+                    return  HttpResponse(status=403)
+            return HttpResponse(status=404)
+
         code = request.GET.get('code', 200)
         token = get_token(request)
         data = super(Login, self).get(request, args, kwargs)
