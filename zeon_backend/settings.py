@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
                 'trials.sidomo.com',
                 '.co.id',
+                '.id',
+                '.club',
                 '.com',
                 '.biz',
                 '.net',]
