@@ -7,7 +7,7 @@
     var password = $("#id_password").val();
     var site_domain = $("#id_site_domain").val();
 
-    $('#formTitle').html('<h2>Mencoba memverifikasi akun <br>' + user_id + "</h2>");
+    $('#formTitle').html('<h2>Mencoba mendaftarkan akun <br>' + user_id + "</h2>");
     $('#formContainer').html('');
     $('#gearContainer').removeClass('hidden');
     $('#gearContainer').addClass('show');
@@ -23,10 +23,10 @@
             //or your custom data either as object {foo: "bar", ...} or foo=bar&...
             function (data, status){    
                 if(status=='success'){    
-                    $('#formTitle').html('<h1 class="success">Aktivasi Akun Berhasil</h1>');
+                    $('#formTitle').html('<h1 class="success">Pendaftaran Telah Selesai</h1>');
                     $('#gearContainer').removeClass('show');
                     $('#gearContainer').addClass('hidden');
-                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke formulir pendaftaran.</p>");
+                    $('#formContainer').html("<p style='margin: 50px 0; width:100%; text-align:center'>Anda akan diarahkan ke <br>"+data['redirect_url']+"</p>");
                     setTimeout(function(){
                        window.open(data['redirect_url'], '_self');
                     }, 5000);
