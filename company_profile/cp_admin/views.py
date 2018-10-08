@@ -156,7 +156,7 @@ class Register(Dispatcher):
             submitted_site_domain = post_data.get('site_domain')+'.sidomo.com' 
 
             is_exist = User.objects.filter(username=submitted_username).exists()
-            is_domain_used = Site.objects.filter(domain_name=submitted_site_domain).exists()
+            is_domain_used = Site.objects.filter(domain=submitted_site_domain).exists()
             if (not submitted_access_key == access_key) or\
                 (not submitted_access_key == member.activation_code) or\
                 (not access_key == member.activation_code) or\
@@ -168,8 +168,8 @@ class Register(Dispatcher):
             user.set_password(submitted_password)
             user.save()
 
-            site = Site.objects.create(domain_name='%s.sidomo.com'*(submitted_site_domain),
-                    display_name=submitted_site_domain)
+            site = Site.objects.create(domain='%s.sidomo.com'*(submitted_site_domain),
+                    name=submitted_site_domain)
             member.site = site 
             member.save()
 
