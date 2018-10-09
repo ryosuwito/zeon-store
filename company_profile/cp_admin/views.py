@@ -46,8 +46,7 @@ class Activation(Dispatcher):
 
         if Member.objects.filter(activation_code=access_key).exists():
             member_object = Member.objects.filter(activation_code=access_key)[0]
-            return JsonResponse({'new_token': get_token(request), 
-                'redirect_url':'%s://%s%s'%(request.scheme, member_object.site.domain, reverse('cms:login'))}, status=200)
+            return HttpResponseRedirect('%s://%s%s'%(request.scheme, member_object.site.domain, reverse('cms:login')))
 
 
         if user_id and access_key:
