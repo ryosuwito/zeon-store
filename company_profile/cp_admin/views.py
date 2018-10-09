@@ -72,7 +72,9 @@ class Activation(Dispatcher):
             user_id = post_data.get('user_id')
             access_key = post_data.get('access_key')
             if Member.objects.filter(activation_code=access_key).exists():
-                return  HttpResponse(status=404)
+                member_object = Member.objects.filter(activation_code=access_key)[0]
+                return JsonResponse({'new_token': get_token(request), 
+                    'redirect_url':'%s://%s%s'%(request.scheme, member_object.site.domain, reverse('cms:login'))}, status=200)
 
             random_string = get_random_string(10, allowed_chars='1234567890SIDOMO')
             while User.objects.filter(username = random_string).exists():
@@ -89,7 +91,9 @@ class Activation(Dispatcher):
                 member.save()
 
             if request.user.is_authenticated:
-                return  HttpResponse(status=403)
+                return JsonResponse({'new_token': get_token(request), 
+                    'redirect_url':'%s://%s%s'%(request.scheme, member_object.site.domain, reverse('cms:index'))}, status=200)
+
 
             return JsonResponse({'new_token': get_token(request), 
                 'redirect_url':reverse('cms:register', kwargs={'key':access_key})}, status=200)
