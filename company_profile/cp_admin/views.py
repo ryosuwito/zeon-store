@@ -43,8 +43,12 @@ class Activation(Dispatcher):
         user_id = request.GET.get('id', '')
         access_key = request.GET.get('access_key', '')
 
+
         if Member.objects.filter(activation_code=access_key).exists():
-            return  HttpResponse(status=404)
+            member_object = Member.objects.filter(activation_code=access_key)[0]
+            return JsonResponse({'new_token': get_token(request), 
+                'redirect_url':'%s://%s%s'%(request.scheme, member_object.site.domain, reverse('cms:login'))}, status=200)
+
 
         if user_id and access_key:
             self.form = CmsActivationForm(initial={'user_id': user_id, 'access_key':access_key})
