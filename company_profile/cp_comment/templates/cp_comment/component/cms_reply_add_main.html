@@ -86,9 +86,15 @@
                                 {% endif %}
                             
                             <hr>
-                            <h4>Balas komentar sebagai {{ request.user.username | title}}</h4>
-                            {{form.content}}
-                            <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-7">
+                                        <h4>Balas komentar sebagai {{ request.user.username | title}}</h4>
+                                        {{form.content}}
+                                        <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
