@@ -170,10 +170,10 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 return HttpResponseRedirect(self.index_url)
             else :
                 try:
-                    if not kwargs['action'] == 'add':
-                        reply = Reply.objects.get(pk=kwargs['pk'])
-                    else:
+                    if kwargs['action'] == 'add':
                         comment = Comment.objects.get(pk=kwargs['pk'])
+                    else:
+                        reply = Reply.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
 
