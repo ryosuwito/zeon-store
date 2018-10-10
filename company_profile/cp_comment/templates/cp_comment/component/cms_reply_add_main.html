@@ -35,14 +35,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h1>Balas Komentar</h1>
-                            <h4>{{ data.comment.visitor.name | title }}</h4>
-                            <p>{{ data.comment.created_date|date:"l,j/M/Y" }}</p>
-                            <hr>
                             <div style="width:100%;padding:0 15px">
-                                <div class="row" style="margin: 0">
-                                    <h4>Komentar</h4>
-                                    <p>{{ data.comment.content|linebreaks }}</p>
-                                </div>
+                                <h4>{{ data.comment.visitor.name | title }}</h4>
+                                <p>{{ data.comment.created_date|date:"l,j/M/Y" }}</p>
+                                <p>{{ data.comment.content|linebreaks }}</p>
                             </div>
                                 {% if data.comment.comment_reply.all %}
                                 <hr>
