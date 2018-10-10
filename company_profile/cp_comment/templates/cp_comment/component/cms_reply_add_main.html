@@ -56,7 +56,7 @@
                                         <div class="col-xs-4 col-sm-2" style="text-align: left">
                                             <h6>Tanggal</h6>
                                         </div>
-                                        <div class="col-xs-4 col-sm-6" style="text-align: left">
+                                        <div class="col-xs-4 col-sm-5" style="text-align: left">
                                             <h6>Konten</h6>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                                             <div class="col-xs-4 col-sm-2" style="text-align: center">
                                                 <p>{{ reply.created_date | date:"l,j/M/Y" }}</p>
                                             </div>
-                                            <div class="col-xs-4 col-sm-6">
+                                            <div class="col-xs-4 col-sm-5">
                                                 <p>{{ reply.content|linebreaks }}</p>
                                             </div>
                                         {% if not forloop.last %}
