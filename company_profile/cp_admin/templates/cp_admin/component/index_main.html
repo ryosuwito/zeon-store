@@ -93,6 +93,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row" style="margin: 0">
+
+                        {% if site.domain != "sidomo.com" %}
                             <div class="col-xs-8 col-sm-9" style="text-align: left; padding: 0">
                                 <h3>Pages </h3>
                                 <p>Total Page: {{ pages | length}}</p>
@@ -101,6 +103,7 @@
                                 <span onclick="getNext('/cms/page/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
                                 <span onclick="getNext('/cms/page/add/')" style="margin: 5px 0" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span> CREATE NEW</span>
                             </div>
+                        {% endif %}
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                                 <hr>
                                 {% for page in pages|slice:":5" %}
