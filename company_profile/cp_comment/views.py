@@ -143,7 +143,7 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 return HttpResponseRedirect(self.index_url)
             form_content = self.form.cleaned_data.get('content')
         
-            visitor = Visitor.objects.get_or_create(name='request.user.username',
+            visitor = Visitor.objects.get_or_create(name='admin@%s'%site.domain,
                         site=site)[0]
 
             Reply.objects.create(comment=comment,
