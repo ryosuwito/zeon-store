@@ -7,7 +7,6 @@ from django.middleware.csrf import get_token
 from django.shortcuts import render
 from django.urls import reverse
 from django.template.loader import render_to_string
-from django.db.models import Sum
 from django.utils.crypto import get_random_string
 
 import time
