@@ -32,9 +32,9 @@ class Dispatcher(View):
         if not total_page_views:
             total_page_views = 0
         total_lifetime_views = total_article_views + total_page_views
-        total_comments = Comment.objects.filter(article__site=site).count()
-        total_comments += Reply.objects.filter(comment__article__site=site).count()
-        total_visitors = Visitor.objects.filter(site=site).count()
+        total_comments = CommentModel.objects.filter(article__site=site).count()
+        total_comments += ReplyModel.objects.filter(comment__article__site=site).count()
+        total_visitors = VisitorModel.objects.filter(site=site).count()
         return {'member':member, 
             'site':site,
             'total_article_views':total_article_views,
