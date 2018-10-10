@@ -128,38 +128,30 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = AddReplyForm()
 
     def post(self, request, *args, **kwargs):
-        pass
-        """data = super(CPCategory, self).get(request, args, kwargs)
+        data = super(CPReply, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
-        if  kwargs['action'] == 'edit':
-            category = Category.objects.get(pk=kwargs['pk'])
-            self.form = CategoryAddForm(request.POST, request.FILES, instance=category)
-            if self.form.is_valid():
-                category = self.form.save()
-                return HttpResponseRedirect(self.index_url)
+        if  kwargs['action'] == 'add' and kwargs['pk']:
+            self.form = AddReplyForm(request.POST)
         else:
-            self.form = CategoryAddForm(request.POST, request.FILES)
+            return HttpResponseRedirect(self.index_url)
 
         if self.form.is_valid():
-            category = self.form.save(commit=False)
-            category.site = site
-            category.save()
+            try:
+                comment = Comment.objects.get(pk=kwargs['pk'])
+            except:
+                return HttpResponseRedirect(self.index_url)
+            form_content = self.form.cleaned_data.get('content')
+        
+            visitor = Visitor.objects.get_or_create(name='request.user.username',
+                        site=site)[0]
 
-            return HttpResponseRedirect(self.index_url)
-            
-        token = get_token(request)
-        configs = UserConfigs.objects.get(member = member)
-        return render(request, self.template, {
-                'form': self.form,
-                'member': member,
-                'data': data,
-                'configs': configs,
-                'site': site,
-                'token': token,
-                'component':self.component
-            }
-        )"""
+            Reply.objects.create(comment=comment,
+                visitor=visitor,
+                content=form_content,
+                is_approved=True)
+
+        return HttpResponseRedirect(self.index_url)
 
     def get(self, request, *args, **kwargs):
         comment = reply = ""
