@@ -122,12 +122,8 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     component = {}
     component['base'] = 'cp_admin/component/index_base.html'
     component['header'] =  'cp_admin/component/index_header.html'
-    index_main = 'cp_articles/component/cms_category_main.html'
-    index_local_script = 'cp_articles/component/cms_category_local_script.html'
-    add_main = 'cp_articles/component/cms_category_add_main.html'
-    add_local_script = 'cp_articles/component/cms_category_add_local_script.html'
-    edit_main = 'cp_articles/component/cms_category_edit_main.html'
-    edit_local_script = 'cp_articles/component/cms_category_edit_local_script.html'
+    add_main = 'cp_articles/component/cms_reply_add_main.html'
+    add_local_script = 'cp_articles/component/cms_reply_add_local_script.html'
     index_url = '/cms/comment/'
     form = AddReplyForm()
 
@@ -166,14 +162,18 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         )"""
 
     def get(self, request, *args, **kwargs):
-        reply = ""
+        comment = reply = ""
         if  kwargs['action'] == 'delete' or \
+            kwargs['action'] == 'add' or \
             kwargs['action'] == 'approve' :
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
             else :
                 try:
-                    reply = Reply.objects.get(pk=kwargs['pk'])
+                    if not kwargs['action'] == 'add':
+                        reply = Reply.objects.get(pk=kwargs['pk'])
+                    else:
+                        comment = Comment.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
 
@@ -197,7 +197,8 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         site = data['site']
         form = self.form
 
-        if kwargs['action'] == 'show_all':
+        if kwargs['action'] == 'add' and comment:
+            data['comment'] = comment
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
