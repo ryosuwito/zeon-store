@@ -36,12 +36,12 @@
                         <div class="card-body">
                             <h1>Add New Reply</h1>
                             <hr>
-                            <h4>{{ comment.visitor.name | title }}</h4>
-                            <p>{{ comment.created_date|date:"l,j/M/Y" }}</p>
+                            <h4>{{ data.comment.visitor.name | title }}</h4>
+                            <p>{{ data.comment.created_date|date:"l,j/M/Y" }}</p>
                             <br>
                             <br>
                             <h4>Komentar</h4>
-                            <p>{{ comment.content|linebreaks }}</p>
+                            <p>{{ data.comment.content|linebreaks }}</p>
                             <br>
                             <br>
                             <h4>Your Reply as {{ request.user.username }}</h4>
