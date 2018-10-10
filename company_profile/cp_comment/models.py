@@ -23,7 +23,7 @@ class Comment(models.Model):
     is_approved = models.BooleanField(default=False)
 
     def get_reply_url(self):
-        return "%s" % (reverse('cms:reply_add', kwargs={'pk':self.pk}))
+        return "%s" % (reverse('cms:reply_add', kwargs={'action':'add','pk':self.pk}))
 
     def get_delete_url(self):
         return "%s" % (reverse('cms:comment_edit_approve_delete', kwargs={'action':'delete', 'pk':self.pk}))
