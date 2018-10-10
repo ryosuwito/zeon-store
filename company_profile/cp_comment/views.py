@@ -169,13 +169,11 @@ class CPReply(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             if kwargs['pk'] == 'none':
                 return HttpResponseRedirect(self.index_url)
             else :
-                try:
-                    if kwargs['action'] == 'add':
-                        comment = Comment.objects.get(pk=kwargs['pk'])
-                    else:
-                        reply = Reply.objects.get(pk=kwargs['pk'])
-                except:
-                    return HttpResponseRedirect(self.index_url)
+                if kwargs['action'] == 'add':
+                    comment = Comment.objects.get(pk=kwargs['pk'])
+                else:
+                    reply = Reply.objects.get(pk=kwargs['pk'])
+                return HttpResponseRedirect(self.index_url)
 
         if kwargs['action'] == 'delete' and \
             reply :
