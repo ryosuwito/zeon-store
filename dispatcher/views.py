@@ -27,6 +27,10 @@ class Dispatcher(View):
         member = Member.objects.get(site=site)
         total_article_views = ArticleModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
         total_page_views = PageModel.objects.filter(site=site, is_preview=False).aggregate(Sum('page_view'))['page_view__sum']
+        if not total_article_views:
+            total_article_views = 0
+        if not total_page_views:
+            total_page_views = 0
         total_lifetime_views = total_article_views + total_page_views
         total_comments = Comment.objects.filter(article__site=site).count()
         total_comments += Reply.objects.filter(comment__article__site=site).count()
