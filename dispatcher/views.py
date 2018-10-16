@@ -20,6 +20,8 @@ from company_profile.cp_comment.models import Comment as CommentModel
 from company_profile.cp_comment.models import Reply as ReplyModel
 from membership.models import Member
 
+import random
+
 class Dispatcher(View):
     component = {}
     def get(self, request, *args, **kwargs):
@@ -66,9 +68,10 @@ class Index(Dispatcher):
                     'recent_article':recent_articles
                 }
            )
-        self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
-        self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
-        template = "company_profile/%s/index.html"%(configs.templates.dir_name)
+        else:
+            self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
+            self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
+            template = "company_profile/%s/index.html"%(configs.templates.dir_name)
         return render(request, template, {
             'component': self.component,
             'configs':configs,
@@ -118,8 +121,12 @@ class Blog(Dispatcher):
         else:
             is_paginated = False
             articles = article_list
-                
-        recent_articles = articles[:3]
+
+        if len(article_list)>=8:
+            recent_articles = random.sample(list(article_list), 8)
+        else:
+            recent_articles = article_list
+
         return render(request, template, {
             'articles': articles,
             'max_page':max_page,
@@ -161,7 +168,11 @@ class Article(Dispatcher):
         comment_and_reply = comment.get_comment_and_reply(article)
         article.page_view += 1
         article.save()
-        recent_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('-created_date')[:3]
+        all_articles = ArticleModel.objects.filter(site=site, is_published=True).order_by('-created_date')
+        if len(all_articles)>=8:
+            recent_articles = all_articles[:8]
+        else:
+            recent_articles = all_articles
 
         msg = request.GET.get('msg', 'none')
 
@@ -186,7 +197,7 @@ class Article(Dispatcher):
         identity = configs.brand_identity
         self.component['base'] = "company_profile/%s/base.html"%(configs.templates.dir_name) 
         self.component['sidebar'] = "company_profile/%s/sidebar.html"%(configs.templates.dir_name) 
-        template = "company_profile/%s/article-detail.html"%(configs.templates.dir_name)
+        template = "company_profile/%s/blog-post.html"%(configs.templates.dir_name)
         return render(request, template, {
             'article': article, 
             'message': message,
@@ -364,7 +375,7 @@ class Comment(Dispatcher):
 class ComponentRenderer:
     def get_component(self, request, token, data, configs, site, member, form, featured_image):
         main = render_to_string(self.component['main'], 
-                                    {'form': form,'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
+                                    {'form': form, 'user':request.user, 'token': token, 'member': member,'data': data, 'site': site, 'configs': configs,
                                     'featured_image' : featured_image})
         local_script = render_to_string(self.component['local_script'], 
                                     {'token': token, 'member': member,'data': data, 'site': site, 'configs': configs})
@@ -405,7 +416,7 @@ class ArticleList(Dispatcher):
         if articles:
             return JsonResponse([{
                 "article_title":article.title, 
-                "article_url":article.get_article_url(),
+                "article_url":"%s%s"%(site.domain, article.get_article_url()),
                 "article_is_published":article.is_published,
                 "article_featured_image":article.get_image_url()} for article in articles], safe=False)
 

@@ -22,8 +22,10 @@ class Template(models.Model):
 class ColorScheme(models.Model):
     name = models.CharField(max_length=150, blank=True)
     primary_color = models.CharField(max_length=6, blank=True)
+    light_color = models.CharField(max_length=6, blank=True)
     dark_color = models.CharField(max_length=6, blank=True)
     accent_color = models.CharField(max_length=6, blank=True)
+    accent_light_color = models.CharField(max_length=6, blank=True)
     def __str__(self):
         return self.name.title()
 

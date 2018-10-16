@@ -105,4 +105,5 @@ venv.bak/
 
 company_profile/templates/
 company_profile/static/
+company_profile/media/
 *.pyc

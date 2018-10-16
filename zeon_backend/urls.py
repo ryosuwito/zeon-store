@@ -19,10 +19,19 @@ from dispatcher.views import Index, Blog, Article, Page, Comment, ArticleList, R
 from django.conf import settings
 from django.conf.urls.static import static
 from company_profile.cp_admin import urls as cp_admin
+from store.st_admin import urls as st_admin
 import company_profile.cp_admin.ckeditor_uploader.urls as ckeditor_uploader_urls
 
 urlpatterns = [
+    path('wilayah/', include(wilayah, namespace='wilayah_backend')),
+    path('cart/', include(cart, namespace='cart_backend')),
+    path('checkout/', checkout, name="checkout"),
+    path('pay/', pay, name="pay"),
+    path('history/', history, name="history"),
+    path('order/', include(order, namespace='order_backend')),
+    path('shipping/', include(shipping, namespace='shipping_backend')),
     re_path(r'^taggit/', include('taggit_selectize.urls')),
+    path('cms/store/', include(st_admin, namespace='st_admin')),
     path('cms/', include(cp_admin, namespace='cp_admin')),
     re_path(r'^ckeditor/', include(ckeditor_uploader_urls)),
     path('core/admin/', admin.site.urls),
@@ -32,6 +41,5 @@ urlpatterns = [
     path('comment/<str:article_slug>/<str:method>/', Comment.as_view(), name="add_comment"),
     path('comment/<str:article_slug>/', Comment.as_view(), name="view_all_comment"),
     path('reply/<str:article_slug>/<int:comment_pk>/<str:method>/', Reply.as_view(), name="add_reply"),
-    path('articlelist/', ArticleList.as_view()),
     path('<str:page_slug>/', Page.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
