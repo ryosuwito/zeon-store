@@ -62,7 +62,7 @@
                                     <form id='editArticleForm' method="POST">
                                         <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
                                         <input type="hidden" name="template_pk" value="{{ template.pk }}">
-                                        <p onclick="getNext('/cms/template/edit/{{ configs.templates.pk }}/')" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</p>
+                                        <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span> USE THIS</button>
                                     </form>
                                     {% endif %}
                                 </div>
