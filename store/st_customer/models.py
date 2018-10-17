@@ -7,7 +7,7 @@ from membership.models import Member
 
 class Customer (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) #done
-    seller = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='member_customer')
+    seller = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='member_customer', null=True)
     name = models.CharField(max_length=250, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?62?\d{9,15}$', message="Nomor Telepon Harus memiliki format +62819999999 atau 0819999999'. Maksimal 15 Digit.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validator haruslah berupa list

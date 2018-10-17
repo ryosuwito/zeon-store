@@ -26,6 +26,7 @@ SECRET_KEY = 'dli3^=1mdk6vj-d+k*e8=49o^g35gqhc7_3)l4m^++wa^h)b8j'
 DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0',
+                'localhost',
                 's.trials.sidomo.com',
                 '.s.sidomo.com',
                 '.co.id',
@@ -110,7 +111,6 @@ WSGI_APPLICATION = 'zeon_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -128,6 +128,7 @@ DATABASES = {
         'PORT': '',
     }
 }
+"""
 
 
 # Password validation
@@ -258,3 +259,5 @@ TAGGIT_SELECTIZE = {
     'DRAG_DROP': False,
     'DELIMITER': ','
 }
+
+SITE_ID=1
