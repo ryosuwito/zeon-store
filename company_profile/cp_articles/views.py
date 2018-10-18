@@ -120,8 +120,7 @@ class CPArticle(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         if kwargs['action'] == 'show_all' or \
             kwargs['action'] == 'add' or \
-            kwargs['action'] == 'edit' or \
-            kwargs['action'] == 'delete' :
+            kwargs['action'] == 'edit':
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)
@@ -233,8 +232,7 @@ class CPCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
 
         if kwargs['action'] == 'show_all' or \
             kwargs['action'] == 'add' or \
-            kwargs['action'] == 'edit' or \
-            kwargs['action'] == 'delete' :
+            kwargs['action'] == 'edit' :
             self.set_component(kwargs)
         else :
             return HttpResponseRedirect(self.index_url)

@@ -1,0 +1,37 @@
+from django import forms
+from .models import Product, Category
+
+class CategoryAddForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CategoryAddForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['style'] = 'width:100%; padding:10px'
+    class Meta:
+        model = Category
+        fields = ('name',)
+
+class ProductAddForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProductAddForm, self).__init__(*args, **kwargs)
+        self.fields['category'].help_text = 'Pilih Kategori Artikel *(bisa lebih dari 1)'
+        self.fields['category'].widget.attrs['style'] = 'width:100%; padding:10px'
+        self.fields['name'].widget.attrs['style'] = 'width:100%; padding:10px'
+        self.fields['is_available'].widget.attrs['style'] = 'margin:10px 10px 0 0'
+        self.fields['is_available'].widget.attrs['data-toggle'] = 'toggle'
+        self.fields['price'].widget.attrs['style'] = 'width:100%; padding:10px'
+        self.fields['unit_weight'].widget.attrs['style'] = 'width:100%; padding:10px'
+        
+        
+    class Meta:
+        model = TempArticle
+        fields = ('name',
+                'description',
+                'photo',
+                'photo_alt1',
+                'photo_alt2',
+                'photo_alt3',
+                'photo_alt4',
+                'photo_alt5',
+                'unit_weight',
+                'categories',
+                'is_available',
+                'price',)

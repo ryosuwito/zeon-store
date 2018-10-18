@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.middleware.csrf import get_token
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.forms.models import model_to_dict
 from django.urls import reverse
@@ -15,10 +17,116 @@ from store.st_storefront.templatetags.int_to_rupiah import int_to_rupiah
 from store.st_database_wilayah.models import Provinsi, Kota, Kecamatan, Kelurahan
 #from reward_system.my_point import count_point
 #from reward_system.my_purchasing import check_purchasing_bonus
-from .models import PurchaseOrder, PurchaseOrderItem
 import store.st_shopping_cart.carts as carts
 import store.st_shopping_cart.wishlists as wishlists
 import datetime
+
+
+from company_profile.cp_user_configs.models import UserConfigs
+from dispatcher.views import ComponentRenderer
+from dispatcher.views import Dispatcher
+
+from .forms import OrderAddForm
+from .models import PurchaseOrder, PurchaseOrderItem
+
+class STOrder(LoginRequiredMixin, ComponentRenderer, Dispatcher):
+    login_url = '/cms/login/'
+    template = "cp_admin/index.html"
+    component = {}
+    component['base'] = 'cp_admin/component/index_base.html'
+    component['header'] =  'cp_admin/component/index_header.html'
+    index_main = 'st_purchase_order/component/purchase_order_main.html'
+    index_local_script = 'st_purchase_order/component/purchase_order_local_script.html'
+    add_main = 'st_purchase_order/component/purchase_order_add_main.html'
+    add_local_script = 'st_purchase_order/component/purchase_order_add_local_script.html'
+    edit_main = 'st_purchase_order/component/purchase_order_edit_main.html'
+    edit_local_script = 'st_purchase_order/component/purchase_order_edit_local_script.html'
+    index_url = '/cms/article/'
+    form = OrderAddForm()
+
+    def post(self, request, *args, **kwargs):
+        data = super(STOrder, self).get(request, args, kwargs)
+        member = data['member']
+        site = data['site']
+        if  kwargs['action'] == 'edit':
+            order = PurchaseOrder.objects.get(pk=kwargs['pk'])
+            self.form = OrderAddForm(request.POST, request.FILES, instance=category)
+            if self.form.is_valid():
+                order = self.form.save()
+                return HttpResponseRedirect(self.index_url)
+        else:
+            self.form = OrderAddForm(request.POST, request.FILES)
+
+        if self.form.is_valid():
+            order = self.form.save(commit=False)
+            order.site = site
+            order.save()
+
+            return HttpResponseRedirect(self.index_url)
+
+        token = get_token(request)
+        configs = UserConfigs.objects.get(member = member)
+        return render(request, self.template, {
+                'form': self.form,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component
+            }
+        )
+        
+    def get(self, request, *args, **kwargs):
+        order = ""
+        if  kwargs['action'] == 'delete' or kwargs['action'] == 'edit':
+            if kwargs['pk'] == 'none':
+                return HttpResponseRedirect(self.index_url)
+            else :
+                try:
+                    Order = PurchaseOrder.objects.get(pk=kwargs['pk'])
+                except:
+                    return HttpResponseRedirect(self.index_url)
+           
+        method = request.GET.get('method', '')
+        data = super(STOrder, self).get(request, args, kwargs)
+        token = get_token(request)
+        member = data['member']
+        configs = UserConfigs.objects.get(member = member)
+        site = data['site']
+        form = self.form
+        featured_image = ''
+        if  kwargs['action'] == 'edit':
+            try:
+                order = PurchaseOrder.objects.get(pk=kwargs['pk'])
+            except:
+                return HttpResponseRedirect(self.index_url)
+            form = OrderAddForm(instance=order)
+
+        elif  kwargs['action'] == 'delete':
+            return HttpResponseRedirect(self.index_url)
+
+        if kwargs['action'] == 'show_all' or \
+            kwargs['action'] == 'add' or \
+            kwargs['action'] == 'edit' :
+            self.set_component(kwargs)
+        else :
+            return HttpResponseRedirect(self.index_url)
+
+        if method == 'get_component':
+            return self.get_component(request, token, data, configs, site, member, form, featured_image)
+
+        return render(request, self.template, {
+                'form': form,
+                'featured_image': featured_image,
+                'member': member,
+                'data': data,
+                'configs': configs,
+                'site': site,
+                'token': token,
+                'component':self.component,
+            }
+        )
 
 @login_required
 def index(request):

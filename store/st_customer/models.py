@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import RegexValidator
@@ -8,7 +9,8 @@ from membership.models import Member
 class Customer (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) #done
     seller = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='member_customer', null=True)
-    name = models.CharField(max_length=250, blank=True)
+    username = models.CharField(max_length=250, blank=True)
+    site = models.ForeignKey(Site, related_name="customer_site", on_delete=models.CASCADE,null=True, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?62?\d{9,15}$', message="Nomor Telepon Harus memiliki format +62819999999 atau 0819999999'. Maksimal 15 Digit.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validator haruslah berupa list
     home_provinsi = models.CharField(max_length=250, blank=True)
