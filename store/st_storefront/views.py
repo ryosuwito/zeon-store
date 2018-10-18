@@ -130,21 +130,6 @@ def product_detail(request, product_pk, **kwargs):
     return response
     
 def index(request, **kwargs):
-    """
-    referal_code = redirect_referal_code(request, kwargs=kwargs)
-    if referal_code['code']:
-        referer = Member.objects.get(referal_code = referal_code['code'])
-
-    if referal_code['message'] == "redirect_to_default":
-        return  HttpResponseRedirect(request.scheme+"://"+settings.DEFAULT_HOST + 
-                reverse('storefront:product_all', 
-                    current_app=request.resolver_match.namespace))
-    elif referal_code['message'] == 'redirect_to_referal':
-        return HttpResponseRedirect(request.scheme+"://"+referer.user.username+'.'+settings.DEFAULT_HOST + 
-                reverse('storefront:product_all', 
-                    current_app=request.resolver_match.namespace))
-    """
-
     try:
         product_list = Product.objects.filter(is_archived=False)
     except:

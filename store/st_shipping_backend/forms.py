@@ -1,10 +1,11 @@
 from django import forms
+from store.st_database_wilayah.models import Provinsi
 
 class ShippingAddForm(forms.Form):
     name = forms.CharField(label='Username/ Phone/ Email :', max_length=150)
     provinsi = forms.ModelChoiceField(Provinsi.objects.all(), initial='')
     alamat = forms.CharField(max_length=250, required=True)
-    is_default = forms.BooleanField(default=True)
+    is_default = forms.BooleanField()
 
     def __init__(self, *args, **kwargs):
         super(ShippingAddForm, self).__init__(*args, **kwargs)

@@ -12,8 +12,8 @@ class CategoryAddForm(forms.ModelForm):
 class ProductAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductAddForm, self).__init__(*args, **kwargs)
-        self.fields['category'].help_text = 'Pilih Kategori Artikel *(bisa lebih dari 1)'
-        self.fields['category'].widget.attrs['style'] = 'width:100%; padding:10px'
+        self.fields['categories'].help_text = 'Pilih Kategori Artikel *(bisa lebih dari 1)'
+        self.fields['categories'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['name'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['is_available'].widget.attrs['style'] = 'margin:10px 10px 0 0'
         self.fields['is_available'].widget.attrs['data-toggle'] = 'toggle'
@@ -22,7 +22,7 @@ class ProductAddForm(forms.ModelForm):
         
         
     class Meta:
-        model = TempArticle
+        model = Product
         fields = ('name',
                 'description',
                 'photo',
