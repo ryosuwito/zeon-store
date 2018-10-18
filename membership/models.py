@@ -34,9 +34,18 @@ class PackageGroup(models.Model):
         return self.name
 
 class Member(models.Model):
+    COMPANY_PROFILE = 0
+    ONLINE_SHOP = 1
+
+    SUBSCRIPTION_PRODUCTS = (
+        (COMPANY_PROFILE, 'Company Profile'),
+        (ONLINE_SHOP, 'Online Shop'),
+    )
+
     sidomo_user_id = models.CharField(max_length=50, blank=True)
     user = models.OneToOneField(User, related_name="user_member", on_delete=models.CASCADE)
     package_group = models.ManyToManyField(PackageGroup, blank=True, related_name="package_group")
+    subcription = models.PositiveSmallIntegerField(choices=SUBSCRIPTION_PRODUCTS, default=COMPANY_PROFILE) #done
     activation_code = models.CharField(max_length=8, blank=True)
     android_activation_code = models.CharField(max_length=8, blank=True)
     ios_activation_code = models.CharField(max_length=8, blank=True)

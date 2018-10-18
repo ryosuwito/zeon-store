@@ -16,14 +16,14 @@ class Index(LoginRequiredMixin, Dispatcher):
     login_url = '/cms/login/'
     template = "cp_admin/index.html"
     component = {}
-    component['base']='st_admin/component/index_base.html'
+    component['base']='cp_admin/component/index_base.html'
     def get(self, request, *args, **kwargs):
         token = get_token(request)
         data = super(Index, self).get(request, args, kwargs)
         member = data['member']
         configs = UserConfigs.objects.get(member = member)
         site = data['site']
-        self.component['header'] =  'st_admin/component/index_header.html'
+        self.component['header'] =  'cp_admin/component/index_header.html'
         self.component['main'] = 'st_admin/component/index_main.html'
         self.component['local_script'] = 'st_admin/component/index_local_script.html'
         if(request.GET.get('method', '') == 'get_component'):
