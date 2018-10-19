@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -16,10 +17,17 @@ class Category(models.Model):
             help_text="Deskripsi Kategori")
     is_archived = models.BooleanField(default = False,
             help_text="Centang untuk Menyembunyikan Kategori") 
-
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='product_category_site', null=True, blank=True)
+   
     class Meta:
         verbose_name_plural = "Categories"
 
+    def get_edit_url(self):
+        return "%s" % (reverse('store:category_edit_delete', kwargs={'action':'edit', 'pk':self.pk}))
+
+    def get_delete_url(self):
+        return "%s" % (reverse('store:category_edit_delete', kwargs={'action':'delete', 'pk':self.pk}))
+   
 
     def __str__(self):
        return self.name
@@ -61,7 +69,8 @@ class Product(models.Model):
     categories = models.ManyToManyField(Category, 
             related_name="products_in_category",
             help_text="Kategori Produk")
-
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='product_site', null=True, blank=True)
+    
     def get_details(self):
         details = {'name': self.name,
                    'weight' : self.unit_weight,
@@ -82,6 +91,12 @@ class Product(models.Model):
     def get_photo_alt5_url(self):
         return "/media/%s" % (self.photo_alt5)
 
+    def get_edit_url(self):
+        return "%s" % (reverse('store:product_edit_delete', kwargs={'action':'edit', 'pk':self.pk}))
+
+    def get_delete_url(self):
+        return "%s" % (reverse('store:product_edit_delete', kwargs={'action':'delete', 'pk':self.pk}))
+    
     def get_detail_url(self):
         return reverse('storefront:product_detail', kwargs={'product_pk':self.pk})
 

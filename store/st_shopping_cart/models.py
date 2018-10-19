@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -20,7 +21,8 @@ class Cart(models.Model):
     #is_checked_out = models.BooleanField(db_index=True,default=False)
     #is_paid = models.BooleanField(db_index=True,default=False)
     #is_set_as_dropship = models.BooleanField(default=False)
-
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='cart_site', null=True, blank=True)
+    
     seller = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True)
     costumer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -89,7 +91,8 @@ class WishList(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="users_wishlist", null=True)
     seller = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True)
     costumer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='wishlist_site', null=True, blank=True)
+    
     def get_total_products(self):
         return len(self.get_items_in_wishlist())
 

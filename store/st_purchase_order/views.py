@@ -41,7 +41,7 @@ class STOrder(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     add_local_script = 'st_purchase_order/component/purchase_order_add_local_script.html'
     edit_main = 'st_purchase_order/component/purchase_order_edit_main.html'
     edit_local_script = 'st_purchase_order/component/purchase_order_edit_local_script.html'
-    index_url = '/cms/article/'
+    index_url = '/str/order/'
     form = OrderAddForm()
 
     def post(self, request, *args, **kwargs):

@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from django.db import models
 from django.contrib.auth.models import User
 from store.st_shopping_cart.models import Cart
@@ -32,6 +33,8 @@ class PurchaseOrder(models.Model):
     #payment_status = models.TextField(blank=True)
     #payment_token = models.CharField(null=True, max_length=50, blank=True)
 
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='order_site', null=True, blank=True)
+    
     seller = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True)
     costumer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 

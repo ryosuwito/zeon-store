@@ -1,0 +1,90 @@
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/')">Store</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/product/')">Product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+<div class="row">
+    <div class="col-sm-12">
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-sm-12">
+        <form id='addArticleForm' method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
+            <div class="row">
+                <!-- column -->
+                <div class="col-xs-12 col-sm-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Add New Product</h1>
+                            <hr>
+                            <h4>{{ form.name.label }}</h4>
+                            {{ form.name }}
+                            <br>
+                            <br>
+                            <h4>{{ form.description.label }}</h4>
+                            {{ form.description }}
+                            <br>
+                            <br>
+                            <h4>{{ form.price.label }}</h4>
+                            {{ form.price }}
+                            <br>
+                            <br>
+                            <h4>{{ form.unit_weight.label }}</h4>
+                            {{ form.unit_weight }}
+                            <br>
+                            <br>
+                            <h6>{{ form.photo.label }}</h6>
+                            {{ form.photo }}
+                            <br>
+                            <h6>{{ form.photo_alt1.label }}</h6>
+                            {{ form.photo_alt1 }}
+                            <br>
+                            <h6>{{ form.photo_alt2.label }}</h6>
+                            {{ form.photo_alt2 }}
+                            <br>
+                            <h6>{{ form.photo_alt3.label }}</h6>
+                            {{ form.photo_alt3 }}
+                            <br>
+                            <h6>{{ form.photo_alt4.label }}</h6>
+                            {{ form.photo_alt4 }}
+                            <br>
+                            <h6>{{ form.photo_alt5.label }}</h6>
+                            {{ form.photo_alt5 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6>{{ form.is_available }}  {{ form.is_available.label }}</h6>
+                            <h6>{{ form.is_archived }}  {{ form.is_archived.label }}</h6>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="display: flex; justify-content: center">
+                            <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

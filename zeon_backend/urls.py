@@ -38,7 +38,7 @@ urlpatterns = [
     path('history/', history, name="history"),
     path('order/', include(order, namespace='order_backend')),
     #path('shipping/', include(shipping, namespace='shipping_backend')),
-    path('cms/store/', include(st_admin, namespace='st_admin')),
+    path('str/', include(st_admin, namespace='st_admin')),
     path('cms/', include(cp_admin, namespace='cp_admin')),
     path('core/admin/', admin.site.urls),
     path('blog/<str:kategori>/<str:slug>/', Article.as_view(), name="blog_detail"),

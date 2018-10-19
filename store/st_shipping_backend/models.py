@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from django.db import models
 from store.st_database_wilayah.models import Provinsi, Kota, Kecamatan, Kelurahan
 
@@ -9,6 +10,8 @@ class ShippingOrigin(models.Model):
     kelurahan = models.ForeignKey(Kelurahan, null=True, on_delete=models.SET_NULL)
     alamat = models.CharField(max_length=400, blank=True, null=True)
     is_default = models.BooleanField(default=False)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='shipping_site', null=True, blank=True)
+   
     def __str__(self):
         return self.name.title()
 

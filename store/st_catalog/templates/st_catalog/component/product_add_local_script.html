@@ -1,0 +1,15 @@
+<script>
+    function localScript(){
+        $('#id_is_available').bootstrapToggle();
+        $('#id_is_archived').bootstrapToggle();
+    }
+    function submitNewArticle(){
+        $('#addArticleForm').submit();
+    }
+    try {
+        ($('#id_is_available').bootstrapToggle())();
+        ($('#id_is_available').bootstrapToggle())();
+        throw "Exception"; // generates an exception
+    }
+    catch (e) {}
+</script>
