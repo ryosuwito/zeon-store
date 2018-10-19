@@ -1,8 +1,8 @@
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/')">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/cms/page/')">Article</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/')">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/product/')">Product</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>
     </nav>
@@ -27,52 +27,24 @@
     {% endif %}
     </div>
     <div class="col-sm-12">
-        <form id='editArticleForm' method="POST" enctype="multipart/form-data">
+        <form id='addArticleForm' method="POST" enctype="multipart/form-data">
             <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
             <div class="row">
                 <!-- column -->
-                <div class="col-xs-12 col-sm-9">
+                <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <h1>Add New Article</h1>
+                            <h1>Add New Category</h1>
                             <hr>
-                            {% csrf_token %}
-                            <h4>{{ form.title.label }}</h4>
-                            {{ form.title }}
-                            <br>
-                            <br>
-                            <h4>{{ form.content.label }}</h4>
-                            {{ form.content }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>{{ form.tags.label }}</h6>
-                            {{ form.tags }}
-                            <h6>{{ form.category.label }}</h6>
-                            {{ form.category }}
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h6>{{ form.published_date }}  {{ form.published_date.label }}</h6>
-                            <h6>{{ form.is_published }}  {{ form.is_published.label }}</h6>
-                            <h6>{{ form.is_featured }}  {{ form.is_featured.label }}</h6>
-                            <hr>
-                            <h6>{{ form.featured_image.label }}</h6>
-                            {% if featured_image %}
-                            <img src="{{ featured_image }}" width="100%; height:auto">
-                            <hr>
-                            {% endif %}
-                            {{ form.featured_image }}
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body" style="display: flex; justify-content: center">
-                            <p class="btn btn-info" style="margin: auto" onclick="previewNewArticle()">PREVIEW</p>
-                            <button class="btn btn-primary" form="editArticleForm" style="margin: auto" type="submit">SUBMIT</button>
+                            <h4>Category Name</h4>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-9">
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
