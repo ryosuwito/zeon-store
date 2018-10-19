@@ -46,17 +46,15 @@
                             <br>
                             <div class="row" style="margin:0">
                                 <div class="col-xs-12 col-md-4">
+                                    <h4>{{ form.price.label }}</h4>
+                                    {{ form.price }}
+                                    <h4>{{ form.unit_weight.label }}</h4>
+                                    {{ form.unit_weight }}
+                                </div>
+                                <div class="col-xs-12 col-md-6">
                                     <h4>{{ form.categories.label }}</h4>
                                     <p class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/category/add/')">Add New Category</a></p>
                                     {{ form.categories }}
-                                </div>
-                                <div class="col-xs-12 col-md-4">
-                                    <h4>{{ form.price.label }}</h4>
-                                    {{ form.price }}
-                                </div>
-                                <div class="col-xs-12 col-md-4">
-                                    <h4>{{ form.unit_weight.label }}</h4>
-                                    {{ form.unit_weight }}
                                 </div>
                             </div>
                             <br>
