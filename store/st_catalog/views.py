@@ -25,7 +25,7 @@ class STProduct(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     index_url = '/str/product/'
     form = ProductAddForm()
     def post(self, request, *args, **kwargs):
-        data = super(CPArticle, self).get(request, args, kwargs)
+        data = super(STProduct, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
         if  kwargs['action'] == 'edit':
@@ -71,7 +71,7 @@ class STProduct(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                     product = Product.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
-        data = super(STCatalog, self).get(request, args, kwargs)
+        data = super(STProduct, self).get(request, args, kwargs)
         token = get_token(request)
         member = data['member']
         configs = UserConfigs.objects.get(member = member)
@@ -126,7 +126,7 @@ class STCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     form = CategoryAddForm()
 
     def post(self, request, *args, **kwargs):
-        data = super(CPCategory, self).get(request, args, kwargs)
+        data = super(STCategory, self).get(request, args, kwargs)
         member = data['member']
         site = data['site']
         if  kwargs['action'] == 'edit':
