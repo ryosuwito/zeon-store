@@ -59,28 +59,47 @@
                             <br>
                             <h6>{{ form.photo.label }}</h6> 
                             {% if form.instance.get_photo_url %}
-                                <img src="{{ form.instance.get_photo_url }}" style="width:100%; max-width:320px; height:auto">
+                                <img src="{{ form.instance.get_photo_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
                             {% endif %}
                             {{ form.photo }}
                             <br>
                             <br>
                             <h6>{{ form.photo_alt1.label }}</h6>
+                            {% if form.instance.get_photo_alt1_url %}
+                                <img src="{{ form.instance.get_photo_alt1_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                            {% endif %}
                             {{ form.photo_alt1 }}
                             <br>
                             <br>
                             <h6>{{ form.photo_alt2.label }}</h6>
+                            {% if form.instance.get_photo_alt2_url %}
+                                <img src="{{ form.instance.get_photo_alt2_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                            {% endif %}
+                            {{ form.photo_alt1 }}
                             {{ form.photo_alt2 }}
                             <br>
                             <br>
                             <h6>{{ form.photo_alt3.label }}</h6>
+                            {% if form.instance.get_photo_alt3_url %}
+                                <img src="{{ form.instance.get_photo_alt3_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                            {% endif %}
+                            {{ form.photo_alt1 }}
                             {{ form.photo_alt3 }}
                             <br>
                             <br>
                             <h6>{{ form.photo_alt4.label }}</h6>
+                            {% if form.instance.get_photo_alt4_url %}
+                                <img src="{{ form.instance.get_photo_alt4_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                            {% endif %}
+                            {{ form.photo_alt1 }}
                             {{ form.photo_alt4 }}
                             <br>
                             <br>
                             <h6>{{ form.photo_alt5.label }}</h6>
+                            {% if form.instance.get_photo_alt5_url %}
+                                <img src="{{ form.instance.get_photo_alt5_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                            {% endif %}
+                            {{ form.photo_alt1 }}
                             {{ form.photo_alt5 }}
                             <br>
                         </div>
