@@ -43,6 +43,10 @@
                             {{ form.description }}
                             <br>
                             <br>
+                            <h4>{{ form.categories.label }}</h4>
+                            {{ form.categories }}
+                            <br>
+                            <br>
                             <h4>{{ form.price.label }}</h4>
                             {{ form.price }}
                             <br>
@@ -54,20 +58,26 @@
                             <h6>{{ form.photo.label }}</h6>
                             {{ form.photo }}
                             <br>
+                            <br>
                             <h6>{{ form.photo_alt1.label }}</h6>
                             {{ form.photo_alt1 }}
+                            <br>
                             <br>
                             <h6>{{ form.photo_alt2.label }}</h6>
                             {{ form.photo_alt2 }}
                             <br>
+                            <br>
                             <h6>{{ form.photo_alt3.label }}</h6>
                             {{ form.photo_alt3 }}
+                            <br>
                             <br>
                             <h6>{{ form.photo_alt4.label }}</h6>
                             {{ form.photo_alt4 }}
                             <br>
+                            <br>
                             <h6>{{ form.photo_alt5.label }}</h6>
                             {{ form.photo_alt5 }}
+                            <br>
                         </div>
                         <div class="card-body">
                             <h6>{{ form.is_available }}  {{ form.is_available.label }}</h6>
