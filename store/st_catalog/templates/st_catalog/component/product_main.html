@@ -25,12 +25,14 @@
                 <hr>
                 <div class="row" style="margin: 0">
                     <div class="col-xs-2 col-sm-1" style="text-align: center">
+                    </div>
+                    <div class="col-xs-2 col-sm-1" style="text-align: center">
                         <h6>Available</h6>
                     </div>
                     <div class="col-xs-2 col-sm-1" style="text-align: center">
                         <h6>Archived</h6>
                     </div>
-                    <div class="col-xs-4 col-sm-4" style="text-align: left">
+                    <div class="col-xs-4 col-sm-3" style="text-align: left">
                         <h6>Name</h6>
                     </div>
                     <div class="col-xs-4 col-sm-1" style="text-align: left">
@@ -49,6 +51,9 @@
                 {% for product in site.product_site.all %}
                     <div class="row" style="margin: 0">
                         <div class="col-xs-2 col-sm-1" style="text-align: center">
+                            <img src="{{ product.get_photo_url }}" style="width:100%; height:auto">
+                        </div>
+                        <div class="col-xs-2 col-sm-1" style="text-align: center">
                             {% if  product.is_available %}
                             <span class="text-success fa fa-check"></span>
                             {% else %}
@@ -62,7 +67,7 @@
                             <span class="text-danger fa fa-times"></span>
                             {% endif %}
                         </div>
-                        <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
+                        <div class="col-xs-4 col-sm-3" style="text-align: left; word-wrap: break-word">
                             <p onclick="window.open('{{ product.get_detail_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ product.name | title }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
