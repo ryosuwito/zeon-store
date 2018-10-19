@@ -1,0 +1,67 @@
+<script>
+    function localScript(){
+        var textareas = Array.prototype.slice.call(document.querySelectorAll('textarea[data-type=ckeditortype]'));
+        for (var i=0; i<textareas.length; ++i) {
+            var t = textareas[i];
+            if (t.getAttribute('data-processed') == '1') {
+                t.setAttribute('data-processed', '0');
+            }
+        }
+        function initialiseCKEditor() {
+            var textareas = Array.prototype.slice.call(document.querySelectorAll('textarea[data-type=ckeditortype]'));
+            for (var i=0; i<textareas.length; ++i) {
+            var t = textareas[i];
+            if (t.getAttribute('data-processed') == '0' && t.id.indexOf('__prefix__') == -1) {
+                t.setAttribute('data-processed', '1');
+                var ext = JSON.parse(t.getAttribute('data-external-plugin-resources'));
+                for (var j=0; j<ext.length; ++j) {
+                CKEDITOR.plugins.addExternal(ext[j][0], ext[j][1], ext[j][2]);
+                }
+                CKEDITOR.replace(t.id, JSON.parse(t.getAttribute('data-config')));
+            }
+            }
+        }
+        
+        function initialiseCKEditorInInlinedForms() {
+            document.body.addEventListener('click', function(e) {
+            if (e.target && (
+                e.target.matches('.add-row a') ||
+                e.target.matches('.grp-add-handler')
+            )) {
+                initialiseCKEditor();
+            }
+            });
+        }
+        
+        setTimeout(initialiseCKEditor(), 4000);
+        
+        setTimeout(initialiseCKEditorInInlinedForms(), 4000);
+    }
+
+    function submitNewArticle(){
+        $('#addArticleForm').submit();
+    }
+    function previewNewArticle(){
+        CKEDITOR.instances['id_content'].updateElement();
+        var formData = new FormData($('#editArticleForm')[0]);
+        $.ajax({
+            url: '/cms/article/preview/',
+            type: 'POST',
+            data: formData,
+            async: false,
+            success: function (data) {
+                window.open(data['url'], '_blank')
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+    try {
+        ($('#id_is_published').bootstrapToggle())();
+        ($('#id_is_featured').bootstrapToggle())();
+        throw "Exception"; // generates an exception
+    }
+    catch (e) {}
+    
+</script>
