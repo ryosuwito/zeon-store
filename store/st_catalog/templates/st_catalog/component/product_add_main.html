@@ -43,42 +43,69 @@
                             {{ form.description }}
                             <br>
                             <br>
-                            <h4>{{ form.categories.label }}</h4>
-                            <p class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/category/add/')">Add New Category</a></p>
-                            {{ form.categories }}
+                            <div class="row" style="margin:0">
+                                <div class="col-xs-12 col-md-4">
+                                    <h4>{{ form.categories.label }}</h4>
+                                    <p class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/category/add/')">Add New Category</a></p>
+                                    {{ form.categories }}
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <h4>{{ form.price.label }}</h4>
+                                    {{ form.price }}
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.unit_weight.label }}</h4>
+                                    {{ form.unit_weight }}
+                                </div>
+                            </div>
                             <br>
                             <br>
-                            <h4>{{ form.price.label }}</h4>
-                            {{ form.price }}
-                            <br>
-                            <br>
-                            <h4>{{ form.unit_weight.label }}</h4>
-                            {{ form.unit_weight }}
-                            <br>
-                            <br>
-                            <h6>{{ form.photo.label }}</h6>
-                            {{ form.photo }}
-                            <br>
-                            <br>
-                            <h6>{{ form.photo_alt1.label }}</h6>
-                            {{ form.photo_alt1 }}
-                            <br>
-                            <br>
-                            <h6>{{ form.photo_alt2.label }}</h6>
-                            {{ form.photo_alt2 }}
-                            <br>
-                            <br>
-                            <h6>{{ form.photo_alt3.label }}</h6>
-                            {{ form.photo_alt3 }}
-                            <br>
-                            <br>
-                            <h6>{{ form.photo_alt4.label }}</h6>
-                            {{ form.photo_alt4 }}
-                            <br>
-                            <br>
-                            <h6>{{ form.photo_alt5.label }}</h6>
-                            {{ form.photo_alt5 }}
-                            <br>
+                            <div class="row" style="margin:0">
+                                <div class="col-xs-4 col-md-4" style="padding:15px">
+                                    <h6>{{ form.photo.label }}</h6> 
+                                    {% if form.instance.get_photo_url %}
+                                        <img src="{{ form.instance.get_photo_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                                    {% endif %}
+                                    {{ form.photo }}
+                                </div>
+                                <div class="col-xs-4 col-md-4" style="padding:15px">
+                                    <h6>{{ form.photo_alt1.label }}</h6>
+                                    {% if form.instance.get_photo_alt1_url %}
+                                        <img src="{{ form.instance.get_photo_alt1_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                                    {% endif %}
+                                    {{ form.photo_alt1 }}
+                                </div>
+                                <div class="col-xs-4 col-md-4" style="padding:15px">
+                                    <h6>{{ form.photo_alt2.label }}</h6>
+                                    {% if form.instance.get_photo_alt2_url %}
+                                        <img src="{{ form.instance.get_photo_alt2_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                                    {% endif %}
+                                    {{ form.photo_alt2 }}
+                                </div>
+                            </div>
+                            <div class="row" style="margin:0">
+                                <div class="col-xs-4 col-md-4" style="padding:15px">
+                                    <h6>{{ form.photo_alt3.label }}</h6>
+                                    {% if form.instance.get_photo_alt3_url %}
+                                        <img src="{{ form.instance.get_photo_alt3_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                                    {% endif %}
+                                    {{ form.photo_alt3 }}
+                                </div>
+                                <div class="col-xs-4 col-md-4" style="padding:15px">
+                                    <h6>{{ form.photo_alt4.label }}</h6>
+                                    {% if form.instance.get_photo_alt4_url %}
+                                        <img src="{{ form.instance.get_photo_alt4_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                                    {% endif %}
+                                    {{ form.photo_alt4 }}
+                                </div>
+                                <div class="col-xs-4 col-md-4" style="padding:15px">
+                                    <h6>{{ form.photo_alt5.label }}</h6>
+                                    {% if form.instance.get_photo_alt5_url %}
+                                        <img src="{{ form.instance.get_photo_alt5_url }}" style="width:100%; display: block; margin: 5px 0; max-width:320px; height:auto">
+                                    {% endif %}
+                                    {{ form.photo_alt5 }}
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <h6>{{ form.is_available }}  {{ form.is_available.label }}</h6>
