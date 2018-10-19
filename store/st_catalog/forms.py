@@ -34,4 +34,5 @@ class ProductAddForm(forms.ModelForm):
                 'unit_weight',
                 'categories',
                 'is_available',
+                'is_archived',
                 'price',)
