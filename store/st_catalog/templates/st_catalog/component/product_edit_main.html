@@ -59,7 +59,7 @@
                             <br>
                             <h6>{{ form.photo.label }}</h6> 
                             {% if form.instance.get_photo_url %}
-                                <img src="{{ form.instance.get_photo_url }}" width="100%; height:auto">
+                                <img src="{{ form.instance.get_photo_url }}" width="100%; max-width:320px; height:auto">
                             {% endif %}
                             {{ form.photo }}
                             <br>
