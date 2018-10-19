@@ -71,6 +71,7 @@ class STProduct(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                     product = Product.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
+        method = request.GET.get('method', '')
         data = super(STProduct, self).get(request, args, kwargs)
         token = get_token(request)
         member = data['member']
