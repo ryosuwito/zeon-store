@@ -53,6 +53,7 @@ class PurchaseOrder(models.Model):
         return '/str/order/edit/%s/'%(self.pk)
 
     class Meta:
+        ordering = ['-created_date']
         verbose_name = "PurchaseOrder"
         verbose_name_plural = "Purchase Orders"
 
