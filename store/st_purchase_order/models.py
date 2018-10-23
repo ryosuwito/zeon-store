@@ -49,6 +49,9 @@ class PurchaseOrder(models.Model):
         else:
             return 'INV-{}'.format(order_number)
 
+    def get_detail_url(self):
+        return '/str/order/%s'%(self.pk)
+
     class Meta:
         verbose_name = "PurchaseOrder"
         verbose_name_plural = "Purchase Orders"
