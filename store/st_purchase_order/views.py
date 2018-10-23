@@ -54,7 +54,6 @@ class STOrder(LoginRequiredMixin, ComponentRenderer, Dispatcher):
             if self.form.is_valid():
                 order = self.form.save()
                 return HttpResponseRedirect(self.index_url)
-            data['order'] = order
         else:
             return HttpResponseRedirect(self.index_url)
 
@@ -85,7 +84,7 @@ class STOrder(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                 return HttpResponseRedirect(self.index_url)
             else :
                 try:
-                    Order = PurchaseOrder.objects.get(pk=kwargs['pk'])
+                    order = PurchaseOrder.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
            
@@ -98,17 +97,13 @@ class STOrder(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         form = self.form
         featured_image = ''
         if  kwargs['action'] == 'edit':
-            try:
-                order = PurchaseOrder.objects.get(pk=kwargs['pk'])
-            except:
-                return HttpResponseRedirect(self.index_url)
+            data['order'] = order
             form = OrderAddForm(instance=order)
 
         elif  kwargs['action'] == 'delete':
             return HttpResponseRedirect(self.index_url)
 
         if kwargs['action'] == 'show_all' or \
-            kwargs['action'] == 'add' or \
             kwargs['action'] == 'edit' :
             self.set_component(kwargs)
         else :
