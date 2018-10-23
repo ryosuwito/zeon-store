@@ -47,42 +47,31 @@
                     </div>
                 </div>
                 <hr>
-                {% for product in site.product_site.all %}
+                {% for order in site.order_site.all %}
                     <div class="row" style="margin: 0">
-                        <div class="col-xs-2 col-sm-1" style="text-align: center">
-                            <img src="{{ product.get_photo_url }}" style="width:100%; height:auto">
+                        <div class="col-xs-4 col-sm-2" style="text-align: left">
+                            <h6>{{order.created_date|date:"SHORT_DATE_FORMAT"}}</h6>
                         </div>
-                        <div class="col-xs-2 col-sm-1" style="text-align: center">
-                            {% if  product.is_available %}
-                            <span class="text-success fa fa-check"></span>
-                            {% else %}
-                            <span class="text-danger fa fa-times"></span>
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-2 col-sm-1" style="text-align: center">
-                            {% if  product.is_archived %}
-                            <span class="text-success fa fa-check"></span>
-                            {% else %}
-                            <span class="text-danger fa fa-times"></span>
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-4 col-sm-3" style="text-align: left; word-wrap: break-word">
-                            <p onclick="window.open('{{ product.get_detail_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ product.name | title }}</p>
+                        <div class="col-xs-4 col-sm-2" style="text-align: left">
+                            <h6>{{order.payment_date|date:"SHORT_DATE_FORMAT"}}</h6>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <p>{{ product.price | int_to_rupiah }}</p>
+                            <h6>{{order.costumer.username | title}}</h6>
                         </div>
-                        <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <p>{{ product.unit_weight | int_to_kilogram }}</p>
+                        <div class="col-xs-2 col-sm-1" style="text-align: center">
+                            <h6>{{order.is_valid}}</h6>
                         </div>
-                        <div class="col-xs-4 col-sm-2" style="text-align: left; word-wrap: break-word">
-                            {% for category in product.categories.all %}
-                                <span style="display: inline-block; margin: 2px 0"  class="label label-info">{{ category.name | title }}</span>
-                            {% endfor %}
+                        <div class="col-xs-2 col-sm-1" style="text-align: center">
+                            <h6>{{order.is_paid}}</h6>
                         </div>
-                        <div class="col-xs-4 col-sm-2" style="display: flex; justify-content: center">
-                            <p onclick="getNext('{{ product.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
-                            <p onclick="window.open('{{ product.get_delete_url }}', '_parent')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
+                        <div class="col-xs-2 col-sm-1" style="text-align: center">
+                            <h6>{{order.is_verified}}</h6>
+                        </div>
+                        <div class="col-xs-4 col-sm-2" style="text-align: left">
+                            <h6>{{order.order_number}}</h6>
+                        </div>
+                        <div class="col-xs-4 col-sm-2" style="text-align: left">
+                            <h6>{{order.total_payment | int_to_rupiah}} </h6>
                         </div>
                     </div>
                     {% if not forloop.last %}
