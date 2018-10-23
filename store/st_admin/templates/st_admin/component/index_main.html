@@ -32,7 +32,7 @@
                         <hr>
                         <p onclick="window.open('{{ order.get_detail_url }}', '_parent')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ order.order_number | truncatechars:60 }}</p>
                         <br>
-                        <p>ordered by: {{ order.costumer.username | title }} | on : {{ order.created_date | date "j/n/Y"}}</p>
+                        <p>ordered by: {{ order.costumer.username | title }} | on : {{ order.created_date|date:"j/n/Y"}}</p>
                         {% endfor %}
                     </div>
                 </div>
