@@ -31,40 +31,33 @@
             <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
             <div class="row">
                 <!-- column -->
-                <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-12 col-sm-8">
                     <div class="card">
                         <div class="card-body">
-                            <h1>Order : {{ data.order.order_number }}</h1>
+                            <h3>Order : {{ data.order.order_number }}</h3>
                             <hr>
                             <h4>Category Name</h4>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4">
                                     <h4>{{ form.is_paid.label }} <br> {{ form.is_paid }}</h4>
                                     <br>
-                                    <br>
                                     <h4>{{ form.is_verified.label }} <br> {{ form.is_verified }}</h4>
-                                    <br>
                                     <br>
                                     <h4>{{ form.is_valid.label }} <br> {{ form.is_valid }}</h4>
                                 </div>
                                 <div class="col-xs-12 col-md-8">
                                     <h4>{{ form.total_price.label }} <br> {{ form.total_price }}</h4>
                                     <br>
-                                    <br>
                                     <h4>{{ form.discount.label }} <br> {{ form.total_price }}</h4>
                                     <br>
-                                    <br>
                                     <h4>{{ form.shipping_cost.label }} <br> {{ form.shipping_cost }}</h4>
-                                    <br>
                                     <br>
                                     <h4>{{ form.total_payment.label }} <br> {{ form.total_payment }}</h4>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
                                     <h4>{{ form.service.label }} <br> {{ form.service }}</h4>
                                     <br>
-                                    <br>
                                     <h4>{{ form.sub_service.label }} <br> {{ form.sub_service }}</h4>
-                                    <br>
                                     <br>
                                     <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
                                 </div>
