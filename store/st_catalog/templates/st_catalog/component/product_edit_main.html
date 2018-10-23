@@ -1,9 +1,9 @@
 {% block breadcrumb %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/')">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/')">Store</a></li>
             <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/product/')">Product</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+            <li class="breadcrumb-item active" aria-current="page">Add</li>
         </ol>
     </nav>
 {% endblock %}
@@ -15,7 +15,6 @@
             {% for error in field.errors %}
                 <div class="alert alert-danger">
                     <strong>{{ error|escape }}</strong>
-                    <p>{{ field.label }}</p>
                 </div>
             {% endfor %}
         {% endfor %}
@@ -57,6 +56,12 @@
                                     <br>
                                     <h4>{{ form.unit_weight.label }}</h4>
                                     {{ form.unit_weight }}
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <h4>{{ form.is_available.label }} <br> {{ form.is_available }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.is_archived.label }} <br> {{ form.is_archived }}</h4>
                                 </div>
                             </div>
                             <br>
@@ -109,8 +114,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6>{{ form.is_available }}  {{ form.is_available.label }}</h6>
-                            <h6>{{ form.is_archived }}  {{ form.is_archived.label }}</h6>
                             <p class="btn btn-primary" style="float:right; margin: auto" onclick="submitNewArticle()">SUBMIT</p>
                         </div>
                     </div>
