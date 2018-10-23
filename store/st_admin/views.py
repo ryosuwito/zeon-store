@@ -7,6 +7,7 @@ from dispatcher.views import ComponentRenderer
 from django.shortcuts import render
 from django.views import View
 
+from company_profile.cp_user_configs.models import UserConfigs
 from store.st_catalog.views import STProduct, STCategory
 from store.st_purchase_order.views import STOrder
 from store.st_customer.views import STCustomer
