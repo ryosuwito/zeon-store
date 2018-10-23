@@ -70,6 +70,7 @@
                                         <p>{{ data.order.sub_service }}</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
+                                    <hr>
                                     <div class="row" style="margin-bottom:5px">
                                         <div class="col-xs-2 col-sm-1">
                                         </div>
@@ -90,7 +91,7 @@
                                         {% for item in data.order.item_in_order.all %}
                                             <div class="row" style="margin-bottom:5px">
                                                 <div class="col-xs-2 col-sm-1">
-                                                    <img src="{{ item.product.get_photo_url }}" style="width:100%; height:auto">
+                                                    <img src="{{ item.product.get_photo_url }}" style="width:100%; max-width: 90px; height:auto">
                                                 </div>
                                                 <div class="col-xs-6 col-sm-7">
                                                     <a href="{{item.product.get_detail_url}}" target="_blank">{{ item.product.name | title }}</a>
