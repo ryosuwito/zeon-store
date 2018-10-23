@@ -12,7 +12,7 @@ class CategoryAddForm(forms.ModelForm):
 class ProductAddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductAddForm, self).__init__(*args, **kwargs)
-        self.fields['description'].widget.attrs['rows'] = '3'
+        self.fields['description'].widget.attrs['rows'] = '13'
         self.fields['description'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['description'].widget.attrs['placeholder'] = ''
         self.fields['categories'].help_text = 'Pilih Kategori Artikel *(bisa lebih dari 1)'
