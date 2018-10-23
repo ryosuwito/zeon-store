@@ -12,7 +12,6 @@ urlpatterns = [
     path('category/', StoreCategory.as_view(), name='category_all'),
 
     path('order/<str:action>/<int:pk>/', StoreOrder.as_view(), name='order_edit_delete'),
-    path('order/<int:pk>/', StoreOrder.as_view(), name='order_add'),
     path('order/', StoreOrder.as_view(), name='order_all'),
 
     path('customer/<str:action>/<int:pk>/', StoreCustomer.as_view(), name='customer_edit_delete'),
