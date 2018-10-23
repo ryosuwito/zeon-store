@@ -1,0 +1,78 @@
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/')">Store</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/order/')">Order</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ data.order.order_number }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-sm-12">
+        <form id='addArticleForm' method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
+            <div class="row">
+                <!-- column -->
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>Order : {{ data.order.order_number }}</h1>
+                            <hr>
+                            <h4>Category Name</h4>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <h4>{{ form.is_paid.label }} <br> {{ form.is_paid }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.is_verified.label }} <br> {{ form.is_verified }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.is_valid.label }} <br> {{ form.is_valid }}</h4>
+                                </div>
+                                <div class="col-xs-12 col-md-8">
+                                    <h4>{{ form.total_price.label }} <br> {{ form.total_price }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.discount.label }} <br> {{ form.total_price }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.shipping_cost.label }} <br> {{ form.shipping_cost }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.total_payment.label }} <br> {{ form.total_payment }}</h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <h4>{{ form.service.label }} <br> {{ form.service }}</h4>
+                                    <br>
+                                    <br>
+                                    <h4>{{ form.sub_service.label }} <br> {{ form.sub_service }}</h4>
+                                    <br>
+                                    <br>
+                                    <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

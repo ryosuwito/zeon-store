@@ -13,7 +13,7 @@ class OrderAddForm(forms.ModelForm):
         self.fields['is_paid'].widget.attrs['style'] = 'margin:10px 10px 0 0'
         self.fields['is_paid'].widget.attrs['data-toggle'] = 'toggle'
 
-        self.fields['order_number'].widget.attrs['style'] = 'width:100%; padding:10px'
+        self.fields['order_number'].widget.attrs['style'] = 'width:100%; padding:10px; display:none'
         self.fields['service'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['sub_service'].widget.attrs['style'] = 'width:100%; padding:10px'
         self.fields['total_price'].widget.attrs['style'] = 'width:100%; padding:10px'
