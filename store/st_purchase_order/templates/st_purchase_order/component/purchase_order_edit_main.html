@@ -48,28 +48,24 @@
                                 <div class="col-xs-12 col-md-8">
                                     <h4>Total Price</h4>
                                         
-                                        <p>{{ data.order.total_price | int_to_rupiah }}"></p>
-                                    <br>
+                                        <p>{{ data.order.total_price | int_to_rupiah }}</p>
                                     <h4>Discount</h4>
                                         
-                                        <p>{{ data.order.discount | int_to_rupiah }}"></p>
-                                    <br>
+                                        <p>{{ data.order.discount | int_to_rupiah }}</p>
                                     <h4>Shipping Cost</h4>
                                         
-                                        <p>{{ data.order.shipping_cost | int_to_rupiah }}"></p>
-                                    <br>
+                                        <p>{{ data.order.shipping_cost | int_to_rupiah }}</p>
                                     <h4>Total Payment</h4>
                                         
-                                        <p>{{ data.order.total_payment | int_to_rupiah }}"></p>
+                                        <p>{{ data.order.total_payment | int_to_rupiah }}</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
                                     <h4>Service</h4>
                                         
-                                        <p>{{ data.order.service }}"></p>
-                                    <br>
+                                        <p>{{ data.order.service }}</p>
                                     <h4>Sub Service</h4>
                                         
-                                        <p>{{ data.order.sub_service }}"></p>
+                                        <p>{{ data.order.sub_service }}</p>
                                     <br>
                                     <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
                                 </div>
