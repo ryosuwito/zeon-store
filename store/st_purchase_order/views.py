@@ -50,13 +50,13 @@ class STOrder(LoginRequiredMixin, ComponentRenderer, Dispatcher):
         site = data['site']
         if  kwargs['action'] == 'edit':
             order = PurchaseOrder.objects.get(pk=kwargs['pk'])
-            data['order'] = order
             self.form = OrderAddForm(request.POST, request.FILES, instance=category)
             if self.form.is_valid():
                 order = self.form.save()
                 return HttpResponseRedirect(self.index_url)
+            data['order'] = order
         else:
-            self.form = OrderAddForm(request.POST, request.FILES)
+            return HttpResponseRedirect(self.index_url)
 
         if self.form.is_valid():
             order = self.form.save(commit=False)
