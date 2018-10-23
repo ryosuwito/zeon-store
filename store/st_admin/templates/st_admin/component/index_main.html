@@ -16,10 +16,8 @@
                 <p>
                     <a href="javascript:void(0)" onclick="window.open('http://{{ request.get_host }}/store','_blank')" class="btn btn-primary">VIEW STORE</span></a>
                 </p>
+                <hr>
                 <div class="row" style="margin: 0">
-                    <div class="col-xs-12">
-                        <hr>
-                    </div>
                     <div class="col-xs-8 col-sm-9" style="text-align: left; padding: 0">
                         <h3>Orders </h3>
                         <p>Total Orders: {{ site.order_site.all | length}}</p>
