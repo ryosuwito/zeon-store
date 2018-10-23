@@ -169,8 +169,8 @@ class STCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
                     category = Category.objects.get(pk=kwargs['pk'])
                 except:
                     return HttpResponseRedirect(self.index_url)
-        if category.name == 'post':
-            return HttpResponseRedirect(self.index_url)
+            if category.name == 'post':
+                return HttpResponseRedirect(self.index_url)
 
         method = request.GET.get('method', '')
         data = super(STCategory, self).get(request, args, kwargs)
