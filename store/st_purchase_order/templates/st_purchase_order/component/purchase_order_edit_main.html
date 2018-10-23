@@ -45,18 +45,30 @@
                                     <h4>{{ form.is_valid.label }} <br> {{ form.is_valid }}</h4>
                                 </div>
                                 <div class="col-xs-12 col-md-8">
-                                    <h4>{{ form.total_price.label }} <br> {{ form.total_price }}</h4>
+                                    <h4>Total Price <br>
+                                        <input style="width:100%;padding:10px;background: #eee;color: #888;"
+                                        placeholder="{{ data.order.total_price | int_to_rupiah }}"></h4>
                                     <br>
-                                    <h4>{{ form.discount.label }} <br> {{ form.total_price }}</h4>
+                                    <h4>Discount<br>
+                                        <input style="width:100%;padding:10px;background: #eee;color: #888;"
+                                        placeholder="{{ data.order.discount | int_to_rupiah }}"></h4>
                                     <br>
-                                    <h4>{{ form.shipping_cost.label }} <br> {{ form.shipping_cost }}</h4>
+                                    <h4>Shipping Cost <br>
+                                        <input style="width:100%;padding:10px;background: #eee;color: #888;"
+                                        placeholder="{{ data.order.shipping_cost | int_to_rupiah }}"></h4>
                                     <br>
-                                    <h4>{{ form.total_payment.label }} <br> {{ form.total_payment }}</h4>
+                                    <h4>Total Payment <br>
+                                        <input style="width:100%;padding:10px;background: #eee;color: #888;"
+                                        placeholder="{{ data.order.total_payment | int_to_rupiah }}"></h4>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
-                                    <h4>{{ form.service.label }} <br> {{ form.service }}</h4>
+                                    <h4>Service<br>
+                                        <input style="width:100%;padding:10px;background: #eee;color: #888;"
+                                        placeholder="{{ data.order.service| int_to_rupiah }}"></h4>
                                     <br>
-                                    <h4>{{ form.sub_service.label }} <br> {{ form.sub_service }}</h4>
+                                    <h4>Sub Service<br>
+                                        <input style="width:100%;padding:10px;background: #eee;color: #888;"
+                                        placeholder="{{ data.order.sub_service| int_to_rupiah }}"></h4></h4>
                                     <br>
                                     <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
                                 </div>
