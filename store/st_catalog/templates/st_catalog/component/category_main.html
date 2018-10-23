@@ -1,0 +1,69 @@
+{% load humanize %}
+{% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" onclick="getNext('/str/')">Store</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Category</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+<div class="row">
+    <!-- column -->
+    <div class="col-sm-12 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-10 col-sm-10" style="text-align: left">
+                        <h3>Categories </h3>
+                        <p>Total Category: {{ site.product_category_site.all | length }}</p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2" style="text-align: right; display: flex; flex-direction: column; justify-content: flex-end">
+                        <p onclick="getNext('/str/category/add/')" class="btn btn-primary btn-md"><span class="fa fa-plus"></span> CREATE NEW</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-4 col-sm-4" style="text-align: left">
+                        <h6>Title</h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-2" style="text-align: left">
+                    </div>
+                </div>
+                <hr>
+                {% for category in site.product_category_site.all %}
+                    {% if not category.title == 'preview' %}
+                        <div class="row" style="margin: 0">
+                            <div class="col-xs-4 col-sm-4" style="text-align: left; word-wrap: break-word">
+                                <p onclick="window.open('/{{ category.slug }}', '_blank')" style="cursor:pointer" class="text-info">{{ category.title | title }}</p>
+                            </div>
+                            <div class="col-xs-4 col-sm-2" style="display: flex; justify-content: center">
+                                <p onclick="getNext('{{ category.get_edit_url }}')" class="btn btn-info btn-xs" style="margin: auto"><span class="fa fa-edit"></span> EDIT</p>
+                                <p onclick="window.open('{{ category.get_delete_url }}', '_parent')" class="btn btn-danger btn-xs" style="margin: auto"><span class="fa fa-trash"></span> DELETE</p>
+                            </div>
+                            <div class="col-xs-4 col-sm-6">
+                            </div>
+                            <div class="col-xs-12 col-sm-12" style="word-wrap:break-word">
+                                {% for product in category.products_in_category.all %}
+                                    {% if forloop.first %}
+                                    <p>Product in this category :</p>
+                                    <div style="padding-left:25px">
+                                    <h6>Name</h6>{% endif %}
+                                    
+                                    <p onclick="window.open('{{ product.get_detail_url }}', '_blank')" style="cursor:pointer" class="text-info">{{ product.name | title }}</p>
+                                    {% if forloop.last %} 
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% if not forloop.last %}
+                        <hr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+</div>
