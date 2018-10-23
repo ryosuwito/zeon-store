@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                                 <hr>
-                                {% for order in .order_site.all|slice:":5" %}
+                                {% for order in site.order_site.all|slice:":5" %}
                                 <p onclick="window.open('{{ order.get_detail_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ order.order_number | truncatechars:60 }}</p>
                                 <br>
                                 {% endfor %}
