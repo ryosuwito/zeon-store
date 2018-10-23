@@ -32,7 +32,7 @@
             <input type="hidden" name="csrfmiddlewaretoken" value="{{token}}">
             <div class="row">
                 <!-- column -->
-                <div class="col-xs-12 col-sm-8">
+                <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-body">
                             <h3>Order No. : {{ data.order.order_number }}</h3>
@@ -63,16 +63,30 @@
                                     <h4>Customer</h4>
                                         <p>{{ data.order.costumer.username | title }}</p>
                                     <h4>Shipping Address</h4>
-                                        <p>{{ data.order.alamat_tujuan | title }}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-12">
+                                        <p>{{ data.order.alamat_tujuan | title }}</p> 
                                     <h4>Service</h4>
-                                        
                                         <p>{{ data.order.service }}</p>
                                     <h4>Sub Service</h4>
-                                        
                                         <p>{{ data.order.sub_service }}</p>
-                                    <br>
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <h4>Products</h4>
+                                    <hr>
+                                        {% for item in data.order.item_in_order.all %}
+                                            <div class="row">
+                                                <div class="col-xs-2">
+                                                    <img src="{{ item.product.get_photo_url }}" style="width:100%; height:auto">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    {{ item.product.name | title }}
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    {{ item.quantity }}
+                                                </div>
+                                                <div class="col-xs-4">
+                                                </div>
+                                            </div>
+                                        {% endfor %}
                                     <p class="btn btn-primary" style="margin: auto" onclick="submitNewArticle()">SUBMIT</p>
                                 </div>
                             </div>
