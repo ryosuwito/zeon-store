@@ -58,7 +58,7 @@
                             <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                                 <hr>
                                 {% for product in site.product_site.all|slice:":5" %}
-                                <p onclick="window.open('{{ article.get_article_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ product.name | title | truncatechars:60 }}</p>
+                                <p onclick="window.open('{{ product.get_detail_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ product.name | title | truncatechars:60 }}</p>
                                 <a href='javascript:void(0)' onclick="getNext('{{ product.get_edit_url }}')"class="btn btn-link btn-sm text-info"><span class="fa fa-edit"></span></a>
                                 <a href='javascript:void(0)' onclick="getNext('{{ product.get_delete_url }}')" class="btn btn-link btn-sm text-danger"><span class="fa fa-trash"></span></a>
                                 <br>
