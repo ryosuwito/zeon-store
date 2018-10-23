@@ -120,7 +120,7 @@ class STCategory(LoginRequiredMixin, ComponentRenderer, Dispatcher):
     index_main = 'st_catalog/component/category_main.html'
     index_local_script = 'st_catalog/component/category_local_script.html'
     add_main = 'st_catalog/component/category_add_main.html'
-    add_local_titlescript = 'st_catalog/component/category_add_local_script.html'
+    add_local_script = 'st_catalog/component/category_add_local_script.html'
     edit_main = 'st_catalog/component/category_edit_main.html'
     edit_local_script = 'st_catalog/component/category_edit_local_script.html'
     index_url = '/str/category/'
