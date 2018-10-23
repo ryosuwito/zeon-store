@@ -30,7 +30,7 @@
                     <div class="col-xs-4 col-sm-1" style="text-align: left">
                         <h6>Payment Date</h6>
                     </div>
-                    <div class="col-xs-4 col-sm-2" style="text-align: left">
+                    <div class="col-xs-4 col-sm-1" style="text-align: left">
                         <h6>Customer</h6>
                     </div>
                     <div class="col-xs-2 col-sm-1" style="text-align: center">
@@ -42,7 +42,7 @@
                     <div class="col-xs-2 col-sm-1" style="text-align: center">
                         <h6>Is Verified</h6>
                     </div>
-                    <div class="col-xs-4 col-sm-3" style="text-align: left">
+                    <div class="col-xs-4 col-sm-4" style="text-align: left">
                         <h6>Total Payment </h6>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
                             <h6>{{order.payment_date|date:"j/n/Y"}}</h6>
                         </div>
-                        <div class="col-xs-4 col-sm-2" style="text-align: left">
+                        <div class="col-xs-4 col-sm-1" style="text-align: left">
                             <h6>{{order.costumer.username | title}}</h6>
                         </div>
                         <div class="col-xs-2 col-sm-1" style="text-align: center">
@@ -70,7 +70,7 @@
                         <div class="col-xs-2 col-sm-1" style="text-align: center">
                             <h6>{{order.is_verified}}</h6>
                         </div>
-                        <div class="col-xs-4 col-sm-3" style="text-align: left">
+                        <div class="col-xs-4 col-sm-4" style="text-align: left">
                             <h6>{{order.total_payment | int_to_rupiah}} </h6>
                         </div>
                     </div>
