@@ -6,8 +6,9 @@
         $('#addArticleForm').submit();
     }
     try {
-        ($('#id_is_published').bootstrapToggle())();
-        ($('#id_is_featured').bootstrapToggle())();
+        ($('#id_is_verified').bootstrapToggle())();
+        ($('#id_is_vaild').bootstrapToggle())();
+        ($('#id_is_paid').bootstrapToggle())();
         throw "Exception"; // generates an exception
     }
     catch (e) {}
