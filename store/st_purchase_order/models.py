@@ -13,10 +13,10 @@ import datetime
 
 class PurchaseOrder(models.Model):
     user = models.ForeignKey(User, related_name="users_order", on_delete=models.SET_NULL, null=True)
-    total_price = models.IntegerField(null=True, help_text="Total Belanja")
-    discount = models.IntegerField(null=True, help_text="Diskon Member")
-    shipping_cost = models.IntegerField(null=True, help_text="Ongkos Kirim")
-    total_payment = models.IntegerField(null=True, help_text="Total Belanja")
+    total_price = models.PositiveIntegerField(null=True, help_text="Total Belanja")
+    discount = models.PositiveIntegerField(null=True, help_text="Diskon Member")
+    shipping_cost = models.PositiveIntegerField(null=True, help_text="Ongkos Kirim")
+    total_payment = models.PositiveIntegerField(null=True, help_text="Total Belanja")
     created_date = models.DateTimeField(db_index=True,default=datetime.datetime.now)
     payment_date = models.DateTimeField(null=True, db_index=True, blank=True)
     #token_expiry_date = models.DateTimeField(null=True, blank=True)
@@ -61,7 +61,7 @@ class PurchaseOrder(models.Model):
        return 'Purchase Order No. : %s'%self.order_number
 
 class PurchaseOrderItem(models.Model):
-    quantity = models.IntegerField(null=True, blank=True)
+    quantity = models.PositiveIntegerField(null=True, blank=True)
     product = models.ForeignKey(Product, related_name="product_in_order", on_delete=models.SET_NULL, null=True)
     purchase_order = models.ForeignKey(PurchaseOrder, related_name="item_in_order", on_delete=models.SET_NULL, null=True)
     product_referal = models.ForeignKey(Member, on_delete=models.SET_NULL, db_index=True,  related_name="product_order_referal", null=True, blank=True) 

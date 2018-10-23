@@ -32,7 +32,7 @@ class PageModel(models.Model):
     banner_image_3 = models.ImageField(upload_to = 'cp/user_uploads/banner_images/', null=True, blank=True)
     meta_description = models.CharField(max_length=1000, default="", blank=True)
     meta_keyword = TaggableManager(blank=True)
-    page_view = models.IntegerField(default=0)
+    page_view = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title.title()

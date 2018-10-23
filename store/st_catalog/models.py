@@ -57,9 +57,9 @@ class Product(models.Model):
             help_text="Foto Produk Alternatif 4")
     photo_alt5 = models.ImageField(upload_to = 'product_photo', null=True, blank=True,
             help_text="Foto Produk Alternatif 5")
-    price = models.IntegerField(null=True, help_text="Harga Produk")
+    price = models.PositiveIntegerField(null=True, help_text="Harga Produk")
 
-    unit_weight = models.IntegerField(null=True, help_text="Berat Satuan Produk dalam gram")
+    unit_weight = models.PositiveIntegerField(null=True, help_text="Berat Satuan Produk dalam gram")
     is_available = models.BooleanField(default = True,
             help_text="Centang Jika Produk Tersedia")
     is_featured = models.BooleanField(default = False,
