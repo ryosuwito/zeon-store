@@ -16,28 +16,20 @@
                 <p>
                     <a href="javascript:void(0)" onclick="window.open('http://{{ request.get_host }}/store','_blank')" class="btn btn-primary">VIEW STORE</span></a>
                 </p>
-            </div>
-            <div class="row" style="margin: 0">
-                <div class="col-sm-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row" style="margin: 0">
-                                <div class="col-xs-8 col-sm-9" style="text-align: left; padding: 0">
-                                    <h3>Orders </h3>
-                                    <p>Total Orders: {{ site.order_site.all | length}}</p>
-                                </div>
-                                <div class="col-xs-4 col-sm-3" style="text-align: right; padding: 0">
-                                    <span onclick="getNext('/str/order/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
-                                </div>
-                                <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
-                                    <hr>
-                                    {% for order in site.order_site.all|slice:":5" %}
-                                    <p onclick="window.open('{{ order.get_detail_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ order.order_number | truncatechars:60 }}</p>
-                                    <br>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-8 col-sm-9" style="text-align: left; padding: 0">
+                        <h3>Orders </h3>
+                        <p>Total Orders: {{ site.order_site.all | length}}</p>
+                    </div>
+                    <div class="col-xs-4 col-sm-3" style="text-align: right; padding: 0">
+                        <span onclick="getNext('/str/order/')" style="margin: 5px 0" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> VIEW ALL</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
+                        <hr>
+                        {% for order in site.order_site.all|slice:":5" %}
+                        <p onclick="window.open('{{ order.get_detail_url }}', '_blank')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ order.order_number | truncatechars:60 }}</p>
+                        <br>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
