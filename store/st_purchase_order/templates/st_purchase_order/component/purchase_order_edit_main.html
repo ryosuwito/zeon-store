@@ -74,16 +74,16 @@
                                     <hr>
                                         {% for item in data.order.item_in_order.all %}
                                             <div class="row">
-                                                <div class="col-xs-2">
+                                                <div class="col-xs-2 col-sm-2">
                                                     <img src="{{ item.product.get_photo_url }}" style="width:100%; height:auto">
                                                 </div>
-                                                <div class="col-xs-4">
+                                                <div class="col-xs-4 col-sm-4">
                                                     {{ item.product.name | title }}
                                                 </div>
-                                                <div class="col-xs-2">
+                                                <div class="col-xs-2 col-sm-2">
                                                     {{ item.quantity }}
                                                 </div>
-                                                <div class="col-xs-4">
+                                                <div class="col-xs-4 col-sm-2">
                                                 </div>
                                             </div>
                                         {% endfor %}
