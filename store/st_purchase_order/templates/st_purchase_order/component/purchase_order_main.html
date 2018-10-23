@@ -53,10 +53,10 @@
                             <h6><a href="javascript:void(0)" onclick="getNext('{{order.get_detail_url}}')">{{order.order_number}}</a></h6>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <h6>{{order.created_date|date:"j/M/Y"}}</h6>
+                            <h6>{{order.created_date|date:"j/n/Y"}}</h6>
                         </div>
                         <div class="col-xs-4 col-sm-1" style="text-align: left">
-                            <h6>{{order.payment_date|date:"j/M/Y"}}</h6>
+                            <h6>{{order.payment_date|date:"j/n/Y"}}</h6>
                         </div>
                         <div class="col-xs-4 col-sm-2" style="text-align: left">
                             <h6>{{order.costumer.username | title}}</h6>
