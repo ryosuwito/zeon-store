@@ -27,7 +27,9 @@
                     </div>
                     <div class="col-xs-12 col-sm-12" style="text-align: left; padding: 0">
                         {% for order in site.order_site.all|slice:":5" %}
+                        {% if not forloop.first %}
                         <hr>
+                        {% endif %}
                         <p onclick="window.open('{{ order.get_detail_url }}', '_parent')" style="margin: 0; padding: 0" class="btn btn-link text-info">{{ order.order_number | truncatechars:60 }}</p>
                         <br>
                         <p>ordered by: {{ order.costumer.username | title }} | on : {{ order.created_date|date:"j/n/Y"}}</p>
