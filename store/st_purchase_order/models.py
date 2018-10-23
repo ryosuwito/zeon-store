@@ -35,8 +35,8 @@ class PurchaseOrder(models.Model):
 
     site = models.ForeignKey(Site, on_delete=models.CASCADE,related_name='order_site', null=True, blank=True)
     
-    seller = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True)
-    costumer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    seller = models.ForeignKey(Member, on_delete=models.SET_NULL,related_name='order_seller', null=True, blank=True)
+    costumer = models.ForeignKey(Customer, on_delete=models.SET_NULL,related_name='order_customer', null=True, blank=True)
 
     def get_number():
         order_number_alpha = get_random_string(5, 
