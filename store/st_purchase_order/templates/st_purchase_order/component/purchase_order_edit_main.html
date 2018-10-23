@@ -45,7 +45,7 @@
                                     <br>
                                     <h4>{{ form.is_valid.label }} <br> {{ form.is_valid }}</h4>
                                 </div>
-                                <div class="col-xs-12 col-md-8">
+                                <div class="col-xs-12 col-md-4">
                                     <h4>Total Price</h4>
                                         
                                         <p>{{ data.order.total_price | int_to_rupiah }}</p>
@@ -58,6 +58,12 @@
                                     <h4>Total Payment</h4>
                                         
                                         <p>{{ data.order.total_payment | int_to_rupiah }}</p>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <h4>Customer</h4>
+                                        <p>{{ data.order.customer.username | title }}</p>
+                                    <h4>Shipping Address</h4>
+                                        <p>{{ data.order.customer.alamat_tujuan | title }}</p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12">
                                     <h4>Service</h4>
